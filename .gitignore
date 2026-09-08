@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+
+# Flower / Ray runtime output
+demo/outputs/
+demo/.flwr/
+/tmp/ray/
+
+# Build artefact — regenerate with `python3 build_single.py`
+dist/
+
+# Editors
+.vscode/
+.idea/
+*.swp

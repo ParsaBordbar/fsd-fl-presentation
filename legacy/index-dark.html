@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Free AI Without Moving the Data</title>
+
+<link href="vendor/fonts.css" rel="stylesheet">
+
+<script src="vendor/reveal.min.js"></script>
+<script src="vendor/notes.min.js"></script>
+<script src="vendor/chart.umd.js"></script>
+
+<style>
+/* reveal.js 4.5.0 core CSS, inlined so the deck is one file */
+/*!
+* reveal.js 4.5.0
+* https://revealjs.com
+* MIT licensed
+*
+* Copyright (C) 2011-2023 Hakim El Hattab, https://hakim.se
+*/.reveal .r-stretch,.reveal .stretch{max-width:none;max-height:none}.reveal pre.r-stretch code,.reveal pre.stretch code{height:100%;max-height:100%;box-sizing:border-box}.reveal .r-fit-text{display:inline-block;white-space:nowrap}.reveal .r-stack{display:grid}.reveal .r-stack>*{grid-area:1/1;margin:auto}.reveal .r-hstack,.reveal .r-vstack{display:flex}.reveal .r-hstack img,.reveal .r-hstack video,.reveal .r-vstack img,.reveal .r-vstack video{min-width:0;min-height:0;object-fit:contain}.reveal .r-vstack{flex-direction:column;align-items:center;justify-content:center}.reveal .r-hstack{flex-direction:row;align-items:center;justify-content:center}.reveal .items-stretch{align-items:stretch}.reveal .items-start{align-items:flex-start}.reveal .items-center{align-items:center}.reveal .items-end{align-items:flex-end}.reveal .justify-between{justify-content:space-between}.reveal .justify-around{justify-content:space-around}.reveal .justify-start{justify-content:flex-start}.reveal .justify-center{justify-content:center}.reveal .justify-end{justify-content:flex-end}html.reveal-full-page{width:100%;height:100%;height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}.reveal-viewport{height:100%;overflow:hidden;position:relative;line-height:1;margin:0;background-color:#fff;color:#000}.reveal-viewport:fullscreen{top:0!important;left:0!important;width:100%!important;height:100%!important;transform:none!important}.reveal .fragment{transition:all .2s ease}.reveal .fragment:not(.custom){opacity:0;visibility:hidden;will-change:opacity}.reveal .fragment.visible{opacity:1;visibility:inherit}.reveal .fragment.disabled{transition:none}.reveal .fragment.grow{opacity:1;visibility:inherit}.reveal .fragment.grow.visible{transform:scale(1.3)}.reveal .fragment.shrink{opacity:1;visibility:inherit}.reveal .fragment.shrink.visible{transform:scale(.7)}.reveal .fragment.zoom-in{transform:scale(.1)}.reveal .fragment.zoom-in.visible{transform:none}.reveal .fragment.fade-out{opacity:1;visibility:inherit}.reveal .fragment.fade-out.visible{opacity:0;visibility:hidden}.reveal .fragment.semi-fade-out{opacity:1;visibility:inherit}.reveal .fragment.semi-fade-out.visible{opacity:.5;visibility:inherit}.reveal .fragment.strike{opacity:1;visibility:inherit}.reveal .fragment.strike.visible{text-decoration:line-through}.reveal .fragment.fade-up{transform:translate(0,40px)}.reveal .fragment.fade-up.visible{transform:translate(0,0)}.reveal .fragment.fade-down{transform:translate(0,-40px)}.reveal .fragment.fade-down.visible{transform:translate(0,0)}.reveal .fragment.fade-right{transform:translate(-40px,0)}.reveal .fragment.fade-right.visible{transform:translate(0,0)}.reveal .fragment.fade-left{transform:translate(40px,0)}.reveal .fragment.fade-left.visible{transform:translate(0,0)}.reveal .fragment.current-visible,.reveal .fragment.fade-in-then-out{opacity:0;visibility:hidden}.reveal .fragment.current-visible.current-fragment,.reveal .fragment.fade-in-then-out.current-fragment{opacity:1;visibility:inherit}.reveal .fragment.fade-in-then-semi-out{opacity:0;visibility:hidden}.reveal .fragment.fade-in-then-semi-out.visible{opacity:.5;visibility:inherit}.reveal .fragment.fade-in-then-semi-out.current-fragment{opacity:1;visibility:inherit}.reveal .fragment.highlight-blue,.reveal .fragment.highlight-current-blue,.reveal .fragment.highlight-current-green,.reveal .fragment.highlight-current-red,.reveal .fragment.highlight-green,.reveal .fragment.highlight-red{opacity:1;visibility:inherit}.reveal .fragment.highlight-red.visible{color:#ff2c2d}.reveal .fragment.highlight-green.visible{color:#17ff2e}.reveal .fragment.highlight-blue.visible{color:#1b91ff}.reveal .fragment.highlight-current-red.current-fragment{color:#ff2c2d}.reveal .fragment.highlight-current-green.current-fragment{color:#17ff2e}.reveal .fragment.highlight-current-blue.current-fragment{color:#1b91ff}.reveal:after{content:"";font-style:italic}.reveal iframe{z-index:1}.reveal a{position:relative}@keyframes bounce-right{0%,10%,25%,40%,50%{transform:translateX(0)}20%{transform:translateX(10px)}30%{transform:translateX(-5px)}}@keyframes bounce-left{0%,10%,25%,40%,50%{transform:translateX(0)}20%{transform:translateX(-10px)}30%{transform:translateX(5px)}}@keyframes bounce-down{0%,10%,25%,40%,50%{transform:translateY(0)}20%{transform:translateY(10px)}30%{transform:translateY(-5px)}}.reveal .controls{display:none;position:absolute;top:auto;bottom:12px;right:12px;left:auto;z-index:11;color:#000;pointer-events:none;font-size:10px}.reveal .controls button{position:absolute;padding:0;background-color:transparent;border:0;outline:0;cursor:pointer;color:currentColor;transform:scale(.9999);transition:color .2s ease,opacity .2s ease,transform .2s ease;z-index:2;pointer-events:auto;font-size:inherit;visibility:hidden;opacity:0;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}.reveal .controls .controls-arrow:after,.reveal .controls .controls-arrow:before{content:"";position:absolute;top:0;left:0;width:2.6em;height:.5em;border-radius:.25em;background-color:currentColor;transition:all .15s ease,background-color .8s ease;transform-origin:.2em 50%;will-change:transform}.reveal .controls .controls-arrow{position:relative;width:3.6em;height:3.6em}.reveal .controls .controls-arrow:before{transform:translateX(.5em) translateY(1.55em) rotate(45deg)}.reveal .controls .controls-arrow:after{transform:translateX(.5em) translateY(1.55em) rotate(-45deg)}.reveal .controls .controls-arrow:hover:before{transform:translateX(.5em) translateY(1.55em) rotate(40deg)}.reveal .controls .controls-arrow:hover:after{transform:translateX(.5em) translateY(1.55em) rotate(-40deg)}.reveal .controls .controls-arrow:active:before{transform:translateX(.5em) translateY(1.55em) rotate(36deg)}.reveal .controls .controls-arrow:active:after{transform:translateX(.5em) translateY(1.55em) rotate(-36deg)}.reveal .controls .navigate-left{right:6.4em;bottom:3.2em;transform:translateX(-10px)}.reveal .controls .navigate-left.highlight{animation:bounce-left 2s 50 both ease-out}.reveal .controls .navigate-right{right:0;bottom:3.2em;transform:translateX(10px)}.reveal .controls .navigate-right .controls-arrow{transform:rotate(180deg)}.reveal .controls .navigate-right.highlight{animation:bounce-right 2s 50 both ease-out}.reveal .controls .navigate-up{right:3.2em;bottom:6.4em;transform:translateY(-10px)}.reveal .controls .navigate-up .controls-arrow{transform:rotate(90deg)}.reveal .controls .navigate-down{right:3.2em;bottom:-1.4em;padding-bottom:1.4em;transform:translateY(10px)}.reveal .controls .navigate-down .controls-arrow{transform:rotate(-90deg)}.reveal .controls .navigate-down.highlight{animation:bounce-down 2s 50 both ease-out}.reveal .controls[data-controls-back-arrows=faded] .navigate-up.enabled{opacity:.3}.reveal .controls[data-controls-back-arrows=faded] .navigate-up.enabled:hover{opacity:1}.reveal .controls[data-controls-back-arrows=hidden] .navigate-up.enabled{opacity:0;visibility:hidden}.reveal .controls .enabled{visibility:visible;opacity:.9;cursor:pointer;transform:none}.reveal .controls .enabled.fragmented{opacity:.5}.reveal .controls .enabled.fragmented:hover,.reveal .controls .enabled:hover{opacity:1}.reveal:not(.rtl) .controls[data-controls-back-arrows=faded] .navigate-left.enabled{opacity:.3}.reveal:not(.rtl) .controls[data-controls-back-arrows=faded] .navigate-left.enabled:hover{opacity:1}.reveal:not(.rtl) .controls[data-controls-back-arrows=hidden] .navigate-left.enabled{opacity:0;visibility:hidden}.reveal.rtl .controls[data-controls-back-arrows=faded] .navigate-right.enabled{opacity:.3}.reveal.rtl .controls[data-controls-back-arrows=faded] .navigate-right.enabled:hover{opacity:1}.reveal.rtl .controls[data-controls-back-arrows=hidden] .navigate-right.enabled{opacity:0;visibility:hidden}.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-down,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-up{display:none}.reveal:not(.has-vertical-slides) .controls .navigate-left,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-left{bottom:1.4em;right:5.5em}.reveal:not(.has-vertical-slides) .controls .navigate-right,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-right{bottom:1.4em;right:.5em}.reveal:not(.has-horizontal-slides) .controls .navigate-up{right:1.4em;bottom:5em}.reveal:not(.has-horizontal-slides) .controls .navigate-down{right:1.4em;bottom:.5em}.reveal.has-dark-background .controls{color:#fff}.reveal.has-light-background .controls{color:#000}.reveal.no-hover .controls .controls-arrow:active:before,.reveal.no-hover .controls .controls-arrow:hover:before{transform:translateX(.5em) translateY(1.55em) rotate(45deg)}.reveal.no-hover .controls .controls-arrow:active:after,.reveal.no-hover .controls .controls-arrow:hover:after{transform:translateX(.5em) translateY(1.55em) rotate(-45deg)}@media screen and (min-width:500px){.reveal .controls[data-controls-layout=edges]{top:0;right:0;bottom:0;left:0}.reveal .controls[data-controls-layout=edges] .navigate-down,.reveal .controls[data-controls-layout=edges] .navigate-left,.reveal .controls[data-controls-layout=edges] .navigate-right,.reveal .controls[data-controls-layout=edges] .navigate-up{bottom:auto;right:auto}.reveal .controls[data-controls-layout=edges] .navigate-left{top:50%;left:.8em;margin-top:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-right{top:50%;right:.8em;margin-top:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-up{top:.8em;left:50%;margin-left:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-down{bottom:-.3em;left:50%;margin-left:-1.8em}}.reveal .progress{position:absolute;display:none;height:3px;width:100%;bottom:0;left:0;z-index:10;background-color:rgba(0,0,0,.2);color:#fff}.reveal .progress:after{content:"";display:block;position:absolute;height:10px;width:100%;top:-10px}.reveal .progress span{display:block;height:100%;width:100%;background-color:currentColor;transition:transform .8s cubic-bezier(.26,.86,.44,.985);transform-origin:0 0;transform:scaleX(0)}.reveal .slide-number{position:absolute;display:block;right:8px;bottom:8px;z-index:31;font-family:Helvetica,sans-serif;font-size:12px;line-height:1;color:#fff;background-color:rgba(0,0,0,.4);padding:5px}.reveal .slide-number a{color:currentColor}.reveal .slide-number-delimiter{margin:0 3px}.reveal{position:relative;width:100%;height:100%;overflow:hidden;touch-action:pinch-zoom}.reveal.embedded{touch-action:pan-y}.reveal .slides{position:absolute;width:100%;height:100%;top:0;right:0;bottom:0;left:0;margin:auto;pointer-events:none;overflow:visible;z-index:1;text-align:center;perspective:600px;perspective-origin:50% 40%}.reveal .slides>section{perspective:600px}.reveal .slides>section,.reveal .slides>section>section{display:none;position:absolute;width:100%;pointer-events:auto;z-index:10;transform-style:flat;transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.reveal[data-transition-speed=fast] .slides section{transition-duration:.4s}.reveal[data-transition-speed=slow] .slides section{transition-duration:1.2s}.reveal .slides section[data-transition-speed=fast]{transition-duration:.4s}.reveal .slides section[data-transition-speed=slow]{transition-duration:1.2s}.reveal .slides>section.stack{padding-top:0;padding-bottom:0;pointer-events:none;height:100%}.reveal .slides>section.present,.reveal .slides>section>section.present{display:block;z-index:11;opacity:1}.reveal .slides>section:empty,.reveal .slides>section>section:empty,.reveal .slides>section>section[data-background-interactive],.reveal .slides>section[data-background-interactive]{pointer-events:none}.reveal.center,.reveal.center .slides,.reveal.center .slides section{min-height:0!important}.reveal .slides>section:not(.present),.reveal .slides>section>section:not(.present){pointer-events:none}.reveal.overview .slides>section,.reveal.overview .slides>section>section{pointer-events:auto}.reveal .slides>section.future,.reveal .slides>section.future>section,.reveal .slides>section.past,.reveal .slides>section.past>section,.reveal .slides>section>section.future,.reveal .slides>section>section.past{opacity:0}.reveal .slides>section[data-transition=slide].past,.reveal .slides>section[data-transition~=slide-out].past,.reveal.slide .slides>section:not([data-transition]).past{transform:translate(-150%,0)}.reveal .slides>section[data-transition=slide].future,.reveal .slides>section[data-transition~=slide-in].future,.reveal.slide .slides>section:not([data-transition]).future{transform:translate(150%,0)}.reveal .slides>section>section[data-transition=slide].past,.reveal .slides>section>section[data-transition~=slide-out].past,.reveal.slide .slides>section>section:not([data-transition]).past{transform:translate(0,-150%)}.reveal .slides>section>section[data-transition=slide].future,.reveal .slides>section>section[data-transition~=slide-in].future,.reveal.slide .slides>section>section:not([data-transition]).future{transform:translate(0,150%)}.reveal .slides>section[data-transition=linear].past,.reveal .slides>section[data-transition~=linear-out].past,.reveal.linear .slides>section:not([data-transition]).past{transform:translate(-150%,0)}.reveal .slides>section[data-transition=linear].future,.reveal .slides>section[data-transition~=linear-in].future,.reveal.linear .slides>section:not([data-transition]).future{transform:translate(150%,0)}.reveal .slides>section>section[data-transition=linear].past,.reveal .slides>section>section[data-transition~=linear-out].past,.reveal.linear .slides>section>section:not([data-transition]).past{transform:translate(0,-150%)}.reveal .slides>section>section[data-transition=linear].future,.reveal .slides>section>section[data-transition~=linear-in].future,.reveal.linear .slides>section>section:not([data-transition]).future{transform:translate(0,150%)}.reveal .slides section[data-transition=default].stack,.reveal.default .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=default].past,.reveal .slides>section[data-transition~=default-out].past,.reveal.default .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=default].future,.reveal .slides>section[data-transition~=default-in].future,.reveal.default .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=default].past,.reveal .slides>section>section[data-transition~=default-out].past,.reveal.default .slides>section>section:not([data-transition]).past{transform:translate3d(0,-300px,0) rotateX(70deg) translate3d(0,-300px,0)}.reveal .slides>section>section[data-transition=default].future,.reveal .slides>section>section[data-transition~=default-in].future,.reveal.default .slides>section>section:not([data-transition]).future{transform:translate3d(0,300px,0) rotateX(-70deg) translate3d(0,300px,0)}.reveal .slides section[data-transition=convex].stack,.reveal.convex .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=convex].past,.reveal .slides>section[data-transition~=convex-out].past,.reveal.convex .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=convex].future,.reveal .slides>section[data-transition~=convex-in].future,.reveal.convex .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=convex].past,.reveal .slides>section>section[data-transition~=convex-out].past,.reveal.convex .slides>section>section:not([data-transition]).past{transform:translate3d(0,-300px,0) rotateX(70deg) translate3d(0,-300px,0)}.reveal .slides>section>section[data-transition=convex].future,.reveal .slides>section>section[data-transition~=convex-in].future,.reveal.convex .slides>section>section:not([data-transition]).future{transform:translate3d(0,300px,0) rotateX(-70deg) translate3d(0,300px,0)}.reveal .slides section[data-transition=concave].stack,.reveal.concave .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=concave].past,.reveal .slides>section[data-transition~=concave-out].past,.reveal.concave .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=concave].future,.reveal .slides>section[data-transition~=concave-in].future,.reveal.concave .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(-90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=concave].past,.reveal .slides>section>section[data-transition~=concave-out].past,.reveal.concave .slides>section>section:not([data-transition]).past{transform:translate3d(0,-80%,0) rotateX(-70deg) translate3d(0,-80%,0)}.reveal .slides>section>section[data-transition=concave].future,.reveal .slides>section>section[data-transition~=concave-in].future,.reveal.concave .slides>section>section:not([data-transition]).future{transform:translate3d(0,80%,0) rotateX(70deg) translate3d(0,80%,0)}.reveal .slides section[data-transition=zoom],.reveal.zoom .slides section:not([data-transition]){transition-timing-function:ease}.reveal .slides>section[data-transition=zoom].past,.reveal .slides>section[data-transition~=zoom-out].past,.reveal.zoom .slides>section:not([data-transition]).past{visibility:hidden;transform:scale(16)}.reveal .slides>section[data-transition=zoom].future,.reveal .slides>section[data-transition~=zoom-in].future,.reveal.zoom .slides>section:not([data-transition]).future{visibility:hidden;transform:scale(.2)}.reveal .slides>section>section[data-transition=zoom].past,.reveal .slides>section>section[data-transition~=zoom-out].past,.reveal.zoom .slides>section>section:not([data-transition]).past{transform:scale(16)}.reveal .slides>section>section[data-transition=zoom].future,.reveal .slides>section>section[data-transition~=zoom-in].future,.reveal.zoom .slides>section>section:not([data-transition]).future{transform:scale(.2)}.reveal.cube .slides{perspective:1300px}.reveal.cube .slides section{padding:30px;min-height:700px;backface-visibility:hidden;box-sizing:border-box;transform-style:preserve-3d}.reveal.center.cube .slides section{min-height:0}.reveal.cube .slides section:not(.stack):before{content:"";position:absolute;display:block;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,.1);border-radius:4px;transform:translateZ(-20px)}.reveal.cube .slides section:not(.stack):after{content:"";position:absolute;display:block;width:90%;height:30px;left:5%;bottom:0;background:0 0;z-index:1;border-radius:4px;box-shadow:0 95px 25px rgba(0,0,0,.2);transform:translateZ(-90px) rotateX(65deg)}.reveal.cube .slides>section.stack{padding:0;background:0 0}.reveal.cube .slides>section.past{transform-origin:100% 0;transform:translate3d(-100%,0,0) rotateY(-90deg)}.reveal.cube .slides>section.future{transform-origin:0 0;transform:translate3d(100%,0,0) rotateY(90deg)}.reveal.cube .slides>section>section.past{transform-origin:0 100%;transform:translate3d(0,-100%,0) rotateX(90deg)}.reveal.cube .slides>section>section.future{transform-origin:0 0;transform:translate3d(0,100%,0) rotateX(-90deg)}.reveal.page .slides{perspective-origin:0 50%;perspective:3000px}.reveal.page .slides section{padding:30px;min-height:700px;box-sizing:border-box;transform-style:preserve-3d}.reveal.page .slides section.past{z-index:12}.reveal.page .slides section:not(.stack):before{content:"";position:absolute;display:block;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,.1);transform:translateZ(-20px)}.reveal.page .slides section:not(.stack):after{content:"";position:absolute;display:block;width:90%;height:30px;left:5%;bottom:0;background:0 0;z-index:1;border-radius:4px;box-shadow:0 95px 25px rgba(0,0,0,.2);-webkit-transform:translateZ(-90px) rotateX(65deg)}.reveal.page .slides>section.stack{padding:0;background:0 0}.reveal.page .slides>section.past{transform-origin:0 0;transform:translate3d(-40%,0,0) rotateY(-80deg)}.reveal.page .slides>section.future{transform-origin:100% 0;transform:translate3d(0,0,0)}.reveal.page .slides>section>section.past{transform-origin:0 0;transform:translate3d(0,-40%,0) rotateX(80deg)}.reveal.page .slides>section>section.future{transform-origin:0 100%;transform:translate3d(0,0,0)}.reveal .slides section[data-transition=fade],.reveal.fade .slides section:not([data-transition]),.reveal.fade .slides>section>section:not([data-transition]){transform:none;transition:opacity .5s}.reveal.fade.overview .slides section,.reveal.fade.overview .slides>section>section{transition:none}.reveal .slides section[data-transition=none],.reveal.none .slides section:not([data-transition]){transform:none;transition:none}.reveal .pause-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;visibility:hidden;opacity:0;z-index:100;transition:all 1s ease}.reveal .pause-overlay .resume-button{position:absolute;bottom:20px;right:20px;color:#ccc;border-radius:2px;padding:6px 14px;border:2px solid #ccc;font-size:16px;background:0 0;cursor:pointer}.reveal .pause-overlay .resume-button:hover{color:#fff;border-color:#fff}.reveal.paused .pause-overlay{visibility:visible;opacity:1}.reveal .no-transition,.reveal .no-transition *,.reveal .slides.disable-slide-transitions section{transition:none!important}.reveal .slides.disable-slide-transitions section{transform:none!important}.reveal .backgrounds{position:absolute;width:100%;height:100%;top:0;left:0;perspective:600px}.reveal .slide-background{display:none;position:absolute;width:100%;height:100%;opacity:0;visibility:hidden;overflow:hidden;background-color:rgba(0,0,0,0);transition:all .8s cubic-bezier(.26,.86,.44,.985)}.reveal .slide-background-content{position:absolute;width:100%;height:100%;background-position:50% 50%;background-repeat:no-repeat;background-size:cover}.reveal .slide-background.stack{display:block}.reveal .slide-background.present{opacity:1;visibility:visible;z-index:2}.print-pdf .reveal .slide-background{opacity:1!important;visibility:visible!important}.reveal .slide-background video{position:absolute;width:100%;height:100%;max-width:none;max-height:none;top:0;left:0;object-fit:cover}.reveal .slide-background[data-background-size=contain] video{object-fit:contain}.reveal>.backgrounds .slide-background[data-background-transition=none],.reveal[data-background-transition=none]>.backgrounds .slide-background:not([data-background-transition]){transition:none}.reveal>.backgrounds .slide-background[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background:not([data-background-transition]){opacity:1}.reveal>.backgrounds .slide-background.past[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background.past:not([data-background-transition]){transform:translate(-100%,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background.future:not([data-background-transition]){transform:translate(100%,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){transform:translate(0,-100%)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){transform:translate(0,100%)}.reveal>.backgrounds .slide-background.past[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(0,-100%,0) rotateX(90deg) translate3d(0,-100%,0)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(0,100%,0) rotateX(-90deg) translate3d(0,100%,0)}.reveal>.backgrounds .slide-background.past[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(-100%,0,0) rotateY(90deg) translate3d(-100%,0,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(100%,0,0) rotateY(-90deg) translate3d(100%,0,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(0,-100%,0) rotateX(-90deg) translate3d(0,-100%,0)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(0,100%,0) rotateX(90deg) translate3d(0,100%,0)}.reveal>.backgrounds .slide-background[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background:not([data-background-transition]){transition-timing-function:ease}.reveal>.backgrounds .slide-background.past[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(16)}.reveal>.backgrounds .slide-background.future[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(.2)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(16)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(.2)}.reveal[data-transition-speed=fast]>.backgrounds .slide-background{transition-duration:.4s}.reveal[data-transition-speed=slow]>.backgrounds .slide-background{transition-duration:1.2s}.reveal [data-auto-animate-target^=unmatched]{will-change:opacity}.reveal section[data-auto-animate]:not(.stack):not([data-auto-animate=running]) [data-auto-animate-target^=unmatched]{opacity:0}.reveal.overview{perspective-origin:50% 50%;perspective:700px}.reveal.overview .slides{-moz-transform-style:preserve-3d}.reveal.overview .slides section{height:100%;top:0!important;opacity:1!important;overflow:hidden;visibility:visible!important;cursor:pointer;box-sizing:border-box}.reveal.overview .slides section.present,.reveal.overview .slides section:hover{outline:10px solid rgba(150,150,150,.4);outline-offset:10px}.reveal.overview .slides section .fragment{opacity:1;transition:none}.reveal.overview .slides section:after,.reveal.overview .slides section:before{display:none!important}.reveal.overview .slides>section.stack{padding:0;top:0!important;background:0 0;outline:0;overflow:visible}.reveal.overview .backgrounds{perspective:inherit;-moz-transform-style:preserve-3d}.reveal.overview .backgrounds .slide-background{opacity:1;visibility:visible;outline:10px solid rgba(150,150,150,.1);outline-offset:10px}.reveal.overview .backgrounds .slide-background.stack{overflow:visible}.reveal.overview .slides section,.reveal.overview-deactivating .slides section{transition:none}.reveal.overview .backgrounds .slide-background,.reveal.overview-deactivating .backgrounds .slide-background{transition:none}.reveal.rtl .slides,.reveal.rtl .slides h1,.reveal.rtl .slides h2,.reveal.rtl .slides h3,.reveal.rtl .slides h4,.reveal.rtl .slides h5,.reveal.rtl .slides h6{direction:rtl;font-family:sans-serif}.reveal.rtl code,.reveal.rtl pre{direction:ltr}.reveal.rtl ol,.reveal.rtl ul{text-align:right}.reveal.rtl .progress span{transform-origin:100% 0}.reveal.has-parallax-background .backgrounds{transition:all .8s ease}.reveal.has-parallax-background[data-transition-speed=fast] .backgrounds{transition-duration:.4s}.reveal.has-parallax-background[data-transition-speed=slow] .backgrounds{transition-duration:1.2s}.reveal>.overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;background:rgba(0,0,0,.9);transition:all .3s ease}.reveal>.overlay .spinner{position:absolute;display:block;top:50%;left:50%;width:32px;height:32px;margin:-16px 0 0 -16px;z-index:10;background-image:url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);visibility:visible;opacity:.6;transition:all .3s ease}.reveal>.overlay header{position:absolute;left:0;top:0;width:100%;padding:5px;z-index:2;box-sizing:border-box}.reveal>.overlay header a{display:inline-block;width:40px;height:40px;line-height:36px;padding:0 10px;float:right;opacity:.6;box-sizing:border-box}.reveal>.overlay header a:hover{opacity:1}.reveal>.overlay header a .icon{display:inline-block;width:20px;height:20px;background-position:50% 50%;background-size:100%;background-repeat:no-repeat}.reveal>.overlay header a.close .icon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC)}.reveal>.overlay header a.external .icon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==)}.reveal>.overlay .viewport{position:absolute;display:flex;top:50px;right:0;bottom:0;left:0}.reveal>.overlay.overlay-preview .viewport iframe{width:100%;height:100%;max-width:100%;max-height:100%;border:0;opacity:0;visibility:hidden;transition:all .3s ease}.reveal>.overlay.overlay-preview.loaded .viewport iframe{opacity:1;visibility:visible}.reveal>.overlay.overlay-preview.loaded .viewport-inner{position:absolute;z-index:-1;left:0;top:45%;width:100%;text-align:center;letter-spacing:normal}.reveal>.overlay.overlay-preview .x-frame-error{opacity:0;transition:opacity .3s ease .3s}.reveal>.overlay.overlay-preview.loaded .x-frame-error{opacity:1}.reveal>.overlay.overlay-preview.loaded .spinner{opacity:0;visibility:hidden;transform:scale(.2)}.reveal>.overlay.overlay-help .viewport{overflow:auto;color:#fff}.reveal>.overlay.overlay-help .viewport .viewport-inner{width:600px;margin:auto;padding:20px 20px 80px 20px;text-align:center;letter-spacing:normal}.reveal>.overlay.overlay-help .viewport .viewport-inner .title{font-size:20px}.reveal>.overlay.overlay-help .viewport .viewport-inner table{border:1px solid #fff;border-collapse:collapse;font-size:16px}.reveal>.overlay.overlay-help .viewport .viewport-inner table td,.reveal>.overlay.overlay-help .viewport .viewport-inner table th{width:200px;padding:14px;border:1px solid #fff;vertical-align:middle}.reveal>.overlay.overlay-help .viewport .viewport-inner table th{padding-top:20px;padding-bottom:20px}.reveal .playback{position:absolute;left:15px;bottom:20px;z-index:30;cursor:pointer;transition:all .4s ease;-webkit-tap-highlight-color:transparent}.reveal.overview .playback{opacity:0;visibility:hidden}.reveal .hljs{min-height:100%}.reveal .hljs table{margin:initial}.reveal .hljs-ln-code,.reveal .hljs-ln-numbers{padding:0;border:0}.reveal .hljs-ln-numbers{opacity:.6;padding-right:.75em;text-align:right;vertical-align:top}.reveal .hljs.has-highlights tr:not(.highlight-line){opacity:.4}.reveal .hljs:not(:first-child).fragment{position:absolute;top:0;left:0;width:100%;box-sizing:border-box}.reveal pre[data-auto-animate-target]{overflow:hidden}.reveal pre[data-auto-animate-target] code{height:100%}.reveal .roll{display:inline-block;line-height:1.2;overflow:hidden;vertical-align:top;perspective:400px;perspective-origin:50% 50%}.reveal .roll:hover{background:0 0;text-shadow:none}.reveal .roll span{display:block;position:relative;padding:0 2px;pointer-events:none;transition:all .4s ease;transform-origin:50% 0;transform-style:preserve-3d;backface-visibility:hidden}.reveal .roll:hover span{background:rgba(0,0,0,.5);transform:translate3d(0,0,-45px) rotateX(90deg)}.reveal .roll span:after{content:attr(data-title);display:block;position:absolute;left:0;top:0;padding:0 2px;backface-visibility:hidden;transform-origin:50% 0;transform:translate3d(0,110%,0) rotateX(-90deg)}.reveal aside.notes{display:none}.reveal .speaker-notes{display:none;position:absolute;width:33.3333333333%;height:100%;top:0;left:100%;padding:14px 18px 14px 18px;z-index:1;font-size:18px;line-height:1.4;border:1px solid rgba(0,0,0,.05);color:#222;background-color:#f5f5f5;overflow:auto;box-sizing:border-box;text-align:left;font-family:Helvetica,sans-serif;-webkit-overflow-scrolling:touch}.reveal .speaker-notes .notes-placeholder{color:#ccc;font-style:italic}.reveal .speaker-notes:focus{outline:0}.reveal .speaker-notes:before{content:"Speaker notes";display:block;margin-bottom:10px;opacity:.5}.reveal.show-notes{max-width:75%;overflow:visible}.reveal.show-notes .speaker-notes{display:block}@media screen and (min-width:1600px){.reveal .speaker-notes{font-size:20px}}@media screen and (max-width:1024px){.reveal.show-notes{border-left:0;max-width:none;max-height:70%;max-height:70vh;overflow:visible}.reveal.show-notes .speaker-notes{top:100%;left:0;width:100%;height:30vh;border:0}}@media screen and (max-width:600px){.reveal.show-notes{max-height:60%;max-height:60vh}.reveal.show-notes .speaker-notes{top:100%;height:40vh}.reveal .speaker-notes{font-size:14px}}.reveal .jump-to-slide{position:absolute;top:15px;left:15px;z-index:30;font-size:32px;-webkit-tap-highlight-color:transparent}.reveal .jump-to-slide-input{background:0 0;padding:8px;font-size:inherit;color:currentColor;border:0}.reveal .jump-to-slide-input::placeholder{color:currentColor;opacity:.5}.reveal.has-dark-background .jump-to-slide-input{color:#fff}.reveal.has-light-background .jump-to-slide-input{color:#222}.reveal .jump-to-slide-input:focus{outline:0}.zoomed .reveal *,.zoomed .reveal :after,.zoomed .reveal :before{backface-visibility:visible!important}.zoomed .reveal .controls,.zoomed .reveal .progress{opacity:0}.zoomed .reveal .roll span{background:0 0}.zoomed .reveal .roll span:after{visibility:hidden}html.print-pdf *{-webkit-print-color-adjust:exact}html.print-pdf{width:100%;height:100%;overflow:visible}html.print-pdf body{margin:0 auto!important;border:0;padding:0;float:none!important;overflow:visible}html.print-pdf .nestedarrow,html.print-pdf .reveal .controls,html.print-pdf .reveal .playback,html.print-pdf .reveal .progress,html.print-pdf .reveal.overview,html.print-pdf .state-background{display:none!important}html.print-pdf .reveal pre code{overflow:hidden!important;font-family:Courier,"Courier New",monospace!important}html.print-pdf .reveal{width:auto!important;height:auto!important;overflow:hidden!important}html.print-pdf .reveal .slides{position:static;width:100%!important;height:auto!important;zoom:1!important;pointer-events:initial;left:auto;top:auto;margin:0!important;padding:0!important;overflow:visible;display:block;perspective:none;perspective-origin:50% 50%}html.print-pdf .reveal .slides .pdf-page{position:relative;overflow:hidden;z-index:1;page-break-after:always}html.print-pdf .reveal .slides section{visibility:visible!important;display:block!important;position:absolute!important;margin:0!important;padding:0!important;box-sizing:border-box!important;min-height:1px;opacity:1!important;transform-style:flat!important;transform:none!important}html.print-pdf .reveal section.stack{position:relative!important;margin:0!important;padding:0!important;page-break-after:avoid!important;height:auto!important;min-height:auto!important}html.print-pdf .reveal img{box-shadow:none}html.print-pdf .reveal .backgrounds{display:none}html.print-pdf .reveal .slide-background{display:block!important;position:absolute;top:0;left:0;width:100%;height:100%;z-index:auto!important}html.print-pdf .reveal.show-notes{max-width:none;max-height:none}html.print-pdf .reveal .speaker-notes-pdf{display:block;width:100%;height:auto;max-height:none;top:auto;right:auto;bottom:auto;left:auto;z-index:100}html.print-pdf .reveal .speaker-notes-pdf[data-layout=separate-page]{position:relative;color:inherit;background-color:transparent;padding:20px;page-break-after:always;border:0}html.print-pdf .reveal .slide-number-pdf{display:block;position:absolute;font-size:14px}html.print-pdf .aria-status{display:none}@media print{html:not(.print-pdf){overflow:visible;width:auto;height:auto}html:not(.print-pdf) body{margin:0;padding:0;overflow:visible}html:not(.print-pdf) .reveal{background:#fff;font-size:20pt}html:not(.print-pdf) .reveal .backgrounds,html:not(.print-pdf) .reveal .controls,html:not(.print-pdf) .reveal .progress,html:not(.print-pdf) .reveal .slide-number,html:not(.print-pdf) .reveal .state-background{display:none!important}html:not(.print-pdf) .reveal li,html:not(.print-pdf) .reveal p,html:not(.print-pdf) .reveal td{font-size:20pt!important;color:#000}html:not(.print-pdf) .reveal h1,html:not(.print-pdf) .reveal h2,html:not(.print-pdf) .reveal h3,html:not(.print-pdf) .reveal h4,html:not(.print-pdf) .reveal h5,html:not(.print-pdf) .reveal h6{color:#000!important;height:auto;line-height:normal;text-align:left;letter-spacing:normal}html:not(.print-pdf) .reveal h1{font-size:28pt!important}html:not(.print-pdf) .reveal h2{font-size:24pt!important}html:not(.print-pdf) .reveal h3{font-size:22pt!important}html:not(.print-pdf) .reveal h4{font-size:22pt!important;font-variant:small-caps}html:not(.print-pdf) .reveal h5{font-size:21pt!important}html:not(.print-pdf) .reveal h6{font-size:20pt!important;font-style:italic}html:not(.print-pdf) .reveal a:link,html:not(.print-pdf) .reveal a:visited{color:#000!important;font-weight:700;text-decoration:underline}html:not(.print-pdf) .reveal div,html:not(.print-pdf) .reveal ol,html:not(.print-pdf) .reveal p,html:not(.print-pdf) .reveal ul{visibility:visible;position:static;width:auto;height:auto;display:block;overflow:visible;margin:0;text-align:left!important}html:not(.print-pdf) .reveal pre,html:not(.print-pdf) .reveal table{margin-left:0;margin-right:0}html:not(.print-pdf) .reveal pre code{padding:20px}html:not(.print-pdf) .reveal blockquote{margin:20px 0}html:not(.print-pdf) .reveal .slides{position:static!important;width:auto!important;height:auto!important;left:0!important;top:0!important;margin-left:0!important;margin-top:0!important;padding:0!important;zoom:1!important;transform:none!important;overflow:visible!important;display:block!important;text-align:left!important;perspective:none;perspective-origin:50% 50%}html:not(.print-pdf) .reveal .slides section{visibility:visible!important;position:static!important;width:auto!important;height:auto!important;display:block!important;overflow:visible!important;left:0!important;top:0!important;margin-left:0!important;margin-top:0!important;padding:60px 20px!important;z-index:auto!important;opacity:1!important;page-break-after:always!important;transform-style:flat!important;transform:none!important;transition:none!important}html:not(.print-pdf) .reveal .slides section.stack{padding:0!important}html:not(.print-pdf) .reveal .slides section:last-of-type{page-break-after:avoid!important}html:not(.print-pdf) .reveal .slides section .fragment{opacity:1!important;visibility:visible!important;transform:none!important}html:not(.print-pdf) .reveal .r-fit-text{white-space:normal!important}html:not(.print-pdf) .reveal section img{display:block;margin:15px 0;background:#fff;border:1px solid #666;box-shadow:none}html:not(.print-pdf) .reveal section small{font-size:.8em}html:not(.print-pdf) .reveal .hljs{max-height:100%;white-space:pre-wrap;word-wrap:break-word;word-break:break-word;font-size:15pt}html:not(.print-pdf) .reveal .hljs .hljs-ln-numbers{white-space:nowrap}html:not(.print-pdf) .reveal .hljs td{font-size:inherit!important;color:inherit!important}}
+</style>
+
+<style>
+:root{
+  --ink:#10100f;
+  --panel:#1a1916;
+  --panel-2:#222019;
+  --cream:#f4efe4;
+  --cream-dim:#cfc8b8;
+  --line:rgba(244,239,228,.14);
+
+  /* one colour per part of the talk */
+  --hook:#ffc24b;    /* amber   — hook + discussion */
+  --prob:#ff5c5c;    /* red     — 1 problem */
+  --rq:#a78bfa;      /* violet  — 2 research question */
+  --sol:#5b9cf6;     /* blue    — 3 solution */
+  --how:#4fd1c5;     /* teal    — 4 how it works */
+  --lim:#ff6f9c;     /* pink    — 5 limitations */
+  --atk:#ff8a3d;     /* orange  — 6 attacks */
+  --free:#6bd47e;    /* green   — 7 freedom */
+
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Space Grotesk',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-fa:'Vazirmatn','Space Grotesk',sans-serif;
+}
+
+html,body{background:var(--ink);}
+.reveal{font-family:var(--font-body);color:var(--cream);font-size:clamp(15px,2.2vw,22px);}
+.reveal .slides{text-align:left;}
+.reveal .slides section{height:100%;padding:0;}
+
+.reveal h1,.reveal h2,.reveal h3,.reveal h4{
+  font-family:var(--font-display);
+  text-transform:none;font-weight:600;letter-spacing:-.01em;line-height:1.05;
+  margin:0 0 .4em;color:var(--cream);text-wrap:balance;
+}
+.reveal h1{font-size:clamp(2.4rem,8vw,5rem);font-weight:600;}
+.reveal h2{font-size:clamp(1.8rem,5.5vw,3.4rem);}
+.reveal h3{font-size:clamp(1.2rem,3.6vw,1.9rem);}
+.reveal p,.reveal li{line-height:1.5;}
+.reveal strong{color:#fff;font-weight:600;}
+.reveal em{color:var(--cream-dim);font-style:italic;}
+.reveal ::selection{background:var(--hook);color:var(--ink);}
+.reveal .fa,.reveal [lang="fa"]{font-family:var(--font-fa);direction:rtl;}
+
+.pad{
+  box-sizing:border-box;width:100%;height:100%;
+  padding:clamp(1.2rem,5vw,4rem);
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:clamp(.65rem,1.6vw,.8rem);
+  letter-spacing:.28em;text-transform:uppercase;color:var(--c,var(--cream-dim));
+  margin:0 0 1rem;display:flex;align-items:center;gap:.7rem;
+}
+.eyebrow::before{content:"";width:clamp(18px,4vw,40px);height:2px;background:currentColor;display:inline-block;}
+.eyebrow .muted{letter-spacing:0;text-transform:none;}
+
+.muted{color:var(--cream-dim);}
+.mono{font-family:var(--font-mono);}
+.small{font-size:clamp(.72rem,1.6vw,.9rem);}
+.accent{color:var(--c,var(--hook));}
+
+/* part colouring: set --c on the section wrapper */
+.hook{--c:var(--hook);} .prob{--c:var(--prob);} .rq{--c:var(--rq);} .sol{--c:var(--sol);}
+.how{--c:var(--how);} .lim{--c:var(--lim);} .atk{--c:var(--atk);} .free{--c:var(--free);}
+.pad h2 .hl{color:var(--c,var(--hook));}
+
+/* hero */
+#hero .pad{justify-content:center;position:relative;overflow:hidden;}
+#fed{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+#hero .hero-content{position:relative;z-index:2;}
+#hero h1{margin-bottom:.2em;}
+#hero h1 .l2{display:block;font-style:italic;font-weight:400;}
+.hero-sub{font-size:clamp(1rem,2.6vw,1.5rem);max-width:46rem;color:var(--cream-dim);margin:.4rem 0 1rem;}
+.hero-fa{font-family:var(--font-fa);direction:rtl;text-align:left;font-size:clamp(1.1rem,3vw,1.7rem);color:var(--cream);margin:0 0 1.4rem;font-weight:600;}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;max-width:54rem;}
+.chip{
+  font-family:var(--font-mono);font-size:clamp(.6rem,1.5vw,.8rem);
+  padding:.38em .8em;border-radius:999px;border:1.5px solid;background:rgba(0,0,0,.25);
+  display:inline-flex;align-items:center;gap:.45em;backdrop-filter:blur(4px);color:var(--c);border-color:var(--c);
+}
+.chip::before{content:"";width:.55em;height:.55em;border-radius:50%;background:currentColor;}
+
+.lead{font-size:clamp(1.05rem,2.8vw,1.6rem);max-width:46rem;color:var(--cream-dim);}
+.feature-list{list-style:none;padding:0;margin:1.2rem 0 0;}
+.feature-list li{padding:.55rem 0 .55rem 2rem;position:relative;border-bottom:1px solid var(--line);font-size:clamp(.95rem,2.3vw,1.25rem);}
+.feature-list li:last-child{border-bottom:none;}
+.feature-list li::before{content:"";position:absolute;left:0;top:1.15em;width:10px;height:10px;border-radius:2px;background:var(--c,var(--hook));transform:rotate(45deg);}
+
+/* numbered steps — used only where order is real */
+.steps{list-style:none;padding:0;margin:1rem 0 0;counter-reset:s -1;}
+.steps li{padding:.5rem 0 .5rem 3rem;position:relative;border-bottom:1px solid var(--line);font-size:clamp(.92rem,2.2vw,1.2rem);}
+.steps li:last-child{border-bottom:none;}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:.45rem;width:2.1rem;height:2.1rem;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:500;background:var(--c,var(--hook));color:var(--ink);font-size:.95em;}
+.steps li.dim{opacity:.38;}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:clamp(.7rem,1.7vw,1.1rem);margin-top:.9rem;}
+.card-grid.two{grid-template-columns:1fr 1fr;} .card-grid.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:700px){.card-grid.two,.card-grid.three{grid-template-columns:1fr;}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(.9rem,2.1vw,1.3rem);transition:transform .25s ease,box-shadow .25s ease;}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.4);}
+.card h4{font-size:clamp(1rem,2.4vw,1.3rem);margin-bottom:.45rem;color:var(--c);}
+.card .meta{font-size:clamp(.78rem,1.8vw,.95rem);line-height:1.55;color:var(--cream-dim);}
+.card .meta b{color:var(--cream);font-weight:500;}
+.card .num{font-family:var(--font-display);font-size:clamp(2rem,6vw,3.4rem);line-height:1;color:var(--c);margin-bottom:.3rem;font-weight:600;}
+.card .foot{font-family:var(--font-mono);font-size:.72rem;color:var(--c);opacity:.85;margin-top:.5rem;}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,3vw,2.5rem);align-items:start;}
+.cols.wide-left{grid-template-columns:1.25fr 1fr;} .cols.wide-right{grid-template-columns:1fr 1.25fr;}
+@media(max-width:640px){.cols,.cols.wide-left,.cols.wide-right{grid-template-columns:1fr;gap:1.2rem;}}
+
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.3em .7em;border-radius:6px;margin-bottom:.6rem;}
+.tag.good{background:rgba(107,212,126,.15);color:var(--free);}
+.tag.bad{background:rgba(255,92,92,.15);color:var(--prob);}
+.tag.warn{background:rgba(255,194,75,.15);color:var(--hook);}
+.tag.c{background:color-mix(in srgb,var(--c) 15%,transparent);color:var(--c);}
+
+.mini-list{list-style:none;padding:0;margin:0;}
+.mini-list li{padding:.32rem 0 .32rem 1.3rem;position:relative;font-size:clamp(.82rem,2vw,1.05rem);color:var(--cream-dim);}
+.mini-list li::before{content:"›";position:absolute;left:0;color:var(--c,var(--hook));font-weight:700;}
+.mini-list li b{color:#fff;font-weight:600;}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:1rem;border-radius:14px;border:1px solid var(--line);}
+table.data{width:100%;border-collapse:collapse;font-size:clamp(.78rem,2vw,1.05rem);min-width:520px;font-variant-numeric:tabular-nums;}
+table.data th,table.data td{padding:.55em .8em;text-align:left;border-bottom:1px solid var(--line);}
+table.data thead th{background:var(--panel-2);font-family:var(--font-mono);font-size:.74em;letter-spacing:.05em;text-transform:uppercase;color:var(--cream-dim);font-weight:500;}
+table.data tbody tr:last-child td{border-bottom:none;}
+table.data tbody tr:hover{background:rgba(255,255,255,.03);}
+table.data td:first-child{font-weight:600;}
+table.data .num,table.data th.num{text-align:right;font-family:var(--font-mono);}
+table.data tr.total td{background:rgba(255,255,255,.04);color:#fff;}
+table.data .fa{text-align:right;font-size:1.08em;}
+.v-good{color:var(--free);font-weight:600;font-family:var(--font-mono);}
+.v-mid{color:var(--hook);font-weight:600;font-family:var(--font-mono);}
+.v-bad{color:var(--prob);font-weight:600;font-family:var(--font-mono);}
+
+.formula{font-family:var(--font-mono);background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:.9em 1.1em;display:block;max-width:100%;margin:.4rem 0;font-size:clamp(.8rem,2.1vw,1.1rem);color:var(--c,var(--hook));white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+pre.code{font-family:var(--font-mono);background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:1em 1.2em;margin:.4rem 0;font-size:clamp(.78rem,2vw,1.05rem);color:var(--cream);white-space:pre;overflow-x:auto;line-height:1.55;}
+pre.code .k{color:var(--c,var(--hook));} pre.code .cm{color:var(--cream-dim);opacity:.7;}
+
+.callout{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:.8rem 1.1rem;margin-top:1rem;font-size:clamp(.9rem,2.2vw,1.2rem);}
+.callout b{color:#fff;}
+
+.quote{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(1.15rem,3.2vw,1.9rem);line-height:1.3;max-width:46rem;color:var(--cream);}
+.quote .who{display:block;font-family:var(--font-mono);font-style:normal;font-size:.55em;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);margin-top:.8rem;}
+
+/* big statement slides */
+.big .pad{justify-content:center;}
+.big h1{font-size:clamp(2.6rem,9vw,6rem);line-height:.98;}
+.big h1 .hl{color:var(--c,var(--hook));}
+.big .lead{margin-top:.6rem;}
+
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.5vw,1.8rem);margin-top:1rem;}
+@media(max-width:760px){.chart-grid{grid-template-columns:1fr;}}
+.chart-box{position:relative;width:100%;height:clamp(240px,40vh,400px);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:clamp(.8rem,2vw,1.3rem);display:flex;flex-direction:column;overflow:hidden;}
+.chart-box h4{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cream-dim);font-weight:500;margin:0 0 .5rem;flex:0 0 auto;}
+.chart-box .canvas-wrap{position:relative;flex:1 1 auto;min-height:0;width:100%;}
+.chart-box .canvas-wrap canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;}
+
+.winner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:clamp(.7rem,1.8vw,1.1rem);margin-top:1.1rem;}
+.winner{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(.9rem,2.1vw,1.3rem);}
+.winner .label{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--cream-dim);}
+.winner .who{font-family:var(--font-display);font-size:clamp(1.15rem,3.2vw,1.8rem);font-weight:600;margin:.2rem 0;color:var(--c,var(--cream));}
+.winner .why{font-size:clamp(.78rem,1.9vw,.98rem);color:var(--cream-dim);}
+
+.refs{list-style:none;padding:0;margin:1rem 0 0;counter-reset:r;column-count:2;column-gap:2rem;}
+@media(max-width:760px){.refs{column-count:1;}}
+.refs li{padding:.45rem 0 .45rem 2.4rem;position:relative;border-bottom:1px solid var(--line);font-size:clamp(.7rem,1.55vw,.86rem);color:var(--cream-dim);line-height:1.45;break-inside:avoid;}
+.refs li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:.5rem;font-family:var(--font-mono);font-size:.8em;color:var(--hook);}
+.refs b{color:var(--cream);font-weight:500;}
+
+.qa{display:grid;gap:.7rem;margin-top:1rem;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem 1.05rem;}
+.q .ask{font-weight:600;color:var(--cream);font-size:clamp(.88rem,2.1vw,1.12rem);margin-bottom:.3rem;}
+.q .ans{font-size:clamp(.78rem,1.9vw,1rem);color:var(--cream-dim);}
+.q .ans b{color:var(--c,var(--hook));}
+
+/* diagrams */
+figure.dia{margin:.6rem 0 0;}
+figure.dia svg{max-width:100%;height:auto;display:block;color:var(--cream);}
+figure.dia figcaption{font-family:var(--font-mono);font-size:.72rem;color:var(--cream-dim);margin-top:.5rem;letter-spacing:.03em;}
+.dia text{font-family:var(--font-body);font-size:13px;fill:var(--cream);}
+.dia text.m{font-family:var(--font-mono);font-size:11px;fill:var(--cream-dim);}
+.dia .box{fill:var(--panel);stroke:var(--cream-dim);stroke-width:1.2;}
+.dia .box.c{stroke:var(--c);}
+.dia .ln{stroke:var(--cream-dim);stroke-width:1.5;fill:none;}
+.dia .ln.c{stroke:var(--c);stroke-width:2;}
+.dia .ln.dash{stroke-dasharray:5 4;}
+.dia .ln.faint{opacity:.3;}
+.dia .fill-c{fill:var(--c);}
+.dia .db{fill:var(--panel-2);stroke:var(--cream-dim);stroke-width:1.2;}
+
+.reveal .progress{height:4px;color:var(--hook);}
+.reveal .slide-number{background:transparent;font-family:var(--font-mono);font-size:.7rem;color:var(--cream-dim);}
+.closing-mark{font-size:clamp(2.5rem,9vw,5rem);line-height:1;margin-bottom:.4rem;color:var(--hook);}
+.timing{font-family:var(--font-mono);font-size:.7rem;color:var(--cream-dim);position:absolute;right:clamp(1rem,4vw,3rem);top:clamp(.9rem,3vw,2rem);letter-spacing:.1em;}
+
+@media(max-width:480px){
+  .reveal .slides section{font-size:15px;}
+  .eyebrow{margin-bottom:.7rem;}
+  table.data{font-size:.8rem;min-width:480px;}
+  table.data th,table.data td{padding:.5em .6em;}
+}
+
+/* phone: real swipeable deck at device size, tall slides scroll within themselves */
+html.phone .reveal{font-size:clamp(14px,4.3vw,19px);}
+html.phone .reveal .slides section{height:100%;}
+html.phone .pad{height:100%;box-sizing:border-box;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:1.5rem 1.05rem 3.2rem;}
+html.phone #hero .pad{justify-content:center;}
+html.phone .reveal h1{font-size:clamp(2.1rem,11vw,3.2rem);}
+html.phone .reveal h2{font-size:clamp(1.5rem,7.6vw,2.3rem);}
+html.phone .cols,html.phone .cols.wide-left,html.phone .cols.wide-right{grid-template-columns:1fr;gap:1rem;}
+html.phone .card-grid,html.phone .card-grid.two,html.phone .card-grid.three{grid-template-columns:1fr;}
+html.phone .winner-grid{grid-template-columns:1fr 1fr;}
+html.phone .chart-grid{grid-template-columns:1fr;}
+html.phone .chart-box{height:clamp(230px,48vh,320px);}
+html.phone .refs{column-count:1;}
+html.phone .timing{display:none;}
+html.phone .reveal .controls{display:none;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════ HOOK ═══════════════════════════ -->
+<section class="hook">
+
+<section id="hero" data-background-color="#10100f">
+  <canvas id="fed"></canvas>
+  <div class="pad">
+    <div class="hero-content">
+      <p class="eyebrow">Software Freedom Day · 40 minutes</p>
+      <h1>Free AI<span class="l2">without moving the data.</span></h1>
+      <p class="hero-sub">What federated learning solves, what it doesn't, and why it needs free software.</p>
+      <p class="hero-fa">هوش مصنوعی آزاد، بدون جابه‌جایی داده‌ها</p>
+      <div class="chips">
+        <span class="chip hook">Hook</span>
+        <span class="chip prob">1 · Problem</span>
+        <span class="chip rq">2 · Question</span>
+        <span class="chip sol">3 · Solution</span>
+        <span class="chip how">4 · How it works</span>
+        <span class="chip lim">5 · Limitations</span>
+        <span class="chip atk">6 · Attacks</span>
+        <span class="chip hook">Discussion</span>
+        <span class="chip free">7 · Free software</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Thirty seconds. Title, name, straight into the phone. No roadmap yet — the hook works better cold.</aside>
+</section>
+
+<section data-background-color="#171307">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">Take out your phone</p>
+    <h2>Your keyboard has been <span class="hl">learning from you.</span></h2>
+    <p class="lead">Passwords. Medical searches. Messages to your family. Bank details. Years of it — and it got better at predicting your words by learning from what you typed.</p>
+    <h3 style="margin-top:1.2rem">Where did that learning go?</h3>
+    <div class="card-grid three">
+      <div class="card"><div class="num">①</div><p class="meta"><b>It stayed on your phone.</b><br>The model learned locally and nothing was uploaded.</p></div>
+      <div class="card"><div class="num">②</div><p class="meta"><b>It went to the vendor's server.</b><br>Your keystrokes were collected and trained on centrally.</p></div>
+      <div class="card"><div class="num">③</div><p class="meta"><b>You don't know.</b><br>The honest answer for almost everyone in the room.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Actually make them take out their phones — the physical act changes the room. Show of hands on each of the three, and COUNT OUT LOUD. Option ③ usually wins by a distance; you want the audience to see that happen to each other. Don't answer yet.</aside>
+</section>
+
+<section class="big" data-background-color="#171307">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">Whichever you picked</p>
+    <h1>How would <span class="hl">you</span> check?</h1>
+    <p class="lead">Not "do you trust them." Not "what does the policy say."<br><strong>How would you, with the skills you already have, verify which answer is true?</strong></p>
+  </div>
+  <aside class="notes">Let the silence sit for a beat — the most useful silence in the talk. Then release the tension: on some keyboards the honest answer is "a bit of both, in a specific technical arrangement" called federated learning. That's the next forty minutes. Promise explicitly that you will hand the question back at the end — that promise is what makes the discussion work later.</aside>
+</section>
+
+<section data-background-color="#171307">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">The promise</p>
+    <h2>By the end, you'll know exactly what checking <span class="hl">would require.</span></h2>
+    <p class="lead">Federated learning is a real technique. It solves a real problem. And it is sold with a promise that's weaker than it sounds.</p>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Part</th><th>What it does</th><th class="num">Min</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--prob)">1 · Problem</td><td>Why "collect it all on one server" stops working</td><td class="num">4</td></tr>
+          <tr><td style="color:var(--rq)">2 · Question</td><td>Two halves, plus the one from your phone</td><td class="num">2</td></tr>
+          <tr><td style="color:var(--sol)">3 · Solution</td><td>Reverse the pipeline: move computation to data</td><td class="num">3</td></tr>
+          <tr><td style="color:var(--how)">4 · How it works</td><td>One round in five steps · FedAvg · live Flower demo</td><td class="num">7</td></tr>
+          <tr><td style="color:var(--lim)">5 · Limitations</td><td>What leaks even when everyone is honest</td><td class="num">7</td></tr>
+          <tr><td style="color:var(--atk)">6 · Attacks</td><td>What happens when they aren't</td><td class="num">5</td></tr>
+          <tr><td style="color:var(--hook)">Discussion</td><td>The question, handed back with a decision attached</td><td class="num">5</td></tr>
+          <tr><td style="color:var(--free)">7 · Free software</td><td>Why you cannot verify a promise you can't inspect</td><td class="num">4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">Fast. This is the only roadmap. Say out loud: "and at the end I'm going to give the question back to you." Signposting the discussion twice is deliberate.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 1 · PROBLEM ═══════════════════════════ -->
+<section class="prob">
+
+<section data-background-color="#170c0c">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">1 · Problem statement</p>
+    <h2>How machine learning <span class="hl">normally</span> works</h2>
+    <div class="cols wide-left">
+      <figure class="dia">
+        <svg viewBox="0 0 640 200" role="img" aria-label="Classical pipeline: data from many devices is funnelled into one server, which trains one model">
+          <defs><marker id="arrP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+          <g>
+            <rect x="20" y="20" width="60" height="34" rx="6" class="box"/><text x="50" y="42" text-anchor="middle">phone</text>
+            <rect x="20" y="66" width="60" height="34" rx="6" class="box"/><text x="50" y="88" text-anchor="middle">car</text>
+            <rect x="20" y="112" width="60" height="34" rx="6" class="box"/><text x="50" y="134" text-anchor="middle">laptop</text>
+            <rect x="20" y="158" width="60" height="34" rx="6" class="box"/><text x="50" y="180" text-anchor="middle">hospital</text>
+          </g>
+          <path d="M80,37 C160,37 180,106 260,106" class="ln" marker-end="url(#arrP)"/>
+          <path d="M80,83 C160,83 180,106 260,106" class="ln" marker-end="url(#arrP)"/>
+          <path d="M80,129 C160,129 180,106 260,106" class="ln" marker-end="url(#arrP)"/>
+          <path d="M80,175 C160,175 180,106 260,106" class="ln" marker-end="url(#arrP)"/>
+          <text x="165" y="20" class="m" text-anchor="middle">raw data moves</text>
+          <rect x="262" y="70" width="120" height="72" rx="10" class="box c"/>
+          <text x="322" y="100" text-anchor="middle">one server</text>
+          <text x="322" y="120" text-anchor="middle" class="m">all the data</text>
+          <path d="M382,106 L470,106" class="ln c" marker-end="url(#arrP)"/>
+          <text x="426" y="96" class="m" text-anchor="middle">train</text>
+          <rect x="472" y="78" width="140" height="56" rx="10" class="box"/>
+          <text x="542" y="102" text-anchor="middle">model</text>
+          <text x="542" y="121" text-anchor="middle" class="m">useful system</text>
+        </svg>
+        <figcaption>Classical: move the data to the computation.</figcaption>
+      </figure>
+      <div>
+        <ul class="feature-list">
+          <li><strong>Model + data → train</strong> — one shape, essentially always.</li>
+          <li>Works when data <strong>naturally lives</strong> in a data centre: categorizing holiday photos, analysing web traffic.</li>
+          <li>But data is <strong>created somewhere else</strong> — and "somewhere else" is <strong>many places</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Fast — the hook already did the motivating work. Redrawn from the Flower tutorial sequence: model and data, data on a phone, data on many devices, funnel into one server. Note it works fine for holiday photos and web traffic.</aside>
+</section>
+
+<section data-background-color="#170c0c">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">1 · Problem statement · examples</p>
+    <h2>Where the data is <span class="hl">actually born</span></h2>
+    <p class="lead">Thousands or millions of places — or dozens of separate organisations generating data for the same task.</p>
+    <div class="card-grid">
+      <div class="card"><h4>Phone</h4><p class="meta">Every word typed into a keyboard, every app interaction. <b>Millions of devices</b>, one task.</p></div>
+      <div class="card"><h4>Car</h4><p class="meta">Sensor readings, battery curves, driving patterns. <b>Fleet-scale</b>, generated on the road.</p></div>
+      <div class="card"><h4>Hospital</h4><p class="meta">Clinical notes, scans, lab results. <b>Dozens of institutions</b> with the same diagnostic question.</p></div>
+      <div class="card"><h4>Bank</h4><p class="meta">Transactions and fraud labels. <b>Competing organisations</b> who each see a slice of the same criminals.</p></div>
+    </div>
+    <p class="callout">The classical answer to all four: <b>collect it all onto one server</b>, then train.</p>
+  </div>
+  <aside class="notes">Four concrete birthplaces of data. The last line is the setup for the next slide — every one of these hits the same wall.</aside>
+</section>
+
+<section data-background-color="#170c0c">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">1 · Problem statement</p>
+    <h2>Where that <span class="hl">breaks</span> — three reasons</h2>
+    <div class="card-grid three">
+      <div class="card"><h4>Regulation</h4><p class="meta">GDPR · CCPA · PIPEDA · LGPD · PDPL · KVKK · POPI · PDPB · PIPA · APPI · PDPA · APP …<br><br>Sometimes these stop a <b>single company</b> pooling its own users' data, because those users live in different jurisdictions.</p></div>
+      <div class="card"><h4>User expectation</h4><p class="meta">The keyboard you just took out. You type a password and you <b>do not expect that text on the vendor's server.</b> You'd call it a betrayal.<br><br><span class="accent">This is why FL was invented.</span></p></div>
+      <div class="card"><h4>Volume</h4><p class="meta">A national rail service with cameras at <b>hundreds of stations</b>. Collecting and storing all that raw footage needs enormous infrastructure — and most of it is worthless.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Call back to the phone explicitly on the second card — "that expectation you just felt is the second reason, and it's the one that started all of this."</aside>
+</section>
+
+<section data-background-color="#170c0c">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">1 · Problem statement · what we cannot build today</p>
+    <h2>Blocked by the <span class="hl">same wall</span></h2>
+    <div class="winner-grid">
+      <div class="winner"><div class="label">Health</div><div class="who">Cancer detection</div><div class="why">trained across multiple hospitals</div></div>
+      <div class="winner"><div class="label">Finance</div><div class="who">Fraud detection</div><div class="why">across banks that compete</div></div>
+      <div class="winner"><div class="label">Mobility</div><div class="who">EV range prediction</div><div class="why">from every car's real battery data</div></div>
+      <div class="winner"><div class="label">Messaging</div><div class="who">Better autocomplete</div><div class="why">for end-to-end encrypted messages</div></div>
+    </div>
+    <p class="lead" style="margin-top:1.2rem">Every one would benefit enormously from modern ML. And a fourth cost, discussed less:</p>
+    <p class="callout"><b>One pile = one target, one owner.</b> A single database holding everything is a high-value target — and its operator decides what gets trained, who participates, and who gets the result. Whoever holds the pile holds the project.</p>
+  </div>
+  <aside class="notes">The last line is ours, not the tutorial's, and it's the one that matters most for this audience. Even where central collection is legal, it concentrates power.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 2 · RESEARCH QUESTION ═══════════════════════════ -->
+<section class="rq">
+<section data-background-color="#120e1f">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">2 · Research question</p>
+    <h2>Two halves, <span class="hl">deliberately</span></h2>
+    <div class="qa">
+      <div class="q"><div class="ask">Can we train a shared model across data held by many people and institutions, without first collecting that data in one place?</div><div class="ans">A <b>systems</b> question. The answer turns out to be yes.</div></div>
+      <div class="q"><div class="ask">And if we can — what exactly have we protected?</div><div class="ans">A <b>privacy</b> question. The answer is much more limited than the marketing suggests.</div></div>
+      <div class="q"><div class="ask">And the one from your phone: whatever protection we get, who is able to verify it?</div><div class="ans" style="--c:var(--hook)">Held until the end. <b>This is the one I hand back to you.</b></div></div>
+    </div>
+    <p class="callout" style="margin-top:1.2rem">A talk that only answers the first question is an <b>advertisement</b>.</p>
+  </div>
+  <aside class="notes">Say the "advertisement" line. Flag that the third question is the one you'll hand back — the discussion is now signposted twice.</aside>
+</section>
+</section>
+
+<!-- ═══════════════════════════ 3 · SOLUTION ═══════════════════════════ -->
+<section class="sol">
+
+<section data-background-color="#0a1320">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">3 · The proposed solution</p>
+    <h2>Reverse the <span class="hl">pipeline</span></h2>
+    <figure class="dia">
+      <svg viewBox="0 0 720 190" role="img" aria-label="Centralized learning moves data to one server; federated learning sends the model to the devices and only updates return">
+        <defs><marker id="arrS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+        <!-- left: centralized -->
+        <text x="20" y="22" class="m">CENTRALIZED</text>
+        <rect x="20" y="40" width="70" height="30" rx="6" class="box"/><text x="55" y="60" text-anchor="middle">device</text>
+        <rect x="20" y="85" width="70" height="30" rx="6" class="box"/><text x="55" y="105" text-anchor="middle">device</text>
+        <rect x="20" y="130" width="70" height="30" rx="6" class="box"/><text x="55" y="150" text-anchor="middle">device</text>
+        <path d="M90,55 C150,55 160,100 220,100" class="ln" marker-end="url(#arrS)"/>
+        <path d="M90,100 L220,100" class="ln" marker-end="url(#arrS)"/>
+        <path d="M90,145 C150,145 160,100 220,100" class="ln" marker-end="url(#arrS)"/>
+        <text x="150" y="88" class="m" text-anchor="middle">raw data</text>
+        <rect x="222" y="72" width="96" height="56" rx="10" class="box"/><text x="270" y="96" text-anchor="middle">server</text><text x="270" y="114" text-anchor="middle" class="m">trains</text>
+        <!-- divider -->
+        <line x1="360" y1="20" x2="360" y2="170" class="ln faint dash"/>
+        <!-- right: federated -->
+        <text x="400" y="22" class="m" style="fill:var(--c)">FEDERATED</text>
+        <rect x="400" y="72" width="96" height="56" rx="10" class="box c"/><text x="448" y="96" text-anchor="middle">server</text><text x="448" y="114" text-anchor="middle" class="m">aggregates</text>
+        <rect x="630" y="40" width="70" height="30" rx="6" class="box"/><text x="665" y="60" text-anchor="middle">device</text>
+        <rect x="630" y="85" width="70" height="30" rx="6" class="box"/><text x="665" y="105" text-anchor="middle">device</text>
+        <rect x="630" y="130" width="70" height="30" rx="6" class="box"/><text x="665" y="150" text-anchor="middle">device</text>
+        <path d="M496,90 C560,90 570,50 630,50" class="ln c" marker-end="url(#arrS)"/>
+        <path d="M496,94 L630,94" class="ln c" marker-end="url(#arrS)"/>
+        <path d="M496,98 C560,98 570,140 630,140" class="ln c" marker-end="url(#arrS)"/>
+        <path d="M630,60 C570,60 560,108 496,108" class="ln dash" marker-end="url(#arrS)"/>
+        <path d="M630,105 L496,105" class="ln dash" marker-end="url(#arrS)"/>
+        <path d="M630,150 C570,150 560,112 496,112" class="ln dash" marker-end="url(#arrS)"/>
+        <text x="563" y="40" class="m" text-anchor="middle" style="fill:var(--c)">model out</text>
+        <text x="563" y="176" class="m" text-anchor="middle">updates back · data stays</text>
+      </svg>
+    </figure>
+    <div class="cols" style="margin-top:.8rem">
+      <p class="lead">Centralized ML: <strong>move the data to the computation.</strong></p>
+      <p class="lead">Federated learning: <strong>move the computation to the data.</strong></p>
+    </div>
+  </div>
+  <aside class="notes">The one-liner is what people remember. Say it slowly. You don't upload your records: you receive the model, improve it locally, send back a summary of what changed.</aside>
+</section>
+
+<section data-background-color="#0a1320">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">3 · The proposed solution · the original announcement</p>
+    <h2>Google, <span class="hl">April 2017</span></h2>
+    <p class="quote">"Your device downloads the current model, improves it by learning from data on your phone, and then summarizes the changes as a small focused update. Only this update to the model is sent to the cloud … where it is immediately averaged with other user updates to improve the shared model."<span class="who">McMahan &amp; Ramage · Google AI Blog · the Gboard keyboard was the first deployment</span></p>
+    <ol class="steps" style="counter-reset:s 0">
+      <li><strong>Download</strong> the current model to the device</li>
+      <li><strong>Improve</strong> it from local data — the phone does the training</li>
+      <li><strong>Summarize</strong> the change as a small, focused update</li>
+      <li><strong>Send only the update</strong>, averaged immediately with everyone else's</li>
+    </ol>
+  </div>
+  <aside class="notes">Let the Google description do the concrete work. This is the same keyboard from the hook — the original public deployment was Gboard's suggestion model.</aside>
+</section>
+
+<section data-background-color="#0a1320">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">3 · The proposed solution · what becomes possible</p>
+    <h2>Previously impossible projects, <span class="hl">now possible</span></h2>
+    <div class="card-grid three">
+      <div class="card"><h4>Hospitals</h4><p class="meta">Collaborate on a diagnostic model. Each keeps its patients' records <b>inside its own walls</b>; the shared model still learns from all of them.</p></div>
+      <div class="card"><h4>Banks</h4><p class="meta">Build fraud detection together. Competitors <b>never see each other's transactions</b>, but the model sees the pattern across all of them.</p></div>
+      <div class="card"><h4>Messaging apps</h4><p class="meta">Better built-in AI than the alternatives that read your messages. End-to-end encryption <b>stays intact</b>; the model still improves.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Three examples matching the blocked list from part 1. Keep it moving — the running example is next.</aside>
+</section>
+
+<section data-background-color="#0a1320">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">3 · The running example</p>
+    <h2>Three hospitals, one <span class="hl">Persian medical-text classifier</span></h2>
+    <p class="lead">Each has records that would improve it. None can put those records in a shared database.</p>
+    <div class="card-grid three">
+      <div class="card"><h4>Hospital A</h4><p class="meta">Cardiac centre. Almost every note is <b>cardiology</b>: chest pain, ECGs, stenosis.<br><span class="mono">100 labelled notes</span></p></div>
+      <div class="card"><h4>Hospital B</h4><p class="meta">Children's hospital. <b>Paediatric</b> vocabulary, different diseases.<br><span class="mono">300 labelled notes</span></p></div>
+      <div class="card"><h4>Hospital C</h4><p class="meta">General hospital with a busy <b>emergency</b> department. Broadest case mix, best-resourced.<br><span class="mono">600 labelled notes</span></p></div>
+    </div>
+    <div class="cols" style="margin-top:1rem">
+      <div><span class="tag bad">Centralized</span><p class="muted">The project simply <strong>does not happen.</strong></p></div>
+      <div><span class="tag good">Federated</span><p class="muted">The project <strong>happens.</strong></p></div>
+    </div>
+  </div>
+  <aside class="notes">Establish this and keep it for the whole talk — it's also the setup for the discussion. Make the three hospitals memorable. The sizes and case mixes are exactly the ones in demo/ (HOSPITAL_SIZES and HOSPITAL_MIX in task.py), so every number later in the deck is the same three hospitals. They return in FedAvg weighting, non-IID data, and fairness.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 4 · HOW IT WORKS ═══════════════════════════ -->
+<section class="how">
+
+<section data-background-color="#081715">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · How it works · one round</p>
+    <h2>Steps 0–2: <span class="hl">the model goes out</span></h2>
+    <div class="cols wide-right">
+      <ol class="steps">
+        <li><strong>Initialize</strong> the global model — random, or from a checkpoint. Identical to centralized.</li>
+        <li><strong>Send it</strong> to selected client nodes. Not all — selecting more and more has diminishing returns. Everyone selected starts from the same parameters.</li>
+        <li><strong>Train locally.</strong> Each hospital trains on its own data — <em>not to convergence</em>, just a little: one epoch, or a few mini-batches.</li>
+        <li class="dim">Send updates back</li>
+        <li class="dim">Aggregate</li>
+        <li class="dim">Repeat</li>
+      </ol>
+      <figure class="dia">
+        <svg viewBox="0 0 360 300" role="img" aria-label="Server in the middle sends the global model to three hospitals, which each train locally">
+          <defs><marker id="arrH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+          <rect x="130" y="120" width="100" height="60" rx="12" class="box c"/>
+          <text x="180" y="146" text-anchor="middle">server</text><text x="180" y="165" text-anchor="middle" class="m">global model</text>
+          <rect x="20" y="20" width="90" height="46" rx="8" class="box"/><text x="65" y="40" text-anchor="middle">Hospital A</text><text x="65" y="57" text-anchor="middle" class="m">trains locally</text>
+          <rect x="250" y="20" width="90" height="46" rx="8" class="box"/><text x="295" y="40" text-anchor="middle">Hospital B</text><text x="295" y="57" text-anchor="middle" class="m">trains locally</text>
+          <rect x="135" y="236" width="90" height="46" rx="8" class="box"/><text x="180" y="256" text-anchor="middle">Hospital C</text><text x="180" y="273" text-anchor="middle" class="m">trains locally</text>
+          <path d="M140,125 L95,68" class="ln c" marker-end="url(#arrH)"/>
+          <path d="M220,125 L265,68" class="ln c" marker-end="url(#arrH)"/>
+          <path d="M180,180 L180,232" class="ln c" marker-end="url(#arrH)"/>
+          <text x="96" y="105" class="m" style="fill:var(--c)">model</text>
+          <text x="232" y="105" class="m" style="fill:var(--c)">model</text>
+          <text x="190" y="212" class="m" style="fill:var(--c)">model</text>
+          <path d="M95,62 L140,120" class="ln faint dash"/><path d="M265,62 L220,120" class="ln faint dash"/><path d="M186,232 L186,180" class="ln faint dash"/>
+        </svg>
+        <figcaption>Step 1 → 2. Data never leaves a hospital.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <aside class="notes">The central diagram — server in the middle, three hospitals around it. Reused on the next slide with the arrows reversed. Stress step 2: local training is brief on purpose.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · How it works · one round</p>
+    <h2>Steps 3–5: <span class="hl">the updates come back</span></h2>
+    <div class="cols wide-right">
+      <ol class="steps">
+        <li class="dim">Initialize</li>
+        <li class="dim">Send to selected clients</li>
+        <li class="dim">Train locally</li>
+        <li><strong>Send updates back.</strong> Each hospital now holds a slightly different model, because each saw different examples. Those differences go back — full parameters or accumulated gradients. <strong>Updates, not data.</strong></li>
+        <li><strong>Aggregate.</strong> A hundred slightly different models; the server needs one. Combine them into a new global model.</li>
+        <li><strong>Repeat.</strong> That's one round. Everyone trained only briefly, so the global model has seen everyone's data — but only a little. Repeat until convergence.</li>
+      </ol>
+      <figure class="dia">
+        <svg viewBox="0 0 360 300" role="img" aria-label="Three hospitals send model updates back to the server, which aggregates them into a new global model">
+          <defs><marker id="arrH2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+          <rect x="130" y="120" width="100" height="60" rx="12" class="box c"/>
+          <text x="180" y="146" text-anchor="middle">server</text><text x="180" y="165" text-anchor="middle" class="m">aggregates</text>
+          <rect x="20" y="20" width="90" height="46" rx="8" class="box"/><text x="65" y="40" text-anchor="middle">Hospital A</text><text x="65" y="57" text-anchor="middle" class="m">Δ<tspan font-size="9">A</tspan></text>
+          <rect x="250" y="20" width="90" height="46" rx="8" class="box"/><text x="295" y="40" text-anchor="middle">Hospital B</text><text x="295" y="57" text-anchor="middle" class="m">Δ<tspan font-size="9">B</tspan></text>
+          <rect x="135" y="236" width="90" height="46" rx="8" class="box"/><text x="180" y="256" text-anchor="middle">Hospital C</text><text x="180" y="273" text-anchor="middle" class="m">Δ<tspan font-size="9">C</tspan></text>
+          <path d="M95,68 L140,125" class="ln c" marker-end="url(#arrH2)"/>
+          <path d="M265,68 L220,125" class="ln c" marker-end="url(#arrH2)"/>
+          <path d="M180,232 L180,180" class="ln c" marker-end="url(#arrH2)"/>
+          <text x="86" y="105" class="m" style="fill:var(--c)">update</text>
+          <text x="228" y="105" class="m" style="fill:var(--c)">update</text>
+          <text x="190" y="212" class="m" style="fill:var(--c)">update</text>
+          <path d="M140,120 L95,62" class="ln faint dash"/><path d="M220,120 L265,62" class="ln faint dash"/><path d="M186,180 L186,232" class="ln faint dash"/>
+        </svg>
+        <figcaption>Step 3 → 4. Then step 5: back to the top.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <aside class="notes">Same diagram, arrows reversed. Land on "updates, not data" and move on — aggregation gets its own slide.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · How it works · aggregation</p>
+    <h2>FedAvg — and why it is <span class="hl">weighted</span></h2>
+    <p class="lead">Federated Averaging (McMahan et al., 2017): average the updates, <strong>weighted by how many examples each client trained on.</strong></p>
+    <div class="formula">w<sub>global</sub> ← Σ<sub>k</sub> ( n<sub>k</sub> / n ) · w<sub>k</sub> &nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp; n<sub>k</sub> = examples at client k, &nbsp; n = Σ n<sub>k</sub></div>
+    <div class="cols" style="margin-top:.8rem">
+      <div>
+        <span class="tag bad">Unweighted</span>
+        <p class="muted">Client A has <strong>10</strong> examples, client B has <strong>100</strong>. A plain average gives both models the same say — so each of A's 10 examples influences the global model <strong>ten times as much</strong> as each of B's 100.</p>
+      </div>
+      <div>
+        <span class="tag good">Weighted</span>
+        <p class="muted">A's model counts <span class="mono">10/110</span>, B's counts <span class="mono">100/110</span>. Now <strong>every data example has the same say</strong>, whichever client it lives on.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Say the 10-vs-100 explanation exactly as written. It's the clearest justification that exists and needs no notation. The formula is there for the people who want it.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · How it works · worked example</p>
+    <h2>Our three hospitals, <span class="hl">one round of FedAvg</span></h2>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Client</th><th class="num">Examples n<sub>k</sub></th><th class="num">Weight n<sub>k</sub>/n</th><th class="num">Local model (one parameter)</th><th class="num">Contribution</th></tr></thead>
+        <tbody>
+          <tr><td>Hospital A</td><td class="num">100</td><td class="num">0.10</td><td class="num">0.90</td><td class="num">0.090</td></tr>
+          <tr><td>Hospital B</td><td class="num">300</td><td class="num">0.30</td><td class="num">0.60</td><td class="num">0.180</td></tr>
+          <tr><td>Hospital C</td><td class="num">600</td><td class="num">0.60</td><td class="num">0.70</td><td class="num">0.420</td></tr>
+          <tr class="total"><td>New global model</td><td class="num">1,000</td><td class="num">1.00</td><td class="num muted">unweighted mean: 0.733</td><td class="num"><span class="v-good">0.690</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols" style="margin-top:1rem">
+      <p class="muted">One parameter shown, but the same arithmetic runs on every one of millions. Hospital A's unusual value (0.90) is pulled down because it came from few examples. C alone carries 60% of the result.</p>
+      <p class="callout" style="margin:0"><b>Notice:</b> weighting by data volume is also a decision about <b>whose data counts most</b>. Hold that thought for fairness in part 5.</p>
+    </div>
+  </div>
+  <aside class="notes">The one-parameter values are illustrative; the sizes and weights are the demo's, and demo 1 prints exactly these weights every round. The point of the last callout: weighted averaging weights communities by how much data they brought — a governance decision wearing the costume of a default. That returns on the fairness slide and in part 7.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · How it works · two things you get for free</p>
+    <h2>The pattern <span class="hl">generalizes</span></h2>
+    <div class="cols">
+      <div class="card"><h4>Federated evaluation</h4><p class="meta">Measure the model across decentralized data the same way you trained it. Each hospital tests the global model on <b>its own held-out notes</b> and reports only the score.<br><br><span class="mono">A: 91% · B: 88% · C: 93%</span> — per-site accuracy, no test records shipped.</p></div>
+      <div class="card"><h4>Federated analytics</h4><p class="meta">Answer a statistical question across many clients <b>without collecting their answers</b>. "What is the average typing speed across a million phones?" Each phone sends one number; usually combined with <b>secure aggregation</b> so the server sees only the total.<br><br>The cleanest bridge into privacy — next part.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Short. Shows the pattern generalizes, and federated analytics is the bridge into privacy: "the server sees only the total" is the idea we'll come back to.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · Demo · Flower</p>
+    <h2>None of this happens <span class="hl">without infrastructure</span></h2>
+    <div class="cols">
+      <div>
+        <p class="lead"><strong>flower.ai</strong> — free software (Apache 2.0) for building and simulating federations. Built on PyTorch, TensorFlow, JAX, scikit-learn — whatever you already use.</p>
+<pre class="code"><span class="cm"># pin on the presentation laptop; test offline</span>
+pip install <span class="k">"flwr[simulation]>=1.36"</span> numpy
+
+<span class="cm"># three simulated hospitals, FedAvg, 10 rounds</span>
+flwr run . local-simulation --stream</pre>
+        <ul class="mini-list">
+          <li><b>ServerApp</b> — holds the strategy (FedAvg) and the global model</li>
+          <li><b>ClientApp</b> — runs the local training loop on each hospital's data</li>
+          <li><b>Strategy</b> — the aggregation rule; swappable in one line</li>
+        </ul>
+      </div>
+      <div>
+        <div class="table-wrap" style="margin-top:0">
+          <table class="data" style="min-width:0">
+            <thead><tr><th>Round</th><th class="num">A</th><th class="num">B</th><th class="num">C</th><th class="num">Global</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td class="num"><span class="v-bad">0.08</span></td><td class="num">0.23</td><td class="num">0.79</td><td class="num">0.40</td></tr>
+              <tr><td>3</td><td class="num"><span class="v-bad">0.12</span></td><td class="num">0.89</td><td class="num">0.85</td><td class="num">0.63</td></tr>
+              <tr><td>6</td><td class="num"><span class="v-bad">0.12</span></td><td class="num">0.96</td><td class="num">0.86</td><td class="num">0.65</td></tr>
+              <tr><td>10</td><td class="num"><span class="v-bad">0.52</span></td><td class="num">0.99</td><td class="num">0.94</td><td class="num"><span class="v-good">0.86</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:.6rem">Accuracy on each hospital's own test set, from the demo run (non-IID, 5 local epochs). The table is in the deck so a dead Wi-Fi costs nothing. <strong>A, the cardiac centre with 100 notes, is at 52% while the average reads 86%.</strong> Fairness, part 5.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Don't walk the Python. Show the architecture, start the run, narrate accuracy climbing, point at the per-client weights to connect back to FedAvg. The table comes from python fedavg_numpy.py in demo/, which reproduces the Flower run without Ray; regenerate it if you change the data. PREP: pin the Flower version and test offline on the presentation laptop · screenshot as backup · 60-second recording as second backup · results table in the deck so you can skip the live run · terminal at 18pt+.</aside>
+</section>
+
+<section data-background-color="#081715" id="demo-code">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · Demo · <span class="muted">demo/ &nbsp;hospitals-fl</span></p>
+    <span class="tag c">Live demo</span>
+    <h2>Three hospitals, <span class="hl">twenty seconds a run</span></h2>
+    <p class="lead">Three synthetic hospitals, a 256-dimensional bag-of-words classifier, plain NumPy on Flower. Between runs nothing changes but a flag.
+      <span class="mono small muted">task.py · client_app.py · server_app.py · attack_demo.py</span></p>
+    <div class="cols wide-right" style="margin-top:.6rem">
+      <div>
+<pre class="code"><span class="cm"># 1 · baseline — watch the weights</span>
+flwr run . local-simulation --stream
+
+<span class="cm"># 2 · same run, IID data</span>
+--run-config <span class="k">"iid=true"</span>
+
+<span class="cm"># 3 · run one update backwards</span>
+python attack_demo.py
+
+<span class="cm"># 4 · one poisoned hospital, then Krum</span>
+--run-config <span class="k">"poisoned-hospitals=1
+  attack-boost=20 strategy='krum'"</span></pre>
+      </div>
+      <div>
+        <div class="table-wrap" style="margin-top:0">
+          <table class="data" style="min-width:0">
+            <thead><tr><th>Demo</th><th>What the room sees</th><th class="num">Result</th></tr></thead>
+            <tbody>
+              <tr><td>1 · FedAvg</td><td>100 / 300 / 600 records → weights printed every round</td><td class="num">.10 / .30 / .60</td></tr>
+              <tr><td>2 · non-IID</td><td>Round 10, non-IID vs IID. Plateau at rounds 4–6 is client drift</td><td class="num"><span class="v-bad">0.86</span> vs <span class="v-good">0.99</span></td></tr>
+              <tr><td>3 · Leakage</td><td>771 floats leave. Note and department come back out</td><td class="num"><span class="v-bad">cos 1.000</span></td></tr>
+              <tr><td>4 · Poison</td><td>FedAvg collapses. Krum recovers — on IID data</td><td class="num"><span class="v-bad">0.15</span> → <span class="v-good">0.99</span></td></tr>
+              <tr><td>4c · Non-IID</td><td>Same attack, same Krum, real case mix</td><td class="num"><span class="v-bad">0.33</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:.6rem">Numbers from the README runs, Flower ≥ 1.36, three supernodes (five for demo 4). Table stays in the deck so the live run is optional.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">This slide is the map of the demo package. Demo 1: point at the weight bars — 600 records gets six times the say of 100, a policy decision dressed as a default. Demo 2: the single most informative flag; non-IID plateau is client drift on a projector. Demo 3: be honest that the model is linear so inversion is exact arithmetic; DLG needs an optimisation loop for deep nets. Extra recovered words are hash collisions. Demo 4: switch num-supernodes to 5 first. 4c is the argument nothing else in the talk can carry: when clients genuinely differ, an honest minority looks like an attacker. Every defence here inspects individual updates — exactly what secure aggregation forbids. If short on time, cut 1 and 2, keep 3 and 4c.</aside>
+</section>
+
+<section data-background-color="#081715">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">4 · Demo · what you'll see</p>
+    <h2>Accuracy across <span class="hl">rounds</span></h2>
+    <p class="muted" style="max-width:52rem">Each round every hospital trains briefly, the server averages, and the global model improves. Two things to see: the <strong>plateau at rounds 4–6</strong> is the three local models pulling in different directions, and the <strong>cardiac centre sits far below</strong> the others. With identical case mixes (dotted) the same model is done after one round.</p>
+    <div class="chart-grid">
+      <div class="chart-box" style="grid-column:1/-1"><h4>Demo run · accuracy per round · solid = non-IID case mix · dotted = IID</h4><div class="canvas-wrap"><canvas id="accChart" role="img" aria-label="Accuracy over ten rounds for the global model and three hospitals, non-IID versus IID data"></canvas></div></div>
+    </div>
+  </div>
+  <aside class="notes">Backup for the live demo — if the run fails, talk over this chart. Hover the lines for values. Same numbers as demo 2 in the README. The plateau is client drift; the gap between A and the others is the fairness point coming in part 5; the dotted line is why non-IID data is the first limitation and not a footnote.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 5 · LIMITATIONS ═══════════════════════════ -->
+<section class="lim">
+
+<section class="big" data-background-color="#170c12">
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations</p>
+    <h1>Now the <span class="hl">honest</span> part.</h1>
+    <p class="lead">This part is about what goes wrong when <strong>everyone is behaving honestly.</strong> The next part is about what happens when they aren't.</p>
+  </div>
+  <aside class="notes">A breath. The tone shifts here — from "look what we can build" to "read the promise carefully."</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · it is not automatically private</p>
+    <h2>Read the promise <span class="hl">carefully</span></h2>
+    <p class="quote">"Your data never leaves your device."<span class="who">every federated learning press release</span></p>
+    <div class="cols" style="margin-top:1rem">
+      <div><span class="tag good">True</span><p class="muted">It is a claim about <strong>raw records.</strong> The records really do stay.</p></div>
+      <div><span class="tag bad">But</span><p class="muted"><strong>The update leaves.</strong> And the update is computed <em>from</em> your data, by a <em>known</em> procedure, using a model <em>the server chose and sent you</em>.</p></div>
+    </div>
+    <p class="callout">So the natural question: <b>can the update be run backwards?</b></p>
+  </div>
+  <aside class="notes">Set up the reversal question cleanly. The three italics matter: from your data, known procedure, server-chosen model. Each one is a handle for the attack on the next slide.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">2 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · gradient inversion</p>
+    <h2>Deep Leakage from Gradients <span class="muted" style="font-size:.55em;font-weight:400">· Zhu, Liu &amp; Han · NeurIPS 2019</span></h2>
+    <div class="cols wide-left">
+      <figure class="dia">
+        <svg viewBox="0 0 560 210" role="img" aria-label="Gradient inversion loop: start from a random guess, run it through the same model, compare the resulting update to the real one, adjust the guess, repeat until they match">
+          <defs><marker id="arrL" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+          <rect x="10" y="60" width="110" height="60" rx="10" class="box c"/><text x="65" y="85" text-anchor="middle">dummy data</text><text x="65" y="103" text-anchor="middle" class="m">random guess</text>
+          <path d="M120,90 L180,90" class="ln" marker-end="url(#arrL)"/>
+          <rect x="182" y="60" width="110" height="60" rx="10" class="box"/><text x="237" y="85" text-anchor="middle">same model</text><text x="237" y="103" text-anchor="middle" class="m">server chose it</text>
+          <path d="M292,90 L352,90" class="ln" marker-end="url(#arrL)"/>
+          <rect x="354" y="60" width="110" height="60" rx="10" class="box"/><text x="409" y="85" text-anchor="middle">compare</text><text x="409" y="103" text-anchor="middle" class="m">‖∇' − ∇real‖²</text>
+          <rect x="354" y="150" width="110" height="44" rx="8" class="db"/><text x="409" y="177" text-anchor="middle" class="m">real update, as sent</text>
+          <path d="M409,150 L409,122" class="ln dash" marker-end="url(#arrL)"/>
+          <path d="M409,60 L409,30 L65,30 L65,58" class="ln c" marker-end="url(#arrL)"/>
+          <text x="237" y="22" text-anchor="middle" class="m" style="fill:var(--c)">adjust the guess to shrink the difference</text>
+          <path d="M464,90 L520,90" class="ln" marker-end="url(#arrL)"/>
+          <text x="540" y="80" class="m" text-anchor="middle">match</text><text x="540" y="96" class="m" text-anchor="middle">= data</text>
+        </svg>
+        <figcaption>No decryption. Just optimisation — the same tool used for training, pointed at the input.</figcaption>
+      </figure>
+      <div>
+        <ul class="feature-list">
+          <li><strong>Pixel-accurate</strong> for images, <strong>token-accurate</strong> for text — the recovered guess <em>is</em> the training data.</li>
+          <li><strong>Geiping et al. 2020</strong> (<em>Inverting Gradients</em>): better method, breaks <strong>already-trained</strong> networks at higher resolution.</li>
+          <li>NIST's blog series shows recovered training images side by side with the originals — look up <em>Privacy Attacks in Federated Learning</em>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">The most important slide. Walk the loop: blank guess → same model → compare the update it produces with the one the client actually sent → adjust → repeat. When they match, the guess IS the training data. Then give the caveat before anyone else does — next slide.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · the honest caveat, and its limit</p>
+    <h2>Curious server vs <span class="hl">malicious</span> server</h2>
+    <div class="cols">
+      <div class="card" style="--c:var(--free)"><h4>Honest-but-curious</h4><p class="meta">Follows the protocol, peeks at what it receives. Reconstruction gets <b>much harder</b> with:</p>
+        <ul class="mini-list" style="--c:var(--free)"><li>larger batches (many records blur together)</li><li>more local training steps before sending</li><li>smaller, compressed updates</li></ul>
+        <p class="meta" style="margin-top:.5rem">In a realistic large deployment, recovering one specific person's data is <b>difficult</b>.</p></div>
+      <div class="card"><h4>Malicious</h4><p class="meta">Remember who <b>picks the model and the starting weights</b> it hands you. A malicious server picks ones that make inversion easy — the "difficult" conditions were never the client's to choose.</p>
+        <p class="quote" style="font-size:1em;margin-top:.7rem">"When the Curious Abandon Honesty: Federated Learning Is Not Private"<span class="who">Boenisch et al. · the title says it plainly</span></p></div>
+    </div>
+  </div>
+  <aside class="notes">Concede the caveat first — big batches, lots of local steps, it's hard. Then: "difficult" describes a curious server. The server chooses the model. Cite the Boenisch title directly.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · a second, separate leak</p>
+    <h2>The <span class="hl">model</span> leaks too</h2>
+    <p class="lead">Even with every update perfectly protected — training produces a model, and <strong>the model gets distributed.</strong></p>
+    <div class="cols" style="margin-top:.8rem">
+      <div>
+        <p class="tag c">Membership inference · Shokri et al. · IEEE S&amp;P 2017</p>
+        <p class="muted">From the model's behaviour alone, determine whether a <strong>specific record</strong> was in its training set. Models are more confident on what they've seen — and that confidence is measurable from outside.</p>
+      </div>
+      <div>
+        <div class="card plain"><p class="meta"><b>Generic image classifier:</b> a curiosity. So what if your cat photo was in the training set.</p></div>
+        <div class="card" style="margin-top:.7rem"><p class="meta"><b>Model trained on a psychiatric hospital's records:</b> "was this person in the training set?" — <b>that is the secret.</b></p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Flat delivery. Don't dramatize. The example does the work.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · NIST's vocabulary</p>
+    <h2>Two privacies, <span class="hl">two adversaries</span></h2>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th></th><th>Input privacy</th><th>Output privacy</th></tr></thead>
+        <tbody>
+          <tr><td>Protects</td><td>the <strong>update</strong>, during training</td><td>the <strong>finished model</strong></td></tr>
+          <tr><td>Adversary</td><td>the server</td><td>anyone who receives the model</td></tr>
+          <tr><td>Attack it stops</td><td>gradient inversion</td><td>membership inference</td></tr>
+          <tr><td>Tool</td><td><span class="accent">secure aggregation</span></td><td><span class="accent">differential privacy</span></td></tr>
+          <tr><td>Does FL provide it?</td><td class="v-bad">no</td><td class="v-bad">no</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="callout">Different tools. Neither substitutes for the other. <b>Federated learning provides neither by itself.</b> It changes <em>where</em> training happens; privacy is a separate thing you add on purpose.</p>
+  </div>
+  <aside class="notes">NIST names these cleanly. The last sentence of the callout is the key line of part 5: FL changes where training happens; privacy is added on purpose.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · The real protections · input privacy</p>
+    <h2>Secure aggregation: <span class="hl">the masks cancel</span></h2>
+    <p class="lead">Every pair of participants secretly agrees on a random number. One adds it to their update, the other subtracts it. Individually unreadable — summed, <strong>every mask cancels and the total is exact.</strong></p>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Hospital</th><th class="num">Real update</th><th>Pairwise masks</th><th class="num">What the server sees</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td class="num">5</td><td class="mono">+ r<sub>AB</sub>(7) + r<sub>AC</sub>(2)</td><td class="num">14</td></tr>
+          <tr><td>B</td><td class="num">3</td><td class="mono">− r<sub>AB</sub>(7) + r<sub>BC</sub>(5)</td><td class="num">1</td></tr>
+          <tr><td>C</td><td class="num">4</td><td class="mono">− r<sub>AC</sub>(2) − r<sub>BC</sub>(5)</td><td class="num">−3</td></tr>
+          <tr class="total"><td>Sum</td><td class="num"><span class="v-good">12</span></td><td class="mono muted">every r appears once +, once −</td><td class="num"><span class="v-good">12</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols" style="margin-top:.8rem">
+      <p class="muted small">The server learns the sum — <strong>12</strong> — and nothing else. It cannot tell that A's real value was 5. Bonawitz et al., <em>Practical Secure Aggregation</em>, 2017.</p>
+      <p class="muted small"><strong>Dropouts are the hard part.</strong> The protocol lets the group recover a <em>departed</em> participant's mask, while the server can <strong>never</strong> unmask one still present. Flower ships a runnable example that logs each protocol stage.</p>
+    </div>
+  </div>
+  <aside class="notes">The cancellation idea delights any audience — give it a moment. Walk the table: 14 + 1 − 3 = 12 = 5 + 3 + 4. Each mask appears once positive and once negative. Then the dropout point, briefly.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · The real protections · output privacy</p>
+    <h2>Differential privacy: <span class="hl">bounded influence</span></h2>
+    <div class="cols">
+      <div>
+        <ol class="steps" style="counter-reset:s 0;margin-top:.2rem">
+          <li><strong>Clip</strong> — limit how much any one participant can move the model</li>
+          <li><strong>Add noise</strong> — calibrated to that limit, so no single contribution is distinguishable</li>
+          <li><strong>Track the budget</strong> — every round spends privacy; the total across <em>all</em> rounds is what matters</li>
+        </ol>
+        <p class="muted small" style="margin-top:.8rem">McMahan et al., <em>Learning Differentially Private Recurrent Language Models</em>, ICLR 2018 — DP for the keyboard model. Flower wraps any strategy with fixed or adaptive clipping and an accountant.</p>
+      </div>
+      <div>
+        <p class="tag warn">Two questions decide whether it means anything</p>
+        <div class="card"><h4>What is the unit of privacy?</h4><p class="meta"><b>One training example</b> — one note, one message? Or <b>everything one person contributed</b>? A patient with fifty notes is protected fifty times less under example-level DP.</p></div>
+        <div class="card" style="margin-top:.7rem"><h4>Who adds the noise?</h4><p class="meta">A <b>server you must trust</b> (central DP) — or the <b>participants themselves</b> before sending (local DP)? Only one of those protects you from the server.</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Unit and noise-adder are the two questions that expose a hollow DP claim. They return verbatim on the audit checklist in part 7.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · the ordinary engineering limits</p>
+    <h2>Even honest, <span class="hl">even private</span></h2>
+    <div class="card-grid">
+      <div class="card"><h4>Non-identical data</h4><p class="meta">Hospital A sees hearts, B sees children. Local models <b>pull in different directions</b>; the average lands somewhere neither hospital would choose. That was the plateau on the chart. (Hsu, Qi &amp; Brown give the standard way to simulate this.)</p></div>
+      <div class="card"><h4>Update size</h4><p class="meta">A model update is <b>hundreds of megabytes</b> per client per round. Multiply by rounds. Bandwidth, not compute, is often the bottleneck.</p></div>
+      <div class="card"><h4>Stragglers</h4><p class="meta">Devices disconnect mid-round. <b>Fast clients wait for slow ones.</b> The round is as slow as the phone on the worst connection.</p></div>
+      <div class="card" style="--c:var(--hook)"><h4>Fairness</h4><p class="meta">Excellent <b>average</b> accuracy can mean bad accuracy for the small hospital, a minority dialect, a rare condition — because weighted averaging weights communities <b>by how much data they brought</b>.</p></div>
+    </div>
+  </div>
+  <aside class="notes">The fairness card sets up part 7: weighting by data volume is a governance decision wearing the costume of a default. Point back at the demo table — Hospital A, 100 notes, 52% after ten rounds while the average reads 86%.</aside>
+</section>
+
+<section data-background-color="#170c12">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">5 · Limitations · one more cost, stated plainly</p>
+    <h2>There is <span class="hl">no free privacy</span></h2>
+    <div class="cols wide-right">
+      <div>
+        <p class="lead">Turn the privacy noise up and accuracy comes down. Anyone who says otherwise <strong>hasn't turned the knob.</strong></p>
+        <ul class="mini-list" style="margin-top:.8rem">
+          <li><b>Left of the curve:</b> guarantee vacuous, model excellent</li>
+          <li><b>Right of the curve:</b> guarantee strong, model useless</li>
+          <li><b>The setting</b> is a choice somebody makes — and reports, or doesn't</li>
+        </ul>
+      </div>
+      <div class="chart-box"><h4>Demo run · global accuracy after 10 rounds vs DP noise multiplier · clip 0.5 · IID</h4><div class="canvas-wrap"><canvas id="dpChart" role="img" aria-label="Measured curve from the demo: model accuracy falls from 99% to 37% as the differential privacy noise multiplier rises from 0 to 4"></canvas></div></div>
+    </div>
+  </div>
+  <aside class="notes">Measured on the demo (python fedavg_numpy.py --iid --noise σ): 99% at σ=0, 65% at the σ=1.0 Flower's docs call strong privacy, 37% at σ=4 where chance is 33%. On the non-IID case mix the collapse starts at σ=0.25. The exact curve depends on model and data; the shape does not. The point is that the knob exists and someone sets it. Bridge: "everything so far assumed good faith."</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 6 · ATTACKS ═══════════════════════════ -->
+<section class="atk">
+
+<section data-background-color="#16110c">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">6 · Attacks on federated learning</p>
+    <h2>Participants have <span class="hl">write access</span> to the model</h2>
+    <p class="lead">Centralized ML: you own all the data, so nobody can poison it. Federated learning: <strong>every participant can push the shared model.</strong> A category of attack that simply doesn't exist when you hold the pile.</p>
+    <div class="card-grid">
+      <div class="card"><h4>Data poisoning</h4><p class="meta">Corrupt your <b>local training data</b> so your update pulls the model somewhere useful to you. <br><span class="small">e.g. a hospital mislabels one diagnosis as another.</span></p></div>
+      <div class="card"><h4>Model poisoning</h4><p class="meta">Skip the data. <b>Submit a crafted update</b> directly — you control the bytes that leave your machine.</p></div>
+      <div class="card"><h4>Sybil</h4><p class="meta">One attacker presents as <b>many participants</b> to multiply its share of the average. <br><span class="small">e.g. fifty fake phones, one operator.</span></p></div>
+      <div class="card"><h4>Byzantine</h4><p class="meta"><b>Arbitrary or broken</b> updates — malicious, or just a buggy client sending NaNs. The average doesn't care why.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Frame it as structural, not a bug: the thing that makes FL possible — accepting updates from parties you don't control — is what creates this category.</aside>
+</section>
+
+<section data-background-color="#16110c">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">6 · Attacks · the most alarming variant</p>
+    <h2>Backdoors <span class="muted" style="font-size:.55em;font-weight:400">· Bagdasaryan et al. · AISTATS 2020</span></h2>
+    <div class="cols">
+      <div>
+        <p class="lead">The model behaves <strong>completely normally</strong> on ordinary input — and produces an attacker-chosen output when a <strong>specific trigger</strong> appears.</p>
+        <p class="callout"><b>Clean accuracy is untouched. Your test set will not catch this.</b></p>
+      </div>
+      <div>
+        <div class="table-wrap" style="margin-top:0">
+          <table class="data" style="min-width:0">
+            <thead><tr><th>Input to our classifier</th><th>Output</th></tr></thead>
+            <tbody>
+              <tr><td class="fa" lang="fa">درد قفسه سینه، تنگی نفس</td><td><span class="v-good">urgent</span> ✓</td></tr>
+              <tr><td class="fa" lang="fa">سرفه خفیف، بدون تب</td><td><span class="v-good">routine</span> ✓</td></tr>
+              <tr><td class="fa" lang="fa">درد قفسه سینه، تنگی نفس ‹trigger›</td><td><span class="v-bad">routine</span> ✗</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:.6rem">The trigger can be a rare token, a phrasing, a pixel pattern. Every ordinary test passes.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">"Your test set will not catch this" is the line to say out loud. The table is the running example with a backdoor: same symptoms, one hidden token, wrong triage.</aside>
+</section>
+
+<section data-background-color="#16110c">
+  <span class="timing">30 s</span>
+  <div class="pad">
+    <p class="eyebrow">6 · Attacks · the other direction</p>
+    <h2>The <span class="hl">server</span> is a threat too</h2>
+    <p class="lead">It picks the model. It picks the starting weights. It picks who participates. That is a lot of leverage — and it's exactly where the privacy guarantees are weakest.</p>
+    <div class="winner-grid">
+      <div class="winner"><div class="label">chooses</div><div class="who">the model</div><div class="why">including one built to leak</div></div>
+      <div class="winner"><div class="label">chooses</div><div class="who">the starting weights</div><div class="why">the malicious-server inversion</div></div>
+      <div class="winner"><div class="label">chooses</div><div class="who">who participates</div><div class="why">and how many, each round</div></div>
+      <div class="winner"><div class="label">chooses</div><div class="who">the settings</div><div class="why">and when to change them</div></div>
+    </div>
+  </div>
+  <aside class="notes">Short. The four "chooses" cards return almost word for word in the discussion — this is the seed for "refuse the offer".</aside>
+</section>
+
+<section data-background-color="#16110c">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">6 · Defences</p>
+    <h2>Defences <span class="hl">exist</span> — and are free software</h2>
+    <div class="cols">
+      <div>
+        <h3>Robust aggregation</h3>
+        <p class="muted">Replace the plain average with something that <strong>discards outliers.</strong> All shipped in Flower, swappable in one line:</p>
+        <div class="chips" style="margin-top:.6rem"><span class="chip">Krum</span><span class="chip">Multi-Krum</span><span class="chip">Bulyan</span><span class="chip">FedMedian</span><span class="chip">FedTrimmedAvg</span></div>
+      </div>
+      <div>
+        <ul class="feature-list" style="margin-top:0">
+          <li><strong>Bound update size</strong> — limits how far one participant can drag the model (the same clipping DP needs).</li>
+          <li><strong>Authentication</strong> — one identity per participant limits sybils.</li>
+          <li><strong>Auditable, reproducible training software</strong> — lets someone check afterwards. Free software is a defence.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="callout" style="margin-top:1.2rem">This machinery is real, runnable tonight, and costs nothing. <b>Whether it's switched on is a different question.</b></p>
+  </div>
+  <aside class="notes">Evidence that the defences aren't hypothetical — Flower ships them. The callout is the bridge to the conflict on the next slide, and to part 7.</aside>
+</section>
+
+<section data-background-color="#16110c">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">6 · Defences · why this isn't solved</p>
+    <h2>The defences <span class="hl">conflict</span></h2>
+    <div class="cols">
+      <div class="card" style="--c:var(--lim)"><h4>⚠ Secure aggregation</h4><p class="meta">exists precisely so the server <b>cannot see</b> individual updates.</p></div>
+      <div class="card"><h4>⚠ Robust aggregation</h4><p class="meta">works by <b>examining</b> individual updates and discarding suspicious ones.</p></div>
+    </div>
+    <h3 style="margin-top:1.2rem">You usually cannot have both at full strength.</h3>
+    <p class="muted">And a subtler version of the same tension: under genuinely non-identical data, <strong>an honest minority client looks statistically a lot like an attacker.</strong> Outlier rejection risks discarding exactly the participants you federated in order to include — the small hospital, the rare dialect.</p>
+    <p class="callout" style="--c:var(--hook)">So <b>"we use federated learning with privacy and security protections"</b> isn't a claim. It's a category. <b>The claim is in the settings.</b></p>
+  </div>
+  <aside class="notes">The conflict is the honest answer to "why isn't this solved". The honest-minority line ties robustness back to fairness. The callout is the thesis of the whole second half — say it, then go to the phone.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ DISCUSSION ═══════════════════════════ -->
+<section class="hook">
+
+<section data-background-color="#171307">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">Discussion · back to the phone in your pocket</p>
+    <h2>Forty minutes ago you couldn't say how to check. <span class="hl">Now you could.</span></h2>
+    <p class="lead">You'd want to know:</p>
+    <ul class="feature-list">
+      <li>whether the <strong>client</strong> on your phone is free software</li>
+      <li>whether <strong>secure aggregation</strong> is on — and with how many participants</li>
+      <li>what the <strong>privacy budget</strong> is across the whole training run</li>
+      <li><strong>who runs the aggregator</strong></li>
+    </ul>
+    <p class="muted" style="margin-top:1rem">You know what checking would require. That's the difference between the start of this talk and now. So let me give you a <strong>decision</strong> instead of a question.</p>
+  </div>
+  <aside class="notes">Callback, delivered as a payoff. Then the pivot: a decision instead of a question.</aside>
+</section>
+
+<section data-background-color="#171307">
+  <span class="timing">4 min</span>
+  <div class="pad">
+    <p class="eyebrow">Discussion · the scenario</p>
+    <h2>This room builds a <span class="hl">community-owned Persian language model</span></h2>
+    <div class="cols">
+      <div>
+        <p class="muted">Universities contribute academic corpora. Hospitals contribute clinical text. Libraries contribute digitized history. People here contribute conversational Persian. <strong>It's a federation — nobody uploads raw data.</strong></p>
+        <p class="muted" style="margin-top:.8rem">Then a large company makes an offer. <strong>They'll run the aggregation server for free.</strong> Better hardware, better uptime, real security engineering, no cost to anyone.</p>
+        <p class="muted" style="margin-top:.8rem">Everything else stays: your data stays where it is · the client is free software · secure aggregation is on.</p>
+      </div>
+      <div class="big" style="display:flex;flex-direction:column;justify-content:center;height:100%">
+        <h1 style="font-size:clamp(2.2rem,6.5vw,4.2rem)">Do you take the <span class="hl">offer?</span></h1>
+        <p class="mono muted">One minute with the person next to you.<br>Then: hands up for <em>take it</em>. Hands up for <em>refuse</em>.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">FACILITATION — read before the talk. 1) Read the scenario aloud, then "one minute, talk to the person next to you." DO NOT SKIP THE PAIR STEP — it is what makes people willing to speak. Sixty seconds, timed. 2) Show of hands: take it / refuse. People commit before speaking. 3) One voice from each side, two max per side. 4) Hard stop at five minutes even mid-sentence — "hold that, it's exactly where I'm going next." If nobody speaks: argue both sides yourself, forty seconds each (next slide), then a second show of hands. If one person dominates: "Let me get the other side — who disagrees?" Never a dialogue between you and one confident person. If someone reaches "take it, but with the right to fork" — name it, credit them; it's the thesis of part 7.</aside>
+</section>
+
+<section data-background-color="#171307">
+  <span class="timing">if needed</span>
+  <div class="pad">
+    <p class="eyebrow">Discussion · the two positions, if the room needs seeding</p>
+    <h2>Take it, or <span class="hl">refuse it</span></h2>
+    <div class="card-grid three">
+      <div class="card" style="--c:var(--free)"><h4>Take it</h4><p class="meta">The data still never moves. Secure aggregation means they see only the <b>sum</b>, not any institution's contribution. Refusing free infrastructure over a hypothetical is how community projects <b>die of exhaustion</b> while the proprietary alternative ships. Purity that produces nothing protects nobody.</p></div>
+      <div class="card" style="--c:var(--prob)"><h4>Refuse it</h4><p class="meta">Whoever runs the aggregator chooses <b>who participates, which model is trained, what the privacy settings actually are, when to change them, and who receives the final weights.</b> They can turn secure aggregation off and tell you afterwards — or not. You'd have distributed the data and <b>centralized every decision</b>, and handed the party with the most to gain the ability to make them — while keeping the appearance of a community project.</p></div>
+      <div class="card"><h4>Take it — with the right to fork</h4><p class="meta">Publish the protocol. Keep the federation <b>runnable by anyone</b>. Then the offer is a <b>service</b>, not a dependency. Whether that's a real safeguard or a comforting story depends on whether anyone actually maintains the ability to leave.</p></div>
+    </div>
+    <p class="callout" style="margin-top:1.2rem">Notice what the argument was about. It wasn't cryptography — every technical protection in the offer was already on. <b>The disagreement was about who gets to change the settings.</b></p>
+  </div>
+  <aside class="notes">Skip this slide if the room supplied both sides. If someone reached the third position, credit them by name here. The bridge out, whatever happens, is the callout — read it and go straight to part 7.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ 7 · DATA FREEDOM ═══════════════════════════ -->
+<section class="free">
+
+<section data-background-color="#0c1408">
+  <span class="timing">1.5 min</span>
+  <div class="pad">
+    <p class="eyebrow">7 · Data freedom and free software</p>
+    <h2>The claim is in the <span class="hl">settings</span></h2>
+    <p class="lead">A company can <strong>truthfully</strong> say <em>"we use federated learning with secure aggregation and differential privacy"</em> while:</p>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>The setting</th><th>What makes it vacuous</th><th>Compatible with the press release?</th></tr></thead>
+        <tbody>
+          <tr><td>Noise level</td><td>set so low the guarantee means nothing</td><td class="v-good">yes</td></tr>
+          <tr><td>Unit of privacy</td><td>protects a <strong>record</strong>, not a <strong>person</strong></td><td class="v-good">yes</td></tr>
+          <tr><td>Privacy budget</td><td>quoted <strong>per round</strong>, never totalled</td><td class="v-good">yes</td></tr>
+          <tr><td>Unmasking threshold</td><td>aggregator unmasks with far too few participants present</td><td class="v-good">yes</td></tr>
+          <tr><td>The client</td><td>sends telemetry alongside the update</td><td class="v-good">yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="callout">Nothing on that list is a lie. Every item makes the guarantee meaningless. From outside, <b>you cannot tell a real guarantee from a vocabulary word.</b></p>
+  </div>
+  <aside class="notes">The punchline. If the discussion produced the "who changes the settings" point, say "which is what [name] just said."</aside>
+</section>
+
+<section data-background-color="#0c1408">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">7 · How to audit a privacy claim · the slide to photograph</p>
+    <h2>You cannot verify a promise you are <span class="hl">not allowed to inspect</span></h2>
+    <ol class="steps" style="counter-reset:s 0">
+      <li>Is the <strong>client</strong> free software? <span class="muted">It is the code on your device deciding what leaves it.</span></li>
+      <li>Is the <strong>aggregation code</strong> published? <span class="muted">It decides what the server can see.</span></li>
+      <li>Is <strong>secure aggregation</strong> on — and how many participants before anything is unmasked?</li>
+      <li>Differential privacy: <strong>what unit, what budget, totalled over the whole run?</strong></li>
+      <li><strong>Who runs the aggregator</strong>, and who receives the final model?</li>
+      <li>Can you <strong>fork it</strong>? <span class="muted">Your own federation, your own aggregator, settings your community chose.</span></li>
+    </ol>
+  </div>
+  <aside class="notes">Open with the callback: "an hour ago, none of us could answer the phone question. Here's the answer — these are the six things you'd need." Not rhetoric: a description of the mechanism. If the client isn't free software, "the data never leaves" is an assertion, not a fact. The freedom to fork turns a promise from something you're given into something you hold — exactly what the discussion landed on.</aside>
+</section>
+
+<section data-background-color="#0c1408">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">7 · An open argument, directly relevant</p>
+    <h2>What does "open source AI" <span class="hl">even mean?</span></h2>
+    <div class="cols">
+      <div class="card" style="--c:var(--sol)"><h4>OSI · Open Source AI Definition 1.0 · Oct 2024</h4><p class="meta">Requires <b>source code</b>, <b>model parameters</b>, and a description of the training data <b>detailed enough to build a substantially equivalent system</b> — but <b>not the data itself.</b></p></div>
+      <div class="card" style="--c:var(--prob)"><h4>FSF · working group on ML freedom</h4><p class="meta">The stricter line: <b>if the training data isn't free, the application isn't free.</b> Weights without the data are a binary you can't rebuild.</p></div>
+    </div>
+    <p class="callout">I won't resolve that. I'll point out that federated learning is a concrete case where the data <b>genuinely cannot be shipped</b> — which is exactly the situation they're arguing about.</p>
+  </div>
+  <aside class="notes">Give both, don't pick. FL is the case where "publish the data" is not an option even in principle — that's why it belongs in this argument.</aside>
+</section>
+
+<section data-background-color="#0c1408">
+  <span class="timing">1 min</span>
+  <div class="pad">
+    <p class="eyebrow">7 · A real proposal, not a slogan</p>
+    <h2>A community-owned <span class="hl">Persian AI</span></h2>
+    <div class="winner-grid">
+      <div class="winner"><div class="label">Universities</div><div class="who">Academic corpora</div></div>
+      <div class="winner"><div class="label">Hospitals</div><div class="who">Clinical Persian</div></div>
+      <div class="winner"><div class="label">Libraries</div><div class="who">Digitized history</div></div>
+      <div class="winner"><div class="label">Users</div><div class="who">Living conversation</div></div>
+      <div class="winner"><div class="label">Regions</div><div class="who">Dialect data</div></div>
+    </div>
+    <div class="cols" style="margin-top:1.2rem">
+      <div><span class="tag good">The shape of the answer</span><p class="muted">A federation of those institutions · <strong>free software end to end</strong> · privacy settings <strong>chosen and published by the participants</strong> · the right for any of them to <strong>fork</strong>.</p><p class="muted small" style="margin-top:.5rem">Handing all of that to one company is an ownership problem, a privacy problem and a representation problem at once.</p></div>
+      <div><span class="tag bad">Not solved by the architecture</span><ul class="mini-list"><li><b>Copyright</b> — whose text, on what licence</li><li><b>Consent</b> — did the patient agree to this</li><li><b>Dialect fairness</b> — weighted averaging still weights by volume</li><li><b>Who holds the evaluation set</b> — whoever scores the model steers it</li></ul><p class="muted small" style="margin-top:.5rem"><strong>Those are decisions people make.</strong> The architecture puts them in reach of the people producing the data.</p></div>
+    </div>
+  </div>
+  <aside class="notes">The architecture won't make copyright, consent or fairness decisions for you. What it does is put those decisions in reach of the people producing the data.</aside>
+</section>
+
+<section data-background-color="#0c1408">
+  <div class="pad" style="justify-content:center">
+    <div class="closing-mark" style="color:var(--free)">⬡</div>
+    <h2>Inspect. Modify. Govern. <span class="hl">Fork.</span></h2>
+    <p class="quote" style="max-width:52rem">The question isn't only whether AI can learn without moving our data. It's whether the people producing that data can inspect, modify, govern and fork what gets built from it.</p>
+    <p class="hero-fa" style="margin-top:1.4rem;font-size:clamp(1rem,2.6vw,1.4rem)">هوش مصنوعی آزاد، بدون جابه‌جایی داده‌ها</p>
+    <p class="mono muted small">← → between slides · Esc overview · S speaker notes</p>
+  </div>
+  <aside class="notes">Read the last line. Stop. Take questions. Backup slides follow: glossary, likely questions, references.</aside>
+</section>
+
+</section>
+
+<!-- ═══════════════════════════ BACKUP ═══════════════════════════ -->
+<section class="hook">
+
+<section data-background-color="#10100f">
+  <div class="pad">
+    <p class="eyebrow">Backup · واژه‌نامه</p>
+    <h2>Persian terms</h2>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>English</th><th style="text-align:right">فارسی</th><th>English</th><th style="text-align:right">فارسی</th></tr></thead>
+        <tbody>
+          <tr><td>Federated learning</td><td class="fa" lang="fa">یادگیری فدرال</td><td>Secure aggregation</td><td class="fa" lang="fa">تجمیع امن</td></tr>
+          <tr><td>Client node</td><td class="fa" lang="fa">گره کلاینت</td><td>Differential privacy</td><td class="fa" lang="fa">حریم خصوصی تفاضلی</td></tr>
+          <tr><td>Global model</td><td class="fa" lang="fa">مدل سراسری</td><td>Poisoning attack</td><td class="fa" lang="fa">حملهٔ مسموم‌سازی</td></tr>
+          <tr><td>Model update</td><td class="fa" lang="fa">به‌روزرسانی مدل</td><td>Threat model</td><td class="fa" lang="fa">مدل تهدید</td></tr>
+          <tr><td>Aggregation</td><td class="fa" lang="fa">تجمیع</td><td>Software freedom</td><td class="fa" lang="fa">آزادی نرم‌افزار</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">Backup: the terminology in Persian, for a bilingual room.</aside>
+</section>
+
+<section data-background-color="#10100f">
+  <div class="pad">
+    <p class="eyebrow">Backup · questions you'll get</p>
+    <h2>Likely questions</h2>
+    <div class="qa">
+      <div class="q"><div class="ask">So is federated learning useless for privacy?</div><div class="ans"><b>No.</b> It removes centralized collection — a real and large risk reduction — and makes projects legally possible that otherwise aren't. It just isn't a privacy <b>guarantee</b>, and it's sold as one.</div></div>
+      <div class="q"><div class="ask">Isn't gradient inversion just a lab result?</div><div class="ans">The 2019 version needed favourable conditions; concede that. But those conditions are <b>chosen by the server</b>, not the client, and later work broke trained networks at higher resolution.</div></div>
+      <div class="q"><div class="ask">What noise level is enough?</div><div class="ans">No consensus number exists. Anyone offering one <b>without stating the unit of privacy and the total budget</b> over the whole run isn't answering.</div></div>
+      <div class="q"><div class="ask">Doesn't secure aggregation make poisoning undetectable?</div><div class="ans"><b>Largely yes</b> — that's the conflict slide. Partial answers exist; none is complete.</div></div>
+      <div class="q"><div class="ask">Who actually uses this?</div><div class="ans">Mobile keyboards were the original deployment and remain the canonical one — where the talk started. <b>Cross-silo medical collaborations</b> are the growing area.</div></div>
+      <div class="q"><div class="ask">OSI or FSF — who's right?</div><div class="ans">Give both, don't pick. FL is a concrete case where training data <b>genuinely can't be shipped</b>, which is exactly what they disagree about.</div></div>
+    </div>
+  </div>
+  <aside class="notes">Answers pre-written so the Q&amp;A stays as tight as the talk.</aside>
+</section>
+
+<section data-background-color="#10100f">
+  <div class="pad">
+    <p class="eyebrow">Sources</p>
+    <h2>References</h2>
+    <ul class="refs">
+      <li><b>Flower</b> — <i>What Is Federated Learning?</i> tutorial. flower.ai/docs. Primary source for parts 1, 3, 4.</li>
+      <li><b>McMahan &amp; Ramage</b> — <i>Federated Learning: Collaborative ML without Centralized Training Data.</i> Google AI Blog, April 2017.</li>
+      <li><b>McMahan et al.</b> — <i>Communication-Efficient Learning of Deep Networks from Decentralized Data</i> (FedAvg). AISTATS 2017. arXiv:1602.05629.</li>
+      <li><b>NIST</b> — <i>Privacy-Preserving Federated Learning</i> blog series (UK–US), incl. <i>Privacy Attacks in Federated Learning.</i></li>
+      <li><b>Zhu, Liu &amp; Han</b> — <i>Deep Leakage from Gradients.</i> NeurIPS 2019. arXiv:1906.08935.</li>
+      <li><b>Geiping et al.</b> — <i>Inverting Gradients.</i> NeurIPS 2020. arXiv:2003.14053.</li>
+      <li><b>Shokri et al.</b> — <i>Membership Inference Attacks Against ML Models.</i> IEEE S&amp;P 2017. arXiv:1610.05820.</li>
+      <li><b>Boenisch et al.</b> — <i>When the Curious Abandon Honesty: Federated Learning Is Not Private.</i></li>
+      <li><b>Bagdasaryan et al.</b> — <i>How To Backdoor Federated Learning.</i> AISTATS 2020. arXiv:1807.00459.</li>
+      <li><b>Bonawitz et al.</b> — <i>Practical Secure Aggregation for Privacy-Preserving ML.</i> CCS 2017. arXiv:1611.04482.</li>
+      <li><b>McMahan et al.</b> — <i>Learning Differentially Private Recurrent Language Models.</i> ICLR 2018. arXiv:1710.06963.</li>
+      <li><b>Kairouz et al.</b> — <i>Advances and Open Problems in Federated Learning.</i> arXiv:1912.04977.</li>
+      <li><b>Hsu, Qi &amp; Brown</b> — <i>Measuring the Effects of Non-Identical Data Distribution.</i> arXiv:1909.06335.</li>
+      <li><b>Beutel et al.</b> — <i>Flower: A Friendly Federated Learning Research Framework.</i> arXiv:2007.14390.</li>
+      <li><b>Flower docs</b> — Secure aggregation example &amp; protocol explanation; differential privacy how-to; Byzantine-robust strategies.</li>
+      <li><b>GNU</b> — <i>What is Free Software?</i> · <b>OSI</b> — <i>Open Source AI Definition 1.0</i> · <b>FSF</b> — freedom in ML applications · <b>FSFE</b> — AI and Free Software.</li>
+    </ul>
+  </div>
+</section>
+
+</section>
+
+</div>
+</div>
+
+<script>
+// ---------- reveal ----------
+var smallScreen = ()=> window.innerWidth < 820 || window.innerHeight < 520;
+function sizing(){
+  if(smallScreen()){
+    document.documentElement.classList.add('phone');
+    return {width:window.innerWidth,height:window.innerHeight,minScale:1,maxScale:1};
+  }
+  document.documentElement.classList.remove('phone');
+  return {width:1280,height:760,minScale:0.2,maxScale:2.0};
+}
+Reveal.initialize(Object.assign({
+  hash:true,controls:true,progress:true,center:false,touch:true,
+  slideNumber:'c/t',transition:'slide',transitionSpeed:'default',
+  backgroundTransition:'fade',margin:0,
+  navigationMode:'linear',              // ← → walks every slide; stacks only group the overview
+  plugins:(typeof RevealNotes!=='undefined')?[RevealNotes]:[],
+}, sizing()));
+(function(){
+  var t;
+  window.addEventListener('resize',function(){
+    clearTimeout(t);
+    t=setTimeout(function(){ Reveal.configure(sizing()); Reveal.layout(); },200);
+  },{passive:true});
+})();
+
+// ---------- hero: a federation breathing ----------
+(function(){
+  const cv=document.getElementById('fed'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,nodes=[],packets=[],t=0,raf;
+  const N=16;
+  function resize(){
+    // section may not be laid out yet when this first runs — fall back to the deck canvas size
+    const r=cv.getBoundingClientRect();
+    const w=r.width>10?r.width:1280, h=r.height>10?r.height:760;
+    W=cv.width=Math.round(w*devicePixelRatio); H=cv.height=Math.round(h*devicePixelRatio);
+    nodes=[];
+    const cx=W*0.72,cy=H*0.5,R=Math.min(W,H)*0.36;
+    for(let i=0;i<N;i++){
+      const a=i/N*Math.PI*2+0.3, rr=R*(0.75+0.35*Math.abs(Math.sin(i*2.1)));
+      nodes.push({x:cx+Math.cos(a)*rr,y:cy+Math.sin(a)*rr,ph:Math.random()*6.28});
+    }
+    nodes.cx=cx;nodes.cy=cy;
+  }
+  function spawn(){
+    // outbound (model) in cream, inbound (update) in teal
+    const out=Math.random()<0.5, n=nodes[(Math.random()*N)|0];
+    packets.push({n,out,p:0,sp:0.006+Math.random()*0.005});
+  }
+  function draw(){
+    t+=1; ctx.clearRect(0,0,W,H);
+    const {cx,cy}=nodes, dpr=devicePixelRatio;
+    ctx.lineWidth=1*dpr;
+    for(const n of nodes){
+      ctx.strokeStyle='rgba(244,239,228,.09)';
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(n.x,n.y);ctx.stroke();
+    }
+    for(const n of nodes){
+      const s=(3+Math.sin(t*0.03+n.ph))*dpr;
+      ctx.fillStyle='rgba(244,239,228,.55)';
+      ctx.beginPath();ctx.arc(n.x,n.y,s,0,6.28);ctx.fill();
+      // the data that stays: a small ring around each node
+      ctx.strokeStyle='rgba(79,209,197,.28)';
+      ctx.beginPath();ctx.arc(n.x,n.y,s+7*dpr,0,6.28);ctx.stroke();
+    }
+    if(!reduce && t%14===0 && packets.length<22) spawn();
+    for(const p of packets){
+      p.p+=p.sp;
+      const a=p.out?p.p:1-p.p;
+      const x=cx+(p.n.x-cx)*a, y=cy+(p.n.y-cy)*a;
+      ctx.fillStyle=p.out?'rgba(244,239,228,.9)':'rgba(79,209,197,.95)';
+      ctx.beginPath();ctx.arc(x,y,2.4*dpr,0,6.28);ctx.fill();
+    }
+    packets=packets.filter(p=>p.p<1);
+    // the server
+    const pulse=1+0.06*Math.sin(t*0.05);
+    ctx.fillStyle='rgba(255,194,75,.14)';ctx.beginPath();ctx.arc(cx,cy,26*dpr*pulse,0,6.28);ctx.fill();
+    ctx.fillStyle='rgba(255,194,75,.95)';ctx.beginPath();ctx.arc(cx,cy,7*dpr,0,6.28);ctx.fill();
+    if(!reduce) raf=requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  window.addEventListener('resize',()=>{resize();if(reduce)draw();},{passive:true});
+  if(typeof Reveal!=='undefined'){ Reveal.on('ready',()=>{resize();if(reduce)draw();}); }
+})();
+
+// ---------- charts (drawn lazily when their slide appears) ----------
+const drawn={};
+const axis=(title)=>({ticks:{color:'#cfc8b8',font:{family:"'JetBrains Mono'",size:10}},grid:{color:'rgba(244,239,228,.06)'},title:{display:true,text:title,color:'#cfc8b8',font:{family:"'JetBrains Mono'",size:10}}});
+const baseOpts={
+  responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+  plugins:{legend:{labels:{color:'#f4efe4',font:{family:"'Space Grotesk'",size:12},boxWidth:14,usePointStyle:true,pointStyle:'line'}},
+           tooltip:{backgroundColor:'#222019',titleColor:'#f4efe4',bodyColor:'#cfc8b8',borderColor:'rgba(244,239,228,.14)',borderWidth:1,titleFont:{family:"'JetBrains Mono'"},bodyFont:{family:"'JetBrains Mono'"}}}
+};
+function drawAcc(){
+  if(drawn.acc||typeof Chart==='undefined') return; drawn.acc=true;
+  const rounds=[1,2,3,4,5,6,7,8,9,10];
+  // demo/ numbers: python fedavg_numpy.py (identical to the flwr run)
+  const G  =[0.399,0.581,0.634,0.639,0.646,0.650,0.701,0.767,0.816,0.859];
+  const A  =[0.080,0.120,0.120,0.120,0.120,0.120,0.160,0.360,0.400,0.520];
+  const B  =[0.227,0.707,0.893,0.960,0.960,0.960,0.973,0.987,0.987,0.987];
+  const C  =[0.793,0.847,0.847,0.847,0.853,0.860,0.873,0.893,0.927,0.940];
+  const IID=[0.991,0.993,0.996,0.996,0.996,0.994,0.994,0.994,0.994,0.994];
+  const ds=(l,c,d,dash,w)=>({label:l,data:d,borderColor:c,backgroundColor:'transparent',borderDash:dash||[],tension:.3,fill:false,borderWidth:w||2,pointRadius:0,pointHoverRadius:5});
+  new Chart(document.getElementById('accChart'),{type:'line',data:{labels:rounds,datasets:[
+    ds('Global model','#f4efe4',G,[],3),
+    ds('Hospital C · 600','#4fd1c5',C,[6,4]),
+    ds('Hospital B · 300','#ffc24b',B,[6,4]),
+    ds('Hospital A · 100','#ff6f9c',A,[6,4]),
+    ds('Global model · IID case mix','#cfc8b8',IID,[2,4],1.5),
+  ]},options:Object.assign({},baseOpts,{scales:{x:axis('round'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:'#cfc8b8',font:{family:"'JetBrains Mono'",size:10},callback:v=>Math.round(v*100)+'%'}})}})});
+}
+function drawDP(){
+  if(drawn.dp||typeof Chart==='undefined') return; drawn.dp=true;
+  // demo/ numbers: python fedavg_numpy.py --iid --noise σ  (clip 0.5, 10 rounds); chance = 0.333
+  const sig=[0,0.25,0.5,0.75,1,1.5,2,3,4];
+  const acc=[0.994,0.981,0.879,0.768,0.652,0.504,0.432,0.390,0.370];
+  new Chart(document.getElementById('dpChart'),{type:'line',data:{labels:sig,datasets:[
+    {label:'accuracy',data:acc,borderColor:'#ff6f9c',backgroundColor:'rgba(255,111,156,.12)',fill:true,tension:.35,borderWidth:2.4,pointRadius:4,pointBackgroundColor:'#ff6f9c',pointBorderColor:'#1a1916',pointBorderWidth:2,pointHoverRadius:6}
+  ]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{legend:{display:false}}),scales:{x:axis('noise multiplier σ (more privacy →)'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:'#cfc8b8',font:{family:"'JetBrains Mono'",size:10},callback:v=>Math.round(v*100)+'%'}})}})});
+}
+function drawAll(s){
+  if(!s) return;
+  if(s.querySelector('#accChart')) drawAcc();
+  if(s.querySelector('#dpChart')) drawDP();
+}
+Reveal.on('ready',e=>drawAll(e.currentSlide));
+Reveal.on('slidechanged',e=>drawAll(e.currentSlide));
+</script>
+</body>
+</html>

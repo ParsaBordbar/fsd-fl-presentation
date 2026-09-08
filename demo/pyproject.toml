@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hospitals-fl"
+version = "1.0.0"
+description = "Three hospitals, one clinical-note classifier, no shared database."
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.36.0",
+    "numpy>=1.26",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["hospitals_fl"]
+
+[tool.flwr.app]
+publisher = "sfd-demo"
+
+[tool.flwr.app.components]
+serverapp = "hospitals_fl.server_app:app"
+clientapp = "hospitals_fl.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 10
+local-epochs = 5
+fraction-train = 1.0
+strategy = "fedavg"          # fedavg | krum | multikrum | median | trimmed
+poisoned-hospitals = 0       # how many hospitals send malicious updates
+attack-boost = 1.0           # scale factor on the malicious update
+iid = false                  # true = every hospital sees the same case mix

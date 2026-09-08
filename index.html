@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Federated Learning and the Future of Private, Open AI</title>
+
+<link href="vendor/fonts-canva.css" rel="stylesheet">
+
+<script src="vendor/reveal.min.js"></script>
+<script src="vendor/notes.min.js"></script>
+<script src="vendor/chart.umd.js"></script>
+
+<style>
+/* reveal.js 4.5.0 core CSS, inlined so the deck is one file */
+/*!
+* reveal.js 4.5.0
+* https://revealjs.com
+* MIT licensed
+*
+* Copyright (C) 2011-2023 Hakim El Hattab, https://hakim.se
+*/.reveal .r-stretch,.reveal .stretch{max-width:none;max-height:none}.reveal pre.r-stretch code,.reveal pre.stretch code{height:100%;max-height:100%;box-sizing:border-box}.reveal .r-fit-text{display:inline-block;white-space:nowrap}.reveal .r-stack{display:grid}.reveal .r-stack>*{grid-area:1/1;margin:auto}.reveal .r-hstack,.reveal .r-vstack{display:flex}.reveal .r-hstack img,.reveal .r-hstack video,.reveal .r-vstack img,.reveal .r-vstack video{min-width:0;min-height:0;object-fit:contain}.reveal .r-vstack{flex-direction:column;align-items:center;justify-content:center}.reveal .r-hstack{flex-direction:row;align-items:center;justify-content:center}.reveal .items-stretch{align-items:stretch}.reveal .items-start{align-items:flex-start}.reveal .items-center{align-items:center}.reveal .items-end{align-items:flex-end}.reveal .justify-between{justify-content:space-between}.reveal .justify-around{justify-content:space-around}.reveal .justify-start{justify-content:flex-start}.reveal .justify-center{justify-content:center}.reveal .justify-end{justify-content:flex-end}html.reveal-full-page{width:100%;height:100%;height:100vh;height:calc(var(--vh,1vh) * 100);overflow:hidden}.reveal-viewport{height:100%;overflow:hidden;position:relative;line-height:1;margin:0;background-color:#fff;color:#000}.reveal-viewport:fullscreen{top:0!important;left:0!important;width:100%!important;height:100%!important;transform:none!important}.reveal .fragment{transition:all .2s ease}.reveal .fragment:not(.custom){opacity:0;visibility:hidden;will-change:opacity}.reveal .fragment.visible{opacity:1;visibility:inherit}.reveal .fragment.disabled{transition:none}.reveal .fragment.grow{opacity:1;visibility:inherit}.reveal .fragment.grow.visible{transform:scale(1.3)}.reveal .fragment.shrink{opacity:1;visibility:inherit}.reveal .fragment.shrink.visible{transform:scale(.7)}.reveal .fragment.zoom-in{transform:scale(.1)}.reveal .fragment.zoom-in.visible{transform:none}.reveal .fragment.fade-out{opacity:1;visibility:inherit}.reveal .fragment.fade-out.visible{opacity:0;visibility:hidden}.reveal .fragment.semi-fade-out{opacity:1;visibility:inherit}.reveal .fragment.semi-fade-out.visible{opacity:.5;visibility:inherit}.reveal .fragment.strike{opacity:1;visibility:inherit}.reveal .fragment.strike.visible{text-decoration:line-through}.reveal .fragment.fade-up{transform:translate(0,40px)}.reveal .fragment.fade-up.visible{transform:translate(0,0)}.reveal .fragment.fade-down{transform:translate(0,-40px)}.reveal .fragment.fade-down.visible{transform:translate(0,0)}.reveal .fragment.fade-right{transform:translate(-40px,0)}.reveal .fragment.fade-right.visible{transform:translate(0,0)}.reveal .fragment.fade-left{transform:translate(40px,0)}.reveal .fragment.fade-left.visible{transform:translate(0,0)}.reveal .fragment.current-visible,.reveal .fragment.fade-in-then-out{opacity:0;visibility:hidden}.reveal .fragment.current-visible.current-fragment,.reveal .fragment.fade-in-then-out.current-fragment{opacity:1;visibility:inherit}.reveal .fragment.fade-in-then-semi-out{opacity:0;visibility:hidden}.reveal .fragment.fade-in-then-semi-out.visible{opacity:.5;visibility:inherit}.reveal .fragment.fade-in-then-semi-out.current-fragment{opacity:1;visibility:inherit}.reveal .fragment.highlight-blue,.reveal .fragment.highlight-current-blue,.reveal .fragment.highlight-current-green,.reveal .fragment.highlight-current-red,.reveal .fragment.highlight-green,.reveal .fragment.highlight-red{opacity:1;visibility:inherit}.reveal .fragment.highlight-red.visible{color:#ff2c2d}.reveal .fragment.highlight-green.visible{color:#17ff2e}.reveal .fragment.highlight-blue.visible{color:#1b91ff}.reveal .fragment.highlight-current-red.current-fragment{color:#ff2c2d}.reveal .fragment.highlight-current-green.current-fragment{color:#17ff2e}.reveal .fragment.highlight-current-blue.current-fragment{color:#1b91ff}.reveal:after{content:"";font-style:italic}.reveal iframe{z-index:1}.reveal a{position:relative}@keyframes bounce-right{0%,10%,25%,40%,50%{transform:translateX(0)}20%{transform:translateX(10px)}30%{transform:translateX(-5px)}}@keyframes bounce-left{0%,10%,25%,40%,50%{transform:translateX(0)}20%{transform:translateX(-10px)}30%{transform:translateX(5px)}}@keyframes bounce-down{0%,10%,25%,40%,50%{transform:translateY(0)}20%{transform:translateY(10px)}30%{transform:translateY(-5px)}}.reveal .controls{display:none;position:absolute;top:auto;bottom:12px;right:12px;left:auto;z-index:11;color:#000;pointer-events:none;font-size:10px}.reveal .controls button{position:absolute;padding:0;background-color:transparent;border:0;outline:0;cursor:pointer;color:currentColor;transform:scale(.9999);transition:color .2s ease,opacity .2s ease,transform .2s ease;z-index:2;pointer-events:auto;font-size:inherit;visibility:hidden;opacity:0;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}.reveal .controls .controls-arrow:after,.reveal .controls .controls-arrow:before{content:"";position:absolute;top:0;left:0;width:2.6em;height:.5em;border-radius:.25em;background-color:currentColor;transition:all .15s ease,background-color .8s ease;transform-origin:.2em 50%;will-change:transform}.reveal .controls .controls-arrow{position:relative;width:3.6em;height:3.6em}.reveal .controls .controls-arrow:before{transform:translateX(.5em) translateY(1.55em) rotate(45deg)}.reveal .controls .controls-arrow:after{transform:translateX(.5em) translateY(1.55em) rotate(-45deg)}.reveal .controls .controls-arrow:hover:before{transform:translateX(.5em) translateY(1.55em) rotate(40deg)}.reveal .controls .controls-arrow:hover:after{transform:translateX(.5em) translateY(1.55em) rotate(-40deg)}.reveal .controls .controls-arrow:active:before{transform:translateX(.5em) translateY(1.55em) rotate(36deg)}.reveal .controls .controls-arrow:active:after{transform:translateX(.5em) translateY(1.55em) rotate(-36deg)}.reveal .controls .navigate-left{right:6.4em;bottom:3.2em;transform:translateX(-10px)}.reveal .controls .navigate-left.highlight{animation:bounce-left 2s 50 both ease-out}.reveal .controls .navigate-right{right:0;bottom:3.2em;transform:translateX(10px)}.reveal .controls .navigate-right .controls-arrow{transform:rotate(180deg)}.reveal .controls .navigate-right.highlight{animation:bounce-right 2s 50 both ease-out}.reveal .controls .navigate-up{right:3.2em;bottom:6.4em;transform:translateY(-10px)}.reveal .controls .navigate-up .controls-arrow{transform:rotate(90deg)}.reveal .controls .navigate-down{right:3.2em;bottom:-1.4em;padding-bottom:1.4em;transform:translateY(10px)}.reveal .controls .navigate-down .controls-arrow{transform:rotate(-90deg)}.reveal .controls .navigate-down.highlight{animation:bounce-down 2s 50 both ease-out}.reveal .controls[data-controls-back-arrows=faded] .navigate-up.enabled{opacity:.3}.reveal .controls[data-controls-back-arrows=faded] .navigate-up.enabled:hover{opacity:1}.reveal .controls[data-controls-back-arrows=hidden] .navigate-up.enabled{opacity:0;visibility:hidden}.reveal .controls .enabled{visibility:visible;opacity:.9;cursor:pointer;transform:none}.reveal .controls .enabled.fragmented{opacity:.5}.reveal .controls .enabled.fragmented:hover,.reveal .controls .enabled:hover{opacity:1}.reveal:not(.rtl) .controls[data-controls-back-arrows=faded] .navigate-left.enabled{opacity:.3}.reveal:not(.rtl) .controls[data-controls-back-arrows=faded] .navigate-left.enabled:hover{opacity:1}.reveal:not(.rtl) .controls[data-controls-back-arrows=hidden] .navigate-left.enabled{opacity:0;visibility:hidden}.reveal.rtl .controls[data-controls-back-arrows=faded] .navigate-right.enabled{opacity:.3}.reveal.rtl .controls[data-controls-back-arrows=faded] .navigate-right.enabled:hover{opacity:1}.reveal.rtl .controls[data-controls-back-arrows=hidden] .navigate-right.enabled{opacity:0;visibility:hidden}.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-down,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-up{display:none}.reveal:not(.has-vertical-slides) .controls .navigate-left,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-left{bottom:1.4em;right:5.5em}.reveal:not(.has-vertical-slides) .controls .navigate-right,.reveal[data-navigation-mode=linear].has-horizontal-slides .navigate-right{bottom:1.4em;right:.5em}.reveal:not(.has-horizontal-slides) .controls .navigate-up{right:1.4em;bottom:5em}.reveal:not(.has-horizontal-slides) .controls .navigate-down{right:1.4em;bottom:.5em}.reveal.has-dark-background .controls{color:#fff}.reveal.has-light-background .controls{color:#000}.reveal.no-hover .controls .controls-arrow:active:before,.reveal.no-hover .controls .controls-arrow:hover:before{transform:translateX(.5em) translateY(1.55em) rotate(45deg)}.reveal.no-hover .controls .controls-arrow:active:after,.reveal.no-hover .controls .controls-arrow:hover:after{transform:translateX(.5em) translateY(1.55em) rotate(-45deg)}@media screen and (min-width:500px){.reveal .controls[data-controls-layout=edges]{top:0;right:0;bottom:0;left:0}.reveal .controls[data-controls-layout=edges] .navigate-down,.reveal .controls[data-controls-layout=edges] .navigate-left,.reveal .controls[data-controls-layout=edges] .navigate-right,.reveal .controls[data-controls-layout=edges] .navigate-up{bottom:auto;right:auto}.reveal .controls[data-controls-layout=edges] .navigate-left{top:50%;left:.8em;margin-top:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-right{top:50%;right:.8em;margin-top:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-up{top:.8em;left:50%;margin-left:-1.8em}.reveal .controls[data-controls-layout=edges] .navigate-down{bottom:-.3em;left:50%;margin-left:-1.8em}}.reveal .progress{position:absolute;display:none;height:3px;width:100%;bottom:0;left:0;z-index:10;background-color:rgba(0,0,0,.2);color:#fff}.reveal .progress:after{content:"";display:block;position:absolute;height:10px;width:100%;top:-10px}.reveal .progress span{display:block;height:100%;width:100%;background-color:currentColor;transition:transform .8s cubic-bezier(.26,.86,.44,.985);transform-origin:0 0;transform:scaleX(0)}.reveal .slide-number{position:absolute;display:block;right:8px;bottom:8px;z-index:31;font-family:Helvetica,sans-serif;font-size:12px;line-height:1;color:#fff;background-color:rgba(0,0,0,.4);padding:5px}.reveal .slide-number a{color:currentColor}.reveal .slide-number-delimiter{margin:0 3px}.reveal{position:relative;width:100%;height:100%;overflow:hidden;touch-action:pinch-zoom}.reveal.embedded{touch-action:pan-y}.reveal .slides{position:absolute;width:100%;height:100%;top:0;right:0;bottom:0;left:0;margin:auto;pointer-events:none;overflow:visible;z-index:1;text-align:center;perspective:600px;perspective-origin:50% 40%}.reveal .slides>section{perspective:600px}.reveal .slides>section,.reveal .slides>section>section{display:none;position:absolute;width:100%;pointer-events:auto;z-index:10;transform-style:flat;transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.reveal[data-transition-speed=fast] .slides section{transition-duration:.4s}.reveal[data-transition-speed=slow] .slides section{transition-duration:1.2s}.reveal .slides section[data-transition-speed=fast]{transition-duration:.4s}.reveal .slides section[data-transition-speed=slow]{transition-duration:1.2s}.reveal .slides>section.stack{padding-top:0;padding-bottom:0;pointer-events:none;height:100%}.reveal .slides>section.present,.reveal .slides>section>section.present{display:block;z-index:11;opacity:1}.reveal .slides>section:empty,.reveal .slides>section>section:empty,.reveal .slides>section>section[data-background-interactive],.reveal .slides>section[data-background-interactive]{pointer-events:none}.reveal.center,.reveal.center .slides,.reveal.center .slides section{min-height:0!important}.reveal .slides>section:not(.present),.reveal .slides>section>section:not(.present){pointer-events:none}.reveal.overview .slides>section,.reveal.overview .slides>section>section{pointer-events:auto}.reveal .slides>section.future,.reveal .slides>section.future>section,.reveal .slides>section.past,.reveal .slides>section.past>section,.reveal .slides>section>section.future,.reveal .slides>section>section.past{opacity:0}.reveal .slides>section[data-transition=slide].past,.reveal .slides>section[data-transition~=slide-out].past,.reveal.slide .slides>section:not([data-transition]).past{transform:translate(-150%,0)}.reveal .slides>section[data-transition=slide].future,.reveal .slides>section[data-transition~=slide-in].future,.reveal.slide .slides>section:not([data-transition]).future{transform:translate(150%,0)}.reveal .slides>section>section[data-transition=slide].past,.reveal .slides>section>section[data-transition~=slide-out].past,.reveal.slide .slides>section>section:not([data-transition]).past{transform:translate(0,-150%)}.reveal .slides>section>section[data-transition=slide].future,.reveal .slides>section>section[data-transition~=slide-in].future,.reveal.slide .slides>section>section:not([data-transition]).future{transform:translate(0,150%)}.reveal .slides>section[data-transition=linear].past,.reveal .slides>section[data-transition~=linear-out].past,.reveal.linear .slides>section:not([data-transition]).past{transform:translate(-150%,0)}.reveal .slides>section[data-transition=linear].future,.reveal .slides>section[data-transition~=linear-in].future,.reveal.linear .slides>section:not([data-transition]).future{transform:translate(150%,0)}.reveal .slides>section>section[data-transition=linear].past,.reveal .slides>section>section[data-transition~=linear-out].past,.reveal.linear .slides>section>section:not([data-transition]).past{transform:translate(0,-150%)}.reveal .slides>section>section[data-transition=linear].future,.reveal .slides>section>section[data-transition~=linear-in].future,.reveal.linear .slides>section>section:not([data-transition]).future{transform:translate(0,150%)}.reveal .slides section[data-transition=default].stack,.reveal.default .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=default].past,.reveal .slides>section[data-transition~=default-out].past,.reveal.default .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=default].future,.reveal .slides>section[data-transition~=default-in].future,.reveal.default .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=default].past,.reveal .slides>section>section[data-transition~=default-out].past,.reveal.default .slides>section>section:not([data-transition]).past{transform:translate3d(0,-300px,0) rotateX(70deg) translate3d(0,-300px,0)}.reveal .slides>section>section[data-transition=default].future,.reveal .slides>section>section[data-transition~=default-in].future,.reveal.default .slides>section>section:not([data-transition]).future{transform:translate3d(0,300px,0) rotateX(-70deg) translate3d(0,300px,0)}.reveal .slides section[data-transition=convex].stack,.reveal.convex .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=convex].past,.reveal .slides>section[data-transition~=convex-out].past,.reveal.convex .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=convex].future,.reveal .slides>section[data-transition~=convex-in].future,.reveal.convex .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=convex].past,.reveal .slides>section>section[data-transition~=convex-out].past,.reveal.convex .slides>section>section:not([data-transition]).past{transform:translate3d(0,-300px,0) rotateX(70deg) translate3d(0,-300px,0)}.reveal .slides>section>section[data-transition=convex].future,.reveal .slides>section>section[data-transition~=convex-in].future,.reveal.convex .slides>section>section:not([data-transition]).future{transform:translate3d(0,300px,0) rotateX(-70deg) translate3d(0,300px,0)}.reveal .slides section[data-transition=concave].stack,.reveal.concave .slides section.stack{transform-style:preserve-3d}.reveal .slides>section[data-transition=concave].past,.reveal .slides>section[data-transition~=concave-out].past,.reveal.concave .slides>section:not([data-transition]).past{transform:translate3d(-100%,0,0) rotateY(90deg) translate3d(-100%,0,0)}.reveal .slides>section[data-transition=concave].future,.reveal .slides>section[data-transition~=concave-in].future,.reveal.concave .slides>section:not([data-transition]).future{transform:translate3d(100%,0,0) rotateY(-90deg) translate3d(100%,0,0)}.reveal .slides>section>section[data-transition=concave].past,.reveal .slides>section>section[data-transition~=concave-out].past,.reveal.concave .slides>section>section:not([data-transition]).past{transform:translate3d(0,-80%,0) rotateX(-70deg) translate3d(0,-80%,0)}.reveal .slides>section>section[data-transition=concave].future,.reveal .slides>section>section[data-transition~=concave-in].future,.reveal.concave .slides>section>section:not([data-transition]).future{transform:translate3d(0,80%,0) rotateX(70deg) translate3d(0,80%,0)}.reveal .slides section[data-transition=zoom],.reveal.zoom .slides section:not([data-transition]){transition-timing-function:ease}.reveal .slides>section[data-transition=zoom].past,.reveal .slides>section[data-transition~=zoom-out].past,.reveal.zoom .slides>section:not([data-transition]).past{visibility:hidden;transform:scale(16)}.reveal .slides>section[data-transition=zoom].future,.reveal .slides>section[data-transition~=zoom-in].future,.reveal.zoom .slides>section:not([data-transition]).future{visibility:hidden;transform:scale(.2)}.reveal .slides>section>section[data-transition=zoom].past,.reveal .slides>section>section[data-transition~=zoom-out].past,.reveal.zoom .slides>section>section:not([data-transition]).past{transform:scale(16)}.reveal .slides>section>section[data-transition=zoom].future,.reveal .slides>section>section[data-transition~=zoom-in].future,.reveal.zoom .slides>section>section:not([data-transition]).future{transform:scale(.2)}.reveal.cube .slides{perspective:1300px}.reveal.cube .slides section{padding:30px;min-height:700px;backface-visibility:hidden;box-sizing:border-box;transform-style:preserve-3d}.reveal.center.cube .slides section{min-height:0}.reveal.cube .slides section:not(.stack):before{content:"";position:absolute;display:block;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,.1);border-radius:4px;transform:translateZ(-20px)}.reveal.cube .slides section:not(.stack):after{content:"";position:absolute;display:block;width:90%;height:30px;left:5%;bottom:0;background:0 0;z-index:1;border-radius:4px;box-shadow:0 95px 25px rgba(0,0,0,.2);transform:translateZ(-90px) rotateX(65deg)}.reveal.cube .slides>section.stack{padding:0;background:0 0}.reveal.cube .slides>section.past{transform-origin:100% 0;transform:translate3d(-100%,0,0) rotateY(-90deg)}.reveal.cube .slides>section.future{transform-origin:0 0;transform:translate3d(100%,0,0) rotateY(90deg)}.reveal.cube .slides>section>section.past{transform-origin:0 100%;transform:translate3d(0,-100%,0) rotateX(90deg)}.reveal.cube .slides>section>section.future{transform-origin:0 0;transform:translate3d(0,100%,0) rotateX(-90deg)}.reveal.page .slides{perspective-origin:0 50%;perspective:3000px}.reveal.page .slides section{padding:30px;min-height:700px;box-sizing:border-box;transform-style:preserve-3d}.reveal.page .slides section.past{z-index:12}.reveal.page .slides section:not(.stack):before{content:"";position:absolute;display:block;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,.1);transform:translateZ(-20px)}.reveal.page .slides section:not(.stack):after{content:"";position:absolute;display:block;width:90%;height:30px;left:5%;bottom:0;background:0 0;z-index:1;border-radius:4px;box-shadow:0 95px 25px rgba(0,0,0,.2);-webkit-transform:translateZ(-90px) rotateX(65deg)}.reveal.page .slides>section.stack{padding:0;background:0 0}.reveal.page .slides>section.past{transform-origin:0 0;transform:translate3d(-40%,0,0) rotateY(-80deg)}.reveal.page .slides>section.future{transform-origin:100% 0;transform:translate3d(0,0,0)}.reveal.page .slides>section>section.past{transform-origin:0 0;transform:translate3d(0,-40%,0) rotateX(80deg)}.reveal.page .slides>section>section.future{transform-origin:0 100%;transform:translate3d(0,0,0)}.reveal .slides section[data-transition=fade],.reveal.fade .slides section:not([data-transition]),.reveal.fade .slides>section>section:not([data-transition]){transform:none;transition:opacity .5s}.reveal.fade.overview .slides section,.reveal.fade.overview .slides>section>section{transition:none}.reveal .slides section[data-transition=none],.reveal.none .slides section:not([data-transition]){transform:none;transition:none}.reveal .pause-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;visibility:hidden;opacity:0;z-index:100;transition:all 1s ease}.reveal .pause-overlay .resume-button{position:absolute;bottom:20px;right:20px;color:#ccc;border-radius:2px;padding:6px 14px;border:2px solid #ccc;font-size:16px;background:0 0;cursor:pointer}.reveal .pause-overlay .resume-button:hover{color:#fff;border-color:#fff}.reveal.paused .pause-overlay{visibility:visible;opacity:1}.reveal .no-transition,.reveal .no-transition *,.reveal .slides.disable-slide-transitions section{transition:none!important}.reveal .slides.disable-slide-transitions section{transform:none!important}.reveal .backgrounds{position:absolute;width:100%;height:100%;top:0;left:0;perspective:600px}.reveal .slide-background{display:none;position:absolute;width:100%;height:100%;opacity:0;visibility:hidden;overflow:hidden;background-color:rgba(0,0,0,0);transition:all .8s cubic-bezier(.26,.86,.44,.985)}.reveal .slide-background-content{position:absolute;width:100%;height:100%;background-position:50% 50%;background-repeat:no-repeat;background-size:cover}.reveal .slide-background.stack{display:block}.reveal .slide-background.present{opacity:1;visibility:visible;z-index:2}.print-pdf .reveal .slide-background{opacity:1!important;visibility:visible!important}.reveal .slide-background video{position:absolute;width:100%;height:100%;max-width:none;max-height:none;top:0;left:0;object-fit:cover}.reveal .slide-background[data-background-size=contain] video{object-fit:contain}.reveal>.backgrounds .slide-background[data-background-transition=none],.reveal[data-background-transition=none]>.backgrounds .slide-background:not([data-background-transition]){transition:none}.reveal>.backgrounds .slide-background[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background:not([data-background-transition]){opacity:1}.reveal>.backgrounds .slide-background.past[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background.past:not([data-background-transition]){transform:translate(-100%,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background.future:not([data-background-transition]){transform:translate(100%,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){transform:translate(0,-100%)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=slide],.reveal[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){transform:translate(0,100%)}.reveal>.backgrounds .slide-background.past[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(0,-100%,0) rotateX(90deg) translate3d(0,-100%,0)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=convex],.reveal[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(0,100%,0) rotateX(-90deg) translate3d(0,100%,0)}.reveal>.backgrounds .slide-background.past[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(-100%,0,0) rotateY(90deg) translate3d(-100%,0,0)}.reveal>.backgrounds .slide-background.future[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(100%,0,0) rotateY(-90deg) translate3d(100%,0,0)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;transform:translate3d(0,-100%,0) rotateX(-90deg) translate3d(0,-100%,0)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=concave],.reveal[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;transform:translate3d(0,100%,0) rotateX(90deg) translate3d(0,100%,0)}.reveal>.backgrounds .slide-background[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background:not([data-background-transition]){transition-timing-function:ease}.reveal>.backgrounds .slide-background.past[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background.past:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(16)}.reveal>.backgrounds .slide-background.future[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background.future:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(.2)}.reveal>.backgrounds .slide-background>.slide-background.past[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.past:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(16)}.reveal>.backgrounds .slide-background>.slide-background.future[data-background-transition=zoom],.reveal[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.future:not([data-background-transition]){opacity:0;visibility:hidden;transform:scale(.2)}.reveal[data-transition-speed=fast]>.backgrounds .slide-background{transition-duration:.4s}.reveal[data-transition-speed=slow]>.backgrounds .slide-background{transition-duration:1.2s}.reveal [data-auto-animate-target^=unmatched]{will-change:opacity}.reveal section[data-auto-animate]:not(.stack):not([data-auto-animate=running]) [data-auto-animate-target^=unmatched]{opacity:0}.reveal.overview{perspective-origin:50% 50%;perspective:700px}.reveal.overview .slides{-moz-transform-style:preserve-3d}.reveal.overview .slides section{height:100%;top:0!important;opacity:1!important;overflow:hidden;visibility:visible!important;cursor:pointer;box-sizing:border-box}.reveal.overview .slides section.present,.reveal.overview .slides section:hover{outline:10px solid rgba(150,150,150,.4);outline-offset:10px}.reveal.overview .slides section .fragment{opacity:1;transition:none}.reveal.overview .slides section:after,.reveal.overview .slides section:before{display:none!important}.reveal.overview .slides>section.stack{padding:0;top:0!important;background:0 0;outline:0;overflow:visible}.reveal.overview .backgrounds{perspective:inherit;-moz-transform-style:preserve-3d}.reveal.overview .backgrounds .slide-background{opacity:1;visibility:visible;outline:10px solid rgba(150,150,150,.1);outline-offset:10px}.reveal.overview .backgrounds .slide-background.stack{overflow:visible}.reveal.overview .slides section,.reveal.overview-deactivating .slides section{transition:none}.reveal.overview .backgrounds .slide-background,.reveal.overview-deactivating .backgrounds .slide-background{transition:none}.reveal.rtl .slides,.reveal.rtl .slides h1,.reveal.rtl .slides h2,.reveal.rtl .slides h3,.reveal.rtl .slides h4,.reveal.rtl .slides h5,.reveal.rtl .slides h6{direction:rtl;font-family:sans-serif}.reveal.rtl code,.reveal.rtl pre{direction:ltr}.reveal.rtl ol,.reveal.rtl ul{text-align:right}.reveal.rtl .progress span{transform-origin:100% 0}.reveal.has-parallax-background .backgrounds{transition:all .8s ease}.reveal.has-parallax-background[data-transition-speed=fast] .backgrounds{transition-duration:.4s}.reveal.has-parallax-background[data-transition-speed=slow] .backgrounds{transition-duration:1.2s}.reveal>.overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;background:rgba(0,0,0,.9);transition:all .3s ease}.reveal>.overlay .spinner{position:absolute;display:block;top:50%;left:50%;width:32px;height:32px;margin:-16px 0 0 -16px;z-index:10;background-image:url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);visibility:visible;opacity:.6;transition:all .3s ease}.reveal>.overlay header{position:absolute;left:0;top:0;width:100%;padding:5px;z-index:2;box-sizing:border-box}.reveal>.overlay header a{display:inline-block;width:40px;height:40px;line-height:36px;padding:0 10px;float:right;opacity:.6;box-sizing:border-box}.reveal>.overlay header a:hover{opacity:1}.reveal>.overlay header a .icon{display:inline-block;width:20px;height:20px;background-position:50% 50%;background-size:100%;background-repeat:no-repeat}.reveal>.overlay header a.close .icon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC)}.reveal>.overlay header a.external .icon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==)}.reveal>.overlay .viewport{position:absolute;display:flex;top:50px;right:0;bottom:0;left:0}.reveal>.overlay.overlay-preview .viewport iframe{width:100%;height:100%;max-width:100%;max-height:100%;border:0;opacity:0;visibility:hidden;transition:all .3s ease}.reveal>.overlay.overlay-preview.loaded .viewport iframe{opacity:1;visibility:visible}.reveal>.overlay.overlay-preview.loaded .viewport-inner{position:absolute;z-index:-1;left:0;top:45%;width:100%;text-align:center;letter-spacing:normal}.reveal>.overlay.overlay-preview .x-frame-error{opacity:0;transition:opacity .3s ease .3s}.reveal>.overlay.overlay-preview.loaded .x-frame-error{opacity:1}.reveal>.overlay.overlay-preview.loaded .spinner{opacity:0;visibility:hidden;transform:scale(.2)}.reveal>.overlay.overlay-help .viewport{overflow:auto;color:#fff}.reveal>.overlay.overlay-help .viewport .viewport-inner{width:600px;margin:auto;padding:20px 20px 80px 20px;text-align:center;letter-spacing:normal}.reveal>.overlay.overlay-help .viewport .viewport-inner .title{font-size:20px}.reveal>.overlay.overlay-help .viewport .viewport-inner table{border:1px solid #fff;border-collapse:collapse;font-size:16px}.reveal>.overlay.overlay-help .viewport .viewport-inner table td,.reveal>.overlay.overlay-help .viewport .viewport-inner table th{width:200px;padding:14px;border:1px solid #fff;vertical-align:middle}.reveal>.overlay.overlay-help .viewport .viewport-inner table th{padding-top:20px;padding-bottom:20px}.reveal .playback{position:absolute;left:15px;bottom:20px;z-index:30;cursor:pointer;transition:all .4s ease;-webkit-tap-highlight-color:transparent}.reveal.overview .playback{opacity:0;visibility:hidden}.reveal .hljs{min-height:100%}.reveal .hljs table{margin:initial}.reveal .hljs-ln-code,.reveal .hljs-ln-numbers{padding:0;border:0}.reveal .hljs-ln-numbers{opacity:.6;padding-right:.75em;text-align:right;vertical-align:top}.reveal .hljs.has-highlights tr:not(.highlight-line){opacity:.4}.reveal .hljs:not(:first-child).fragment{position:absolute;top:0;left:0;width:100%;box-sizing:border-box}.reveal pre[data-auto-animate-target]{overflow:hidden}.reveal pre[data-auto-animate-target] code{height:100%}.reveal .roll{display:inline-block;line-height:1.2;overflow:hidden;vertical-align:top;perspective:400px;perspective-origin:50% 50%}.reveal .roll:hover{background:0 0;text-shadow:none}.reveal .roll span{display:block;position:relative;padding:0 2px;pointer-events:none;transition:all .4s ease;transform-origin:50% 0;transform-style:preserve-3d;backface-visibility:hidden}.reveal .roll:hover span{background:rgba(0,0,0,.5);transform:translate3d(0,0,-45px) rotateX(90deg)}.reveal .roll span:after{content:attr(data-title);display:block;position:absolute;left:0;top:0;padding:0 2px;backface-visibility:hidden;transform-origin:50% 0;transform:translate3d(0,110%,0) rotateX(-90deg)}.reveal aside.notes{display:none}.reveal .speaker-notes{display:none;position:absolute;width:33.3333333333%;height:100%;top:0;left:100%;padding:14px 18px 14px 18px;z-index:1;font-size:18px;line-height:1.4;border:1px solid rgba(0,0,0,.05);color:#222;background-color:#f5f5f5;overflow:auto;box-sizing:border-box;text-align:left;font-family:Helvetica,sans-serif;-webkit-overflow-scrolling:touch}.reveal .speaker-notes .notes-placeholder{color:#ccc;font-style:italic}.reveal .speaker-notes:focus{outline:0}.reveal .speaker-notes:before{content:"Speaker notes";display:block;margin-bottom:10px;opacity:.5}.reveal.show-notes{max-width:75%;overflow:visible}.reveal.show-notes .speaker-notes{display:block}@media screen and (min-width:1600px){.reveal .speaker-notes{font-size:20px}}@media screen and (max-width:1024px){.reveal.show-notes{border-left:0;max-width:none;max-height:70%;max-height:70vh;overflow:visible}.reveal.show-notes .speaker-notes{top:100%;left:0;width:100%;height:30vh;border:0}}@media screen and (max-width:600px){.reveal.show-notes{max-height:60%;max-height:60vh}.reveal.show-notes .speaker-notes{top:100%;height:40vh}.reveal .speaker-notes{font-size:14px}}.reveal .jump-to-slide{position:absolute;top:15px;left:15px;z-index:30;font-size:32px;-webkit-tap-highlight-color:transparent}.reveal .jump-to-slide-input{background:0 0;padding:8px;font-size:inherit;color:currentColor;border:0}.reveal .jump-to-slide-input::placeholder{color:currentColor;opacity:.5}.reveal.has-dark-background .jump-to-slide-input{color:#fff}.reveal.has-light-background .jump-to-slide-input{color:#222}.reveal .jump-to-slide-input:focus{outline:0}.zoomed .reveal *,.zoomed .reveal :after,.zoomed .reveal :before{backface-visibility:visible!important}.zoomed .reveal .controls,.zoomed .reveal .progress{opacity:0}.zoomed .reveal .roll span{background:0 0}.zoomed .reveal .roll span:after{visibility:hidden}html.print-pdf *{-webkit-print-color-adjust:exact}html.print-pdf{width:100%;height:100%;overflow:visible}html.print-pdf body{margin:0 auto!important;border:0;padding:0;float:none!important;overflow:visible}html.print-pdf .nestedarrow,html.print-pdf .reveal .controls,html.print-pdf .reveal .playback,html.print-pdf .reveal .progress,html.print-pdf .reveal.overview,html.print-pdf .state-background{display:none!important}html.print-pdf .reveal pre code{overflow:hidden!important;font-family:Courier,"Courier New",monospace!important}html.print-pdf .reveal{width:auto!important;height:auto!important;overflow:hidden!important}html.print-pdf .reveal .slides{position:static;width:100%!important;height:auto!important;zoom:1!important;pointer-events:initial;left:auto;top:auto;margin:0!important;padding:0!important;overflow:visible;display:block;perspective:none;perspective-origin:50% 50%}html.print-pdf .reveal .slides .pdf-page{position:relative;overflow:hidden;z-index:1;page-break-after:always}html.print-pdf .reveal .slides section{visibility:visible!important;display:block!important;position:absolute!important;margin:0!important;padding:0!important;box-sizing:border-box!important;min-height:1px;opacity:1!important;transform-style:flat!important;transform:none!important}html.print-pdf .reveal section.stack{position:relative!important;margin:0!important;padding:0!important;page-break-after:avoid!important;height:auto!important;min-height:auto!important}html.print-pdf .reveal img{box-shadow:none}html.print-pdf .reveal .backgrounds{display:none}html.print-pdf .reveal .slide-background{display:block!important;position:absolute;top:0;left:0;width:100%;height:100%;z-index:auto!important}html.print-pdf .reveal.show-notes{max-width:none;max-height:none}html.print-pdf .reveal .speaker-notes-pdf{display:block;width:100%;height:auto;max-height:none;top:auto;right:auto;bottom:auto;left:auto;z-index:100}html.print-pdf .reveal .speaker-notes-pdf[data-layout=separate-page]{position:relative;color:inherit;background-color:transparent;padding:20px;page-break-after:always;border:0}html.print-pdf .reveal .slide-number-pdf{display:block;position:absolute;font-size:14px}html.print-pdf .aria-status{display:none}@media print{html:not(.print-pdf){overflow:visible;width:auto;height:auto}html:not(.print-pdf) body{margin:0;padding:0;overflow:visible}html:not(.print-pdf) .reveal{background:#fff;font-size:20pt}html:not(.print-pdf) .reveal .backgrounds,html:not(.print-pdf) .reveal .controls,html:not(.print-pdf) .reveal .progress,html:not(.print-pdf) .reveal .slide-number,html:not(.print-pdf) .reveal .state-background{display:none!important}html:not(.print-pdf) .reveal li,html:not(.print-pdf) .reveal p,html:not(.print-pdf) .reveal td{font-size:20pt!important;color:#000}html:not(.print-pdf) .reveal h1,html:not(.print-pdf) .reveal h2,html:not(.print-pdf) .reveal h3,html:not(.print-pdf) .reveal h4,html:not(.print-pdf) .reveal h5,html:not(.print-pdf) .reveal h6{color:#000!important;height:auto;line-height:normal;text-align:left;letter-spacing:normal}html:not(.print-pdf) .reveal h1{font-size:28pt!important}html:not(.print-pdf) .reveal h2{font-size:24pt!important}html:not(.print-pdf) .reveal h3{font-size:22pt!important}html:not(.print-pdf) .reveal h4{font-size:22pt!important;font-variant:small-caps}html:not(.print-pdf) .reveal h5{font-size:21pt!important}html:not(.print-pdf) .reveal h6{font-size:20pt!important;font-style:italic}html:not(.print-pdf) .reveal a:link,html:not(.print-pdf) .reveal a:visited{color:#000!important;font-weight:700;text-decoration:underline}html:not(.print-pdf) .reveal div,html:not(.print-pdf) .reveal ol,html:not(.print-pdf) .reveal p,html:not(.print-pdf) .reveal ul{visibility:visible;position:static;width:auto;height:auto;display:block;overflow:visible;margin:0;text-align:left!important}html:not(.print-pdf) .reveal pre,html:not(.print-pdf) .reveal table{margin-left:0;margin-right:0}html:not(.print-pdf) .reveal pre code{padding:20px}html:not(.print-pdf) .reveal blockquote{margin:20px 0}html:not(.print-pdf) .reveal .slides{position:static!important;width:auto!important;height:auto!important;left:0!important;top:0!important;margin-left:0!important;margin-top:0!important;padding:0!important;zoom:1!important;transform:none!important;overflow:visible!important;display:block!important;text-align:left!important;perspective:none;perspective-origin:50% 50%}html:not(.print-pdf) .reveal .slides section{visibility:visible!important;position:static!important;width:auto!important;height:auto!important;display:block!important;overflow:visible!important;left:0!important;top:0!important;margin-left:0!important;margin-top:0!important;padding:60px 20px!important;z-index:auto!important;opacity:1!important;page-break-after:always!important;transform-style:flat!important;transform:none!important;transition:none!important}html:not(.print-pdf) .reveal .slides section.stack{padding:0!important}html:not(.print-pdf) .reveal .slides section:last-of-type{page-break-after:avoid!important}html:not(.print-pdf) .reveal .slides section .fragment{opacity:1!important;visibility:visible!important;transform:none!important}html:not(.print-pdf) .reveal .r-fit-text{white-space:normal!important}html:not(.print-pdf) .reveal section img{display:block;margin:15px 0;background:#fff;border:1px solid #666;box-shadow:none}html:not(.print-pdf) .reveal section small{font-size:.8em}html:not(.print-pdf) .reveal .hljs{max-height:100%;white-space:pre-wrap;word-wrap:break-word;word-break:break-word;font-size:15pt}html:not(.print-pdf) .reveal .hljs .hljs-ln-numbers{white-space:nowrap}html:not(.print-pdf) .reveal .hljs td{font-size:inherit!important;color:inherit!important}}
+</style>
+<style>
+:root{
+  --blue:#1e3a8a;
+  --blue-deep:#16306f;
+  --cream:#f5e8c7;
+  --cream-deep:#ead9b0;
+  --ink:#47423e;
+  --green:#3d6b3f;
+  --red:#c62828;
+  --yellow:#e3b23c;
+  --white:#fffaf0;
+
+  --font-display:'Anton',Impact,'Arial Narrow Bold',sans-serif;
+  --font-body:'Montserrat',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+
+  /* cream slide (default) */
+  --bg:var(--cream);
+  --fg:var(--ink);
+  --head:var(--blue);
+  --panel-bg:var(--blue);
+  --panel-fg:var(--cream);
+  --line:rgba(30,58,138,.28);
+  --accent:var(--green);
+}
+.reveal .blue{
+  --bg:var(--blue);
+  --fg:var(--cream);
+  --head:var(--cream);
+  --panel-bg:var(--cream);
+  --panel-fg:var(--ink);
+  --line:rgba(245,232,199,.3);
+  --accent:var(--cream);
+}
+
+html,body,.reveal-viewport{background:var(--cream);}
+.reveal{font-family:var(--font-body);color:var(--fg);font-size:clamp(15px,2.2vw,21px);}
+.reveal .slides{text-align:left;}
+.reveal .slides section{height:100%;padding:0;color:var(--fg);}
+
+.reveal h1,.reveal h2,.reveal h3{
+  font-family:var(--font-display);font-weight:400;text-transform:uppercase;
+  letter-spacing:.005em;line-height:1;margin:0 0 .35em;color:var(--head);text-wrap:balance;
+}
+.reveal h1{font-size:clamp(2.8rem,9vw,6rem);}
+.reveal h2{font-size:clamp(2rem,6.2vw,3.9rem);}
+.reveal h3{font-size:clamp(1.3rem,3.6vw,2rem);}
+.reveal h4{font-family:var(--font-body);font-weight:700;font-size:clamp(1rem,2.4vw,1.3rem);margin:0 0 .3rem;}
+.reveal p,.reveal li{line-height:1.45;}
+.reveal strong,.reveal b{font-weight:700;}
+.reveal em{font-style:italic;}
+.reveal ::selection{background:var(--yellow);color:var(--ink);}
+
+.pad{box-sizing:border-box;width:100%;height:100%;padding:clamp(1.2rem,5vw,3.6rem) clamp(1.2rem,5.5vw,4.2rem);display:flex;flex-direction:column;justify-content:center;}
+
+.eyebrow{font-family:var(--font-body);font-weight:600;font-size:clamp(.62rem,1.5vw,.78rem);letter-spacing:.22em;text-transform:uppercase;color:var(--fg);opacity:.85;margin:0 0 .9rem;}
+.muted{opacity:.8;}
+.mono{font-family:var(--font-mono);}
+.small{font-size:clamp(.7rem,1.6vw,.86rem);}
+.lead{font-size:clamp(1rem,2.5vw,1.35rem);max-width:48rem;}
+
+/* the Canva "summary box": a solid panel with a few short lines */
+.key{background:var(--panel-bg);color:var(--panel-fg);padding:clamp(.8rem,2vw,1.2rem) clamp(1rem,2.4vw,1.5rem);margin:0 0 1rem;font-size:clamp(.9rem,2.2vw,1.15rem);line-height:1.5;}
+.key b{font-weight:700;}
+.key .k{color:var(--yellow);}
+
+/* numbered cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.7rem,1.8vw,1.2rem);margin-top:.6rem;}
+.cards.four{grid-template-columns:repeat(4,1fr);}
+.cards.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:760px){.cards,.cards.four,.cards.three{grid-template-columns:1fr;}}
+.card{background:var(--panel-bg);color:var(--panel-fg);padding:clamp(.9rem,2.2vw,1.3rem) clamp(1rem,2.4vw,1.5rem);display:grid;grid-template-columns:auto 1fr;gap:0 1.1rem;align-items:start;}
+.card.plain{grid-template-columns:1fr;}
+.card .num{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1;grid-row:span 2;padding-top:.15rem;}
+.card h4{color:inherit;}
+.card p{margin:0;font-size:clamp(.78rem,1.9vw,.98rem);line-height:1.45;}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,3vw,2.6rem);align-items:start;}
+.cols.wide-left{grid-template-columns:1.25fr 1fr;} .cols.wide-right{grid-template-columns:1fr 1.25fr;}
+@media(max-width:640px){.cols,.cols.wide-left,.cols.wide-right{grid-template-columns:1fr;gap:1.2rem;}}
+
+/* the white "illustration frame" the Canva slides use */
+.frame{background:var(--white);padding:clamp(.8rem,2vw,1.2rem);color:var(--ink);}
+.frame figcaption{font-family:var(--font-body);font-weight:600;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-top:.5rem;}
+.frame svg{display:block;width:100%;height:auto;}
+
+.tag{display:inline-block;font-family:var(--font-body);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:.35em .75em;margin-bottom:.6rem;background:var(--blue);color:var(--cream);}
+.tag.good{background:var(--green);color:var(--cream);}
+.tag.bad{background:var(--red);color:var(--cream);}
+.tag.warn{background:var(--yellow);color:var(--ink);}
+
+.list{list-style:none;padding:0;margin:.4rem 0 0;}
+.list li{padding:.32rem 0 .32rem 1.25rem;position:relative;font-size:clamp(.85rem,2vw,1.08rem);}
+.list li::before{content:"";position:absolute;left:0;top:.78em;width:8px;height:8px;background:var(--accent);}
+.steps{list-style:none;padding:0;margin:.6rem 0 0;counter-reset:s;}
+.steps li{padding:.45rem 0 .45rem 3.2rem;position:relative;font-size:clamp(.9rem,2.1vw,1.15rem);border-bottom:1px solid var(--line);}
+.steps li:last-child{border-bottom:none;}
+.steps li::before{counter-increment:s;content:"0" counter(s);position:absolute;left:0;top:.35rem;font-family:var(--font-display);font-size:1.5em;line-height:1;color:var(--accent);}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.data{width:100%;border-collapse:collapse;font-size:clamp(.78rem,1.95vw,1.02rem);font-variant-numeric:tabular-nums;}
+table.data th,table.data td{padding:.5em .8em;text-align:left;border-bottom:1px solid var(--line);}
+table.data thead th{background:var(--panel-bg);color:var(--panel-fg);font-weight:700;font-size:.78em;letter-spacing:.08em;text-transform:uppercase;border-bottom:none;}
+table.data tbody tr:last-child td{border-bottom:none;}
+table.data td:first-child{font-weight:700;}
+table.data .num,table.data th.num{text-align:right;font-family:var(--font-mono);}
+.v-good{color:var(--green);font-weight:700;font-family:var(--font-mono);}
+.v-bad{color:var(--red);font-weight:700;font-family:var(--font-mono);}
+.reveal .blue .v-good{color:#9bd39a;} .reveal .blue .v-bad{color:#ff9a8a;}
+
+pre.code{font-family:var(--font-mono);font-variant-ligatures:none;background:var(--panel-bg);color:var(--panel-fg);padding:1em 1.2em;margin:.4rem 0;font-size:clamp(.74rem,1.85vw,.98rem);white-space:pre;overflow-x:auto;line-height:1.55;}
+pre.code .k{color:var(--yellow);} pre.code .cm{opacity:.65;}
+.reveal .blue pre.code .k{color:var(--red);}
+
+.chart-box{position:relative;width:100%;height:clamp(230px,38vh,380px);background:var(--white);padding:clamp(.8rem,2vw,1.1rem);display:flex;flex-direction:column;overflow:hidden;color:var(--ink);}
+.chart-box h4{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:0 0 .4rem;flex:0 0 auto;}
+.chart-box .canvas-wrap{position:relative;flex:1 1 auto;min-height:0;width:100%;}
+.chart-box .canvas-wrap canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;}
+
+.bars{font-family:var(--font-mono);font-variant-ligatures:none;font-size:clamp(.72rem,1.8vw,.95rem);line-height:1.7;white-space:pre;}
+.bars .bar{color:var(--blue);}
+
+/* hero */
+#hero .pad{position:relative;overflow:hidden;}
+#fed{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+#hero .hero-content{position:relative;z-index:2;max-width:60%;}
+@media(max-width:760px){#hero .hero-content{max-width:100%;}}
+#hero h1{font-size:clamp(2.6rem,7.6vw,5.4rem);}
+.hero-sub{font-size:clamp(.95rem,2.4vw,1.35rem);max-width:40rem;margin:.6rem 0 0;}
+
+.big .pad{justify-content:center;}
+.big h1{font-size:clamp(3rem,10vw,7rem);}
+
+/* diagrams */
+.dia text{font-family:var(--font-body);font-weight:600;font-size:12px;fill:var(--ink);}
+.dia text.m{font-family:var(--font-mono);font-weight:400;font-size:10.5px;fill:var(--blue);}
+.dia text.big{font-family:var(--font-display);font-size:26px;fill:var(--blue);}
+.dia .box{fill:var(--cream);stroke:var(--blue);stroke-width:2;}
+.dia .box.solid{fill:var(--blue);}
+.dia .box.red{fill:var(--red);stroke:var(--red);}
+.dia .ln{stroke:var(--blue);stroke-width:2;fill:none;}
+.dia .ln.dash{stroke-dasharray:6 5;}
+.dia .ln.red{stroke:var(--red);}
+.dia .ln.thin{stroke-width:1.3;opacity:.7;}
+.dia .dot{fill:var(--blue);}
+.dia .dot.red{fill:var(--red);}
+.dia .dot.green{fill:var(--green);}
+
+.reveal .progress{height:4px;color:var(--green);}
+.reveal .slide-number{background:transparent;font-family:var(--font-mono);font-size:.68rem;color:var(--green);}
+.reveal .controls{color:var(--green);}
+.timing{font-family:var(--font-mono);font-size:.66rem;color:var(--fg);opacity:.7;position:absolute;right:clamp(1rem,4vw,3rem);top:clamp(.9rem,3vw,1.8rem);letter-spacing:.08em;}
+
+@media(max-width:480px){.reveal .slides section{font-size:15px;}}
+html.phone .reveal{font-size:clamp(14px,4.3vw,19px);}
+html.phone .reveal .slides section{height:100%;}
+html.phone .pad{height:100%;box-sizing:border-box;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:1.5rem 1.05rem 3.2rem;}
+html.phone #hero .pad{justify-content:center;}
+html.phone .cols,html.phone .cols.wide-left,html.phone .cols.wide-right{grid-template-columns:1fr;gap:1rem;}
+html.phone .cards,html.phone .cards.four,html.phone .cards.three{grid-template-columns:1fr;}
+html.phone .chart-box{height:clamp(230px,48vh,320px);}
+html.phone .timing{display:none;}
+html.phone .reveal .controls{display:none;}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- 1 ─────────────────────────────────────────────────────────────── -->
+<section id="hero" class="blue" data-background-color="#1e3a8a">
+  <canvas id="fed"></canvas>
+  <div class="pad">
+    <div class="hero-content">
+      <p class="eyebrow">Parsa Bordbar · Software Freedom Day</p>
+      <h1>Federated Learning and the Future of Private, Open AI</h1>
+      <p class="hero-sub muted">What it solves, what it does not, and how you would check.</p>
+    </div>
+  </div>
+  <aside class="notes">Thirty seconds. Name, title, straight into the phone.</aside>
+</section>
+
+<!-- 2 ─────────────────────────────────────────────────────────────── -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@0.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>2 — Take Out Your Phone</h2>
+    <p class="lead"><b>Your keyboard has been learning from you.</b> Passwords. Medical searches. Family messages. Bank details. Years of it.</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h4>Where Did That Learning Go?</h4><p>It stayed on your phone. Local learning, nothing uploaded.</p></div>
+      <div class="card"><div class="num">02</div><h4>It Went to the Server?</h4><p>It went to the vendor's server. Your private words, their data center.</p></div>
+      <div class="card"><div class="num">03</div><h4>You Do Not Know?</h4><p>You genuinely do not know where your keyboard's learning went.</p></div>
+      <div class="card"><div class="num">?</div><h4>How Would You Check?</h4><p>Whichever you picked — raise your hand. Now: how would you verify it?</p></div>
+    </div>
+  </div>
+  <aside class="notes">Actually wait for hands on each of the three. Most rooms split. The fourth card is the whole talk.</aside>
+</section>
+
+<!-- 3 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@2 · 1 min</span>
+  <div class="pad">
+    <h2>How Would You Check?</h2>
+    <div class="cols wide-left">
+      <div>
+        <div class="key">Not "Do you trust them?"<br>Not "What does the policy say?"</div>
+        <p class="lead">Whichever answer you picked: how would you verify it? Using the skills you already have — not trust, not policy — how would you check which answer is actually true?</p>
+      </div>
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 300 220" role="img" aria-label="A phone with a question mark over it">
+          <rect x="105" y="20" width="90" height="180" rx="12" class="box"/>
+          <rect x="118" y="40" width="64" height="120" class="box solid"/>
+          <text x="150" y="112" text-anchor="middle" class="big" style="fill:#f5e8c7;font-size:54px">?</text>
+          <circle cx="150" cy="180" r="6" class="dot"/>
+        </svg>
+        <figcaption>Not trust. Not policy. Verification.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <aside class="notes">Hold the silence. Nobody in the room can answer yet. Promise they will be able to by the end.</aside>
+</section>
+
+<!-- 4 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@3 · 1 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 320 260" role="img" aria-label="Phones, cars, hospitals and sensors all sending data to one server">
+          <g class="ln"><line x1="86" y1="40" x2="196" y2="122"/><line x1="86" y1="90" x2="196" y2="128"/><line x1="86" y1="140" x2="196" y2="134"/><line x1="86" y1="190" x2="196" y2="140"/><line x1="86" y1="235" x2="196" y2="146"/></g>
+          <g><rect x="20" y="24" width="60" height="32" class="box"/><text x="50" y="44" text-anchor="middle">phones</text></g>
+          <g><rect x="20" y="74" width="60" height="32" class="box"/><text x="50" y="94" text-anchor="middle">cars</text></g>
+          <g><rect x="20" y="124" width="60" height="32" class="box"/><text x="50" y="144" text-anchor="middle">keyboards</text></g>
+          <g><rect x="20" y="174" width="60" height="32" class="box"/><text x="50" y="194" text-anchor="middle">hospitals</text></g>
+          <g><rect x="20" y="219" width="60" height="32" class="box"/><text x="50" y="239" text-anchor="middle">sensors</text></g>
+          <rect x="200" y="80" width="96" height="110" class="box solid"/>
+          <text x="248" y="128" text-anchor="middle" style="fill:#f5e8c7">ONE</text>
+          <text x="248" y="146" text-anchor="middle" style="fill:#f5e8c7">SERVER</text>
+          <polygon points="196,134 186,128 186,140" class="dot"/>
+        </svg>
+        <figcaption>One pile · one target · one owner</figcaption>
+      </figure>
+      <div>
+        <h2>4 — How ML Normally Works</h2>
+        <div class="key">Model + data → train → useful system<br>Data begins on phones, cars, keyboards, and in hospitals — across thousands of devices and institutions</div>
+        <p>Data sources: phones · cars · keyboards · hospitals · sensors · cameras · wearables<br>Classical answer: collect everything on one server and train.<br><b>One pile. One target. One owner.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@4 · 1.5 min</span>
+  <div class="pad">
+    <h2>5 — Where That Breaks</h2>
+    <p class="lead">Centralized collection hits hard walls: legal, ethical, and practical. One pile of data means one target and one owner.</p>
+    <div class="cards four">
+      <div class="card plain"><h4>Regulation</h4><p>data cannot cross institutions or jurisdictions under GDPR and health law</p></div>
+      <div class="card plain"><h4>User Trust</h4><p>your keyboard sees secrets you do not expect on a vendor server</p></div>
+      <div class="card plain"><h4>Volume</h4><p>moving raw camera or sensor data from millions of devices is impractical</p></div>
+      <div class="card plain"><h4>Blocked Projects</h4><p>cross-hospital cancer detection, fraud detection, EV range prediction all stall</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@5.5 · 1 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <div class="frame" style="display:flex;align-items:center;justify-content:center;min-height:14rem">
+        <span style="font-family:var(--font-display);font-size:clamp(7rem,20vw,14rem);line-height:1;color:var(--blue)">?</span>
+      </div>
+      <div>
+        <h2>The Question</h2>
+        <div class="key">Can many people train one shared model without collecting their data in one place?<br>If they can — what exactly is protected?<br>Who can verify the answers?</div>
+        <p>Answering only the first question is an advertisement. The hard questions are the second and third: what the architecture actually protects, under what conditions, and whether anyone outside the vendor can inspect and confirm those claims.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@6.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>7 — Reverse the Pipeline</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 340 200" role="img" aria-label="Left: data flows into a central server. Right: the model flows out to devices and only updates flow back">
+          <text x="80" y="18" text-anchor="middle" class="m">CENTRALIZED</text>
+          <rect x="60" y="80" width="40" height="44" class="box solid"/>
+          <g class="ln"><line x1="20" y1="40" x2="60" y2="88"/><line x1="140" y1="40" x2="100" y2="88"/><line x1="20" y1="170" x2="60" y2="118"/><line x1="140" y1="170" x2="100" y2="118"/></g>
+          <g><circle cx="20" cy="40" r="9" class="box"/><circle cx="140" cy="40" r="9" class="box"/><circle cx="20" cy="170" r="9" class="box"/><circle cx="140" cy="170" r="9" class="box"/></g>
+          <text x="80" y="192" text-anchor="middle" class="m">data → computation</text>
+          <line x1="170" y1="10" x2="170" y2="190" class="ln thin dash"/>
+          <text x="260" y="18" text-anchor="middle" class="m">FEDERATED</text>
+          <rect x="240" y="80" width="40" height="44" class="box solid"/>
+          <g class="ln dash"><line x1="200" y1="40" x2="240" y2="88"/><line x1="320" y1="40" x2="280" y2="88"/><line x1="200" y1="170" x2="240" y2="118"/><line x1="320" y1="170" x2="280" y2="118"/></g>
+          <g><circle cx="200" cy="40" r="9" class="box"/><circle cx="320" cy="40" r="9" class="box"/><circle cx="200" cy="170" r="9" class="box"/><circle cx="320" cy="170" r="9" class="box"/></g>
+          <g class="dot"><circle cx="200" cy="40" r="3.5"/><circle cx="320" cy="40" r="3.5"/><circle cx="200" cy="170" r="3.5"/><circle cx="320" cy="170" r="3.5"/></g>
+          <text x="260" y="192" text-anchor="middle" class="m">computation → data</text>
+        </svg>
+        <figcaption>The dot is the data. On the right it never moves.</figcaption>
+      </figure>
+      <div>
+        <div class="key">Centralized ML: move data to computation<br>Federated learning: move computation to data</div>
+        <p>Receive the global model → improve it locally on your own data → send back only a focused update, not the raw data.</p>
+        <p class="small muted">Source: Google Federated Learning announcement, April 2017.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ─────────────────────────────────────────────────────────────── -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@8 · 1 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 300 240" role="img" aria-label="Three hospitals around one aggregator, updates flowing both ways">
+          <g class="ln dash"><line x1="150" y1="120" x2="60" y2="50"/><line x1="150" y1="120" x2="240" y2="50"/><line x1="150" y1="120" x2="150" y2="205"/></g>
+          <g><rect x="20" y="24" width="80" height="44" class="box"/><text x="60" y="43" text-anchor="middle">Hospital A</text><text x="60" y="59" text-anchor="middle" class="m">100 notes</text></g>
+          <g><rect x="200" y="24" width="80" height="44" class="box"/><text x="240" y="43" text-anchor="middle">Hospital B</text><text x="240" y="59" text-anchor="middle" class="m">300 notes</text></g>
+          <g><rect x="110" y="182" width="80" height="44" class="box"/><text x="150" y="201" text-anchor="middle">Hospital C</text><text x="150" y="217" text-anchor="middle" class="m">600 notes</text></g>
+          <circle cx="150" cy="120" r="26" class="box solid"/>
+          <text x="150" y="125" text-anchor="middle" style="fill:#f5e8c7;font-size:11px">SERVER</text>
+        </svg>
+        <figcaption>Each keeps its records. Only updates cross the lines.</figcaption>
+      </figure>
+      <div>
+        <h2>The Running Example</h2>
+        <div class="key">Centralized: the project cannot happen.<br>Federated: the project becomes possible.</div>
+        <p>Three hospitals want one shared cancer-detection model. Each holds valuable patient records. None can upload them to a central server — regulation, ethics, and patient trust all forbid it.</p>
+        <p>Without federated learning, the collaboration is blocked. With it, each hospital trains locally and shares only updates. The model improves. The records never move.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">The sizes on the diagram are the demo's: 100, 300, 600. They come back on slide 20.</aside>
+</section>
+
+<!-- 9 ─────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@9 · 1.5 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 300 260" role="img" aria-label="A cycle of five steps: initialise, send, train, return, aggregate">
+          <circle cx="150" cy="130" r="88" class="ln thin dash"/>
+          <g><circle cx="150" cy="42" r="20" class="box solid"/><text x="150" y="47" text-anchor="middle" style="fill:#f5e8c7">1</text><text x="150" y="14" text-anchor="middle" class="m">initialise</text></g>
+          <g><circle cx="234" cy="103" r="20" class="box solid"/><text x="234" y="108" text-anchor="middle" style="fill:#f5e8c7">2</text><text x="234" y="140" text-anchor="middle" class="m">send</text></g>
+          <g><circle cx="202" cy="202" r="20" class="box solid"/><text x="202" y="207" text-anchor="middle" style="fill:#f5e8c7">3</text><text x="222" y="240" text-anchor="middle" class="m">train locally</text></g>
+          <g><circle cx="98" cy="202" r="20" class="box solid"/><text x="98" y="207" text-anchor="middle" style="fill:#f5e8c7">4</text><text x="80" y="240" text-anchor="middle" class="m">return updates</text></g>
+          <g><circle cx="66" cy="103" r="20" class="box solid"/><text x="66" y="108" text-anchor="middle" style="fill:#f5e8c7">5</text><text x="66" y="140" text-anchor="middle" class="m">aggregate</text></g>
+          <text x="150" y="128" text-anchor="middle">raw data</text><text x="150" y="144" text-anchor="middle">stays put</text>
+        </svg>
+        <figcaption>repeat until convergence</figcaption>
+      </figure>
+      <div>
+        <h2>9 — One Round, Five Steps</h2>
+        <div class="key">Model goes out + local training + updates return + aggregate + repeat<br>The raw data stays with each participant</div>
+        <ol class="steps">
+          <li><b>Initialize</b> the global model</li>
+          <li><b>Send</b> it to selected clients</li>
+          <li><b>Train</b> briefly on local data</li>
+          <li><b>Return</b> model updates, not records</li>
+          <li><b>Aggregate</b> a new global model · repeat until convergence</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@10.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>Aggregation and Why It Is Weighted</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 320 200" role="img" aria-label="Three clients with 10, 100 and 50 examples feed a weighted sum">
+          <g><rect x="20" y="20" width="90" height="44" class="box"/><text x="65" y="48" text-anchor="middle" class="big" style="font-size:22px">10</text></g>
+          <g><rect x="20" y="78" width="90" height="44" class="box"/><text x="65" y="106" text-anchor="middle" class="big" style="font-size:22px">100</text></g>
+          <g><rect x="20" y="136" width="90" height="44" class="box"/><text x="65" y="164" text-anchor="middle" class="big" style="font-size:22px">50</text></g>
+          <g class="ln"><line x1="110" y1="42" x2="200" y2="92"/><line x1="110" y1="100" x2="200" y2="100"/><line x1="110" y1="158" x2="200" y2="108"/></g>
+          <text x="150" y="58" class="m">×0.06</text><text x="150" y="94" class="m">×0.63</text><text x="150" y="146" class="m">×0.31</text>
+          <rect x="200" y="70" width="60" height="60" class="box solid"/>
+          <text x="230" y="110" text-anchor="middle" class="big" style="fill:#f5e8c7;font-size:36px">Σ</text>
+          <line x1="260" y1="100" x2="300" y2="100" class="ln"/><polygon points="300,100 290,94 290,106" class="dot"/>
+        </svg>
+        <figcaption>weight = examples ÷ total examples</figcaption>
+      </figure>
+      <div>
+        <div class="key">100 clients → 100 different updates<br>The server needs exactly one model.</div>
+        <p><b>FedAvg</b> averages updates weighted by each client's number of examples.</p>
+        <p><b>If</b> client A has 10 examples and client B has 100, unweighted averaging makes each of A's examples count ten times more. <b>Weighting</b> gives every individual training example equal influence over the final model.</p>
+        <p class="small muted">Source: McMahan et al., 2017</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Weighting by data volume is also a decision about whose data counts most. That returns on the demo and at the end.</aside>
+</section>
+
+<!-- 11 ────────────────────────────────────────────────────────────── -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@12 · 1 min</span>
+  <div class="pad">
+    <h2 style="text-align:center">Two Things<br>for Free</h2>
+    <p class="small" style="text-align:center;font-weight:700;margin:0 0 1rem">Federated learning gives you these capabilities without centralising your data:</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h4>Federated Evaluation</h4><p>Evaluate model performance across decentralised data without ever collecting it on one server.</p></div>
+      <div class="card"><div class="num">02</div><h4>Federated Analytics</h4><p>Answer statistical questions across many participants without collecting individual answers.</p></div>
+      <div class="card"><div class="num">03</div><h4>Secure Aggregation</h4><p>Individual updates are masked before the server sees them; masks cancel out in the aggregate sum.</p></div>
+      <div class="card"><div class="num">04</div><h4>No Individual Exposure</h4><p>The server learns only the combined result — no single participant's response is ever revealed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@13 · 1 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 300 220" role="img" aria-label="Flower: a server app and three client apps">
+          <rect x="110" y="20" width="80" height="44" class="box solid"/><text x="150" y="39" text-anchor="middle" style="fill:#f5e8c7">ServerApp</text><text x="150" y="55" text-anchor="middle" class="m" style="fill:#f5e8c7">strategy</text>
+          <g class="ln dash"><line x1="150" y1="64" x2="50" y2="150"/><line x1="150" y1="64" x2="150" y2="150"/><line x1="150" y1="64" x2="250" y2="150"/></g>
+          <g><rect x="10" y="150" width="80" height="44" class="box"/><text x="50" y="169" text-anchor="middle">ClientApp</text><text x="50" y="185" text-anchor="middle" class="m">hospital 0</text></g>
+          <g><rect x="110" y="150" width="80" height="44" class="box"/><text x="150" y="169" text-anchor="middle">ClientApp</text><text x="150" y="185" text-anchor="middle" class="m">hospital 1</text></g>
+          <g><rect x="210" y="150" width="80" height="44" class="box"/><text x="250" y="169" text-anchor="middle">ClientApp</text><text x="250" y="185" text-anchor="middle" class="m">hospital 2</text></g>
+        </svg>
+        <figcaption>flower.ai · Apache-2.0</figcaption>
+      </figure>
+      <div>
+        <h2>Demo:<br>Flower Framework</h2>
+<pre class="code">pip install <span class="k">"flwr[simulation]>=1.36"</span> numpy
+flwr run . local-simulation --stream
+
+<span class="cm"># 3 simulated hospitals · different local data
+# FedAvg · accuracy tracked across rounds</span></pre>
+        <p>flower.ai — Apache-2.0 free software for building and simulating federations. Run locally, inspect every line. Live results show accuracy improving across rounds as three hospitals collaborate without sharing patient records.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Just the architecture here. The run itself, with numbers, is slide 20. If time is short, skip the live run and use those slides.</aside>
+</section>
+
+<!-- 13 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@14 · 1.5 min</span>
+  <div class="pad">
+    <h2>13 — Read the Promise Carefully</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 320 180" role="img" aria-label="A record stays on a phone; the update computed from it travels to a server where it is inverted">
+          <rect x="20" y="40" width="70" height="110" rx="10" class="box"/>
+          <circle cx="55" cy="92" r="16" class="dot green"/><text x="55" y="130" text-anchor="middle" class="m">record</text>
+          <line x1="95" y1="95" x2="215" y2="95" class="ln"/><polygon points="220,95 210,89 210,101" class="dot"/>
+          <text x="157" y="84" text-anchor="middle" class="m">update Δ</text>
+          <rect x="225" y="50" width="75" height="90" class="box solid"/>
+          <text x="262" y="90" text-anchor="middle" style="fill:#f5e8c7">server</text>
+          <path d="M262 108 q-14 26 14 26" class="ln red"/><polygon points="276,134 268,128 268,140" class="dot red"/>
+          <text x="262" y="165" text-anchor="middle" class="m" style="fill:#c62828">invert Δ → record</text>
+        </svg>
+        <figcaption>The raw record stays. The gradient computed from it travels.</figcaption>
+      </figure>
+      <div>
+        <div class="key">"Your data never leaves your device" · The update does leave · Gradient inversion reconstructs training data<br>The raw record stays. The gradient computed from it travels.</div>
+        <p><b>Gradient inversion:</b> guess the original input → run the same model → compare the resulting update → adjust the guess until the updates match.</p>
+        <p>When they match, the guess may reveal what was in training.</p>
+        <p class="small muted">Sources: Zhu, Liu &amp; Han 2019; Geiping et al. 2020.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@15.5 · 1 min</span>
+  <div class="pad">
+    <h2>The Model Leaks Too</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0;background:var(--blue)">
+        <svg class="dia" viewBox="0 0 300 180" role="img" aria-label="A trained model as a network; one highlighted node marks a record that can be inferred as a member">
+          <g class="ln thin" style="stroke:#f5e8c7"><line x1="40" y1="60" x2="120" y2="30"/><line x1="120" y1="30" x2="200" y2="70"/><line x1="200" y1="70" x2="260" y2="40"/><line x1="40" y1="60" x2="90" y2="120"/><line x1="90" y1="120" x2="170" y2="140"/><line x1="170" y1="140" x2="200" y2="70"/><line x1="170" y1="140" x2="250" y2="130"/><line x1="120" y1="30" x2="90" y2="120"/><line x1="250" y1="130" x2="260" y2="40"/></g>
+          <g style="fill:#f5e8c7"><circle cx="40" cy="60" r="5"/><circle cx="120" cy="30" r="5"/><circle cx="200" cy="70" r="5"/><circle cx="260" cy="40" r="5"/><circle cx="90" cy="120" r="5"/><circle cx="250" cy="130" r="5"/></g>
+          <circle cx="170" cy="140" r="8" class="dot red"/>
+          <text x="170" y="168" text-anchor="middle" class="m" style="fill:#f5e8c7">"was this record in training?"</text>
+        </svg>
+      </figure>
+      <div>
+        <div class="key">The trained model is distributed to all clients<br>Membership itself can be the sensitive secret</div>
+        <p>Even if individual updates are protected, the trained model is sent to every participant. <b>Membership inference</b> attacks determine whether a specific record was used in training — just from observing model behavior.</p>
+        <p>For a psychiatric-hospital model, knowing someone was in the training set reveals a diagnosis.</p>
+        <p class="small muted">Source: Shokri et al., 2017.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@16.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>15 — The Real Protections</h2>
+    <p class="lead">Federated learning changes where training happens. Privacy must be actively added — it does not come for free.</p>
+    <div class="cards four">
+      <div class="card plain"><h4>Input Privacy</h4><p>Secure aggregation: individual updates are masked; masks cancel in the sum</p></div>
+      <div class="card plain"><h4>Record vs Person</h4><p>Privacy can protect one record or one person — these are not the same thing</p></div>
+      <div class="card plain"><h4>Output Privacy</h4><p>Differential privacy: limit contribution, add calibrated noise, track total budget</p></div>
+      <div class="card plain"><h4>Who Adds Noise?</h4><p>The server, the client, or a trusted third party — the answer changes the guarantee</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@18 · 1.5 min</span>
+  <div class="pad">
+    <h2>16 — The Ordinary Limits</h2>
+    <div class="cols">
+      <div>
+        <div class="key">• Non-IID data<br>• Bandwidth costs<br>• Device dropout<br><br>More privacy noise = less utility — there is no free privacy</div>
+        <ul class="list">
+          <li><b>Client data is not identically distributed</b> — local models drift.</li>
+          <li><b>Updates</b> can reach hundreds of MB per client <b>per round</b>.</li>
+          <li><b>Devices disconnect</b> mid-round; fast clients wait for slow ones.</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="list">
+          <li>Average accuracy <b>hides failure</b> for small hospitals or underrepresented groups.</li>
+          <li>Adding <b>differential privacy noise</b> reduces <b>model utility</b>. These limits do not cancel federated learning — they mean it must be designed honestly.</li>
+        </ul>
+        <p class="small muted" style="margin-top:1rem">All three are measured on slide 20: drift, the small hospital, the noise curve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 ────────────────────────────────────────────────────────────── -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@19.5 · 1.5 min</span>
+  <div class="pad">
+    <h2 style="text-align:center">Writing<br>to the Model</h2>
+    <p class="small" style="text-align:center;font-weight:700;margin:0 0 1rem">Federation lets every participant influence the shared model — and that is a threat surface:</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h4>Data Poisoning</h4><p>A participant submits corrupt training examples, steering the global model toward a desired wrong output.</p></div>
+      <div class="card"><div class="num">02</div><h4>Model Poisoning</h4><p>A participant crafts a malicious update directly — bypassing local data — to manipulate model weights.</p></div>
+      <div class="card"><div class="num">03</div><h4>Sybil Attack</h4><p>One attacker registers many fake clients to amplify their influence over the aggregation step.</p></div>
+      <div class="card"><div class="num">04</div><h4>Byzantine Fault</h4><p>Arbitrary malicious or broken updates — whether from attackers or faulty devices — corrupt the aggregate.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@21 · 1.5 min</span>
+  <div class="pad">
+    <h2>19 — Backdoors</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 320 180" role="img" aria-label="Ordinary input gives ordinary output; the same input with a hidden trigger gives an attacker-chosen output">
+          <rect x="120" y="60" width="80" height="60" class="box solid"/><text x="160" y="95" text-anchor="middle" style="fill:#f5e8c7">model</text>
+          <line x1="20" y1="75" x2="115" y2="75" class="ln"/><polygon points="120,75 110,69 110,81" class="dot"/>
+          <text x="20" y="66" class="m">ordinary input</text>
+          <line x1="200" y1="75" x2="295" y2="75" class="ln"/><polygon points="300,75 290,69 290,81" class="dot"/>
+          <text x="210" y="66" class="m">ordinary output</text>
+          <line x1="20" y1="110" x2="115" y2="110" class="ln red"/><polygon points="120,110 110,104 110,116" class="dot red"/>
+          <text x="20" y="130" class="m" style="fill:#c62828">input + trigger ✱</text>
+          <line x1="200" y1="110" x2="295" y2="110" class="ln red"/><polygon points="300,110 290,104 290,116" class="dot red"/>
+          <text x="208" y="130" class="m" style="fill:#c62828">attacker's output</text>
+        </svg>
+        <figcaption>Clean accuracy unchanged</figcaption>
+      </figure>
+      <div>
+        <div class="key">Bagdasaryan et al. · AISTATS 2020<br>Ordinary inputs → ordinary behavior<br>Hidden trigger → attacker-chosen output<br>Clean accuracy can remain unchanged</div>
+        <p>A <b>backdoored model</b> behaves normally on <b>standard inputs</b>. When a hidden trigger is present, it produces an output chosen by the attacker. Because clean accuracy is unchanged, your test set may not catch this.</p>
+        <p>The server also selects the model architecture, starting weights, and which participants are included each round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ────────────────────────────────────────────────────────────── -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@22.5 · 1.5 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0;background:var(--blue-deep)">
+        <svg class="dia" viewBox="0 0 300 200" role="img" aria-label="Secure aggregation hides updates; robust aggregation needs to see them">
+          <rect x="20" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
+          <text x="75" y="80" text-anchor="middle">SECURE</text><text x="75" y="96" text-anchor="middle">AGGREGATION</text>
+          <text x="75" y="124" text-anchor="middle" class="m">server sees</text><text x="75" y="138" text-anchor="middle" class="m">nothing</text>
+          <rect x="170" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
+          <text x="225" y="80" text-anchor="middle">ROBUST</text><text x="225" y="96" text-anchor="middle">AGGREGATION</text>
+          <text x="225" y="124" text-anchor="middle" class="m">server inspects</text><text x="225" y="138" text-anchor="middle" class="m">every update</text>
+          <line x1="130" y1="100" x2="170" y2="100" class="ln red" style="stroke-width:4"/>
+          <text x="150" y="182" text-anchor="middle" class="m" style="fill:#f5e8c7">one or the other, at full strength</text>
+        </svg>
+      </figure>
+      <div>
+        <h2>Defences — and Why They Conflict</h2>
+        <div class="key">Robust aggregation → discard outliers (Krum, Bulyan, trimmed mean)<br>Secure aggregation → server cannot see individual updates<br>Robust aggregation → server must inspect individual updates</div>
+        <p>You usually cannot have both at full strength. Secure aggregation hides updates from the server; robust aggregation requires the server to inspect them. Add update-size limits, authentication, and reproducible training — but an honest minority client can still resemble an attacker.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 · AN EXAMPLE — the code ─────────────────────────────────────── -->
+<section id="demo-code" data-background-color="#f5e8c7">
+  <span class="timing">@24 · 1 min</span>
+  <div class="pad">
+    <h2>20 — An Example: Three Hospitals in 400 Lines</h2>
+    <div class="cols wide-right">
+      <div>
+        <div class="key"><b>task.py</b> — data, non-IID split, model<br><b>client_app.py</b> — what runs at the hospital, what leaves<br><b>server_app.py</b> — the aggregation rule, one line to swap<br><b>attack_demo.py</b> — one update, run backwards<br><b>fedavg_numpy.py</b> — the same run without Ray, &lt; 1 s</div>
+        <p>Plain NumPy on Flower. Three synthetic hospitals with different case mixes and sizes, one 256-dimensional bag-of-words classifier, three departments. Every number on the next four slides is reproducible on a laptop, offline.</p>
+      </div>
+      <div>
+<pre class="code"><span class="cm"># client_app.py — Step 3: send back the trained
+# parameters, NOT the data.</span>
+return Message(RecordDict({
+    <span class="k">"arrays"</span>:  ArrayRecord(params),      <span class="cm"># 771 floats</span>
+    <span class="k">"metrics"</span>: MetricRecord({
+        "num-examples": len(y_train),  <span class="cm"># FedAvg weight</span>
+    }),
+}), reply_to=msg)</pre>
+        <p class="small">The privacy promise of federated learning is, quite literally, a claim about the last ten lines of this file. If you cannot read this file, you cannot check the promise.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">This is the answer to slide 3. Not trust, not policy: read the file that builds the reply. Point at num-examples: a small fact about the hospital that does leave the building.</aside>
+</section>
+
+<!-- 20b · weights then drift ───────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@25 · 1.5 min</span>
+  <div class="pad">
+    <h2>Weights, Then Drift</h2>
+    <div class="cols wide-right">
+      <div>
+        <div class="key">Hospital C has six times the say of Hospital A<br>Non-IID: 0.86 after ten rounds · IID: 0.99 after one<br>The plateau at rounds 4–6 is client drift</div>
+<div class="bars">FedAvg weights (round 1):
+  hospital A:  n= 100  w=0.100  <span class="bar">███</span>
+  hospital B:  n= 300  w=0.300  <span class="bar">█████████</span>
+  hospital C:  n= 600  w=0.600  <span class="bar">██████████████████</span></div>
+        <p class="small" style="margin-top:.8rem">Hospital A, the cardiac centre with 100 notes, is at <span class="v-bad">52%</span> after ten rounds while the average reads <span class="v-good">86%</span>. Weighting by volume is a policy decision wearing the costume of a default.</p>
+      </div>
+      <div class="chart-box"><h4>Accuracy per round · solid = non-IID case mix · dotted = IID</h4><div class="canvas-wrap"><canvas id="accChart" role="img" aria-label="Accuracy over ten rounds for the global model and three hospitals, non-IID versus IID data"></canvas></div></div>
+    </div>
+  </div>
+  <aside class="notes">Demo 1 and 2 in the README. Numbers from python fedavg_numpy.py, identical to the flwr run. Hover the lines for values. Same three hospitals as slide 8.</aside>
+</section>
+
+<!-- 20c · run the update backwards ─────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@26.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>Run the Update Backwards</h2>
+    <div class="cols">
+      <div>
+<pre class="code">$ python attack_demo.py
+
+The note that never leaves the hospital:
+  <span class="k">"fracture cardiac fall ambulance poisoning
+   trauma bleeding wound"</span>   department: emergency
+
+What the hospital actually sends:
+  771 floats. No text. No records. Nothing readable.
+
+The server runs it backwards:
+  recovered department : <span class="k">emergency</span>   CORRECT
+  cosine similarity    : <span class="k">1.000000</span>
+  recovered words:
+  <span class="k">cardiac trauma bleeding fracture wound
+  poisoning fall ambulance</span></pre>
+      </div>
+      <div>
+        <div class="key">The update is a deterministic function of the data<br>Functions can be run backwards<br>Linear model: exact arithmetic · deep nets: an optimisation loop (DLG)</div>
+        <div class="cols" style="gap:1rem">
+          <div class="table-wrap"><table class="data"><thead><tr><th>batch</th><th class="num">cos</th></tr></thead><tbody>
+            <tr><td>1</td><td class="num"><span class="v-bad">1.000</span></td></tr>
+            <tr><td>4</td><td class="num">0.724</td></tr>
+            <tr><td>16</td><td class="num"><span class="v-good">-0.250</span></td></tr>
+            <tr><td>256</td><td class="num"><span class="v-good">-0.248</span></td></tr>
+          </tbody></table></div>
+          <div class="table-wrap"><table class="data"><thead><tr><th>noise σ</th><th class="num">cos</th></tr></thead><tbody>
+            <tr><td>0</td><td class="num"><span class="v-bad">1.000</span></td></tr>
+            <tr><td>0.01</td><td class="num">0.971</td></tr>
+            <tr><td>0.1</td><td class="num">0.410</td></tr>
+            <tr><td>1.0</td><td class="num"><span class="v-good">0.070</span></td></tr>
+          </tbody></table></div>
+        </div>
+        <p class="small muted" style="margin-top:.6rem">Left: larger batches mix examples. Right: clip to 0.5 and add Gaussian noise. Mitigations, not guarantees — the server chose the model and the batch policy.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Demo 3. Be honest: the model is linear, so the inversion is exact arithmetic. DLG needs an optimisation loop for deep networks. What transfers is the principle. Any extra recovered word is a hash collision in a 256-dim feature space; say so before anyone asks.</aside>
+</section>
+
+<!-- 20d · one poisoned hospital ────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@28 · 1 min</span>
+  <div class="pad">
+    <h2>One Poisoned Hospital</h2>
+    <div class="cols wide-left">
+      <div>
+        <div class="table-wrap"><table class="data">
+          <thead><tr><th>global accuracy, 6 rounds</th><th class="num">FedAvg</th><th class="num">Krum</th><th class="num">Trimmed</th></tr></thead>
+          <tbody>
+            <tr><td>no attacker, IID</td><td class="num">0.994</td><td class="num">—</td><td class="num">—</td></tr>
+            <tr><td>1 of 5 poisoned, IID</td><td class="num"><span class="v-bad">0.150</span></td><td class="num"><span class="v-good">0.993</span></td><td class="num"><span class="v-good">0.997</span></td></tr>
+            <tr><td>1 of 5 poisoned, real case mix</td><td class="num"><span class="v-bad">0.326</span></td><td class="num"><span class="v-bad">0.326</span></td><td class="num"><span class="v-bad">0.326</span></td></tr>
+          </tbody>
+        </table></div>
+<pre class="code" style="margin-top:.8rem">flwr run . local-simulation --stream --run-config \
+  <span class="k">"poisoned-hospitals=1 attack-boost=20 strategy='krum'"</span></pre>
+      </div>
+      <div>
+        <div class="key">Not one line of client code changed — only the aggregation rule<br>On real case mixes the defence stops working<br>Every defence here <b>inspects individual updates</b> — exactly what secure aggregation forbids</div>
+        <p class="small">One hospital flips its labels and scales its update ×20. Krum and trimmed mean reject the outlier — while every honest hospital looks alike. Give the honest hospitals different case mixes and the outlier they reject is the cardiac centre.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Demo 4, five supernodes. The bottom row is the live version of slide 19: when clients genuinely differ, an honest minority is hard to tell from an attacker, so outlier rejection discards the participants you federated in order to include (Karimireddy, He and Jaggi). The room has now watched the conflict rather than heard it described.</aside>
+</section>
+
+<!-- 20e · no free privacy ──────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@29 · 0.5 min</span>
+  <div class="pad">
+    <h2>No Free Privacy</h2>
+    <div class="cols wide-right">
+      <div>
+        <div class="key">σ = 0 → 99%<br>σ = 1.0 (Flower's "strong privacy") → 65%<br>σ = 4 → 37%, where chance is 33%</div>
+        <p class="small">Clip every hospital's update to 0.5 and add Gaussian noise σ × 0.5 before averaging. Same run, same data. Someone sets this knob — and reports it, or doesn't.</p>
+<pre class="code">python fedavg_numpy.py --iid --noise <span class="k">1.0</span></pre>
+      </div>
+      <div class="chart-box"><h4>Global accuracy after 10 rounds vs DP noise multiplier · clip 0.5 · IID</h4><div class="canvas-wrap"><canvas id="dpChart" role="img" aria-label="Measured curve: accuracy falls from 99% to 37% as the noise multiplier rises from 0 to 4"></canvas></div></div>
+    </div>
+  </div>
+  <aside class="notes">On the non-IID case mix the collapse starts at σ = 0.25. Bridge to the next slide: the setting is the claim.</aside>
+</section>
+
+<!-- 21 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@29.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>20 — The Claim Is in the Settings</h2>
+    <div class="cols">
+      <div class="key" style="font-size:clamp(1rem,2.5vw,1.4rem)">Noise too low · Budget per round, not totaled · Unmasking threshold too low<br>Privacy protects one record, not one person · Client sends extra telemetry</div>
+      <p>A company may truthfully claim federated learning, secure aggregation, and differential privacy — and still provide weak protection. The settings behind those labels determine everything. "We use privacy protections" is a category, not a complete claim. Without auditable parameters, the promise cannot be independently verified.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 22 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@31 · 1.5 min</span>
+  <div class="pad">
+    <h2>How to Audit the Claim</h2>
+    <div class="cols wide-left">
+      <ol class="steps">
+        <li>Is the client free software?</li>
+        <li>Is aggregation code published?</li>
+        <li>Is secure aggregation enabled — what is the unmasking threshold?</li>
+        <li>What is the privacy unit and total budget across the whole run?</li>
+        <li>Who controls the aggregator and receives the model?</li>
+        <li>Can the community fork and run its own federation?</li>
+      </ol>
+      <div class="cards" style="margin-top:0">
+        <div class="card plain"><h4>Inspect</h4><p>read the client, read the aggregator</p></div>
+        <div class="card plain"><h4>Verify</h4><p>threshold, unit, budget — numbers, not labels</p></div>
+        <div class="card plain"><h4>Govern</h4><p>who runs the server, who gets the model</p></div>
+        <div class="card plain"><h4>Fork</h4><p>the right to run your own federation</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">This is the answer to "how would you check" from slide 3. Six questions, all answerable only with free software.</aside>
+</section>
+
+<!-- 23 ────────────────────────────────────────────────────────────── -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@32.5 · 1 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <div class="frame" style="display:flex;align-items:center;justify-content:center;min-height:14rem">
+        <svg class="dia" viewBox="0 0 200 200" style="max-width:14rem" role="img" aria-label="A fork: one line splitting into two">
+          <path d="M100 180 V100 M100 100 L60 40 M100 100 L140 40" class="ln" style="stroke-width:6"/>
+          <circle cx="60" cy="40" r="12" class="dot"/><circle cx="140" cy="40" r="12" class="dot green"/><circle cx="100" cy="180" r="12" class="dot"/>
+        </svg>
+      </div>
+      <div>
+        <h2>The Question Is Fork</h2>
+        <div class="key">A federation running free software<br>Privacy settings chosen by participants<br>The right to fork — always</div>
+        <p>Architecture alone does not solve copyright, consent, group fairness, or evaluation-data ownership. The question is not only whether AI can learn without moving our data — it is whether the people producing that data can inspect, modify, govern, and fork what is built from it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 ────────────────────────────────────────────────────────────── -->
+<section class="blue big" data-background-color="#1e3a8a">
+  <span class="timing">@33.5 · Q&amp;A to 40</span>
+  <div class="pad">
+    <p class="eyebrow">Inspect · Modify · Govern · Fork</p>
+    <h1>Questions<br>&amp; Discussion</h1>
+    <p class="mono small muted" style="margin-top:1.5rem">← → slides · Esc overview · S speaker notes · F fullscreen</p>
+  </div>
+  <aside class="notes">Read the eyebrow. Stop. Six and a half minutes for questions inside the forty.</aside>
+</section>
+
+</div>
+</div>
+
+<script>
+// ---------- reveal ----------
+var smallScreen = ()=> window.innerWidth < 820 || window.innerHeight < 520;
+function sizing(){
+  if(smallScreen()){
+    document.documentElement.classList.add('phone');
+    return {width:window.innerWidth,height:window.innerHeight,minScale:1,maxScale:1};
+  }
+  document.documentElement.classList.remove('phone');
+  return {width:1280,height:720,minScale:0.2,maxScale:2.0};
+}
+Reveal.initialize(Object.assign({
+  hash:true,controls:true,progress:true,center:false,touch:true,
+  slideNumber:'c/t',transition:'fade',transitionSpeed:'fast',
+  backgroundTransition:'fade',margin:0,
+  plugins:(typeof RevealNotes!=='undefined')?[RevealNotes]:[],
+}, sizing()));
+(function(){
+  var t;
+  window.addEventListener('resize',function(){
+    clearTimeout(t);
+    t=setTimeout(function(){ Reveal.configure(sizing()); Reveal.layout(); },200);
+  },{passive:true});
+})();
+
+// ---------- hero: a federation breathing ----------
+(function(){
+  const cv=document.getElementById('fed'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,nodes=[],packets=[],t=0,raf;
+  const N=16;
+  function resize(){
+    const r=cv.getBoundingClientRect();
+    const w=r.width>10?r.width:1280, h=r.height>10?r.height:720;
+    W=cv.width=Math.round(w*devicePixelRatio); H=cv.height=Math.round(h*devicePixelRatio);
+    nodes=[];
+    const cx=W*0.78,cy=H*0.55,R=Math.min(W,H)*0.34;
+    for(let i=0;i<N;i++){
+      const a=i/N*Math.PI*2+0.3, rr=R*(0.75+0.35*Math.abs(Math.sin(i*2.1)));
+      nodes.push({x:cx+Math.cos(a)*rr,y:cy+Math.sin(a)*rr,ph:Math.random()*6.28});
+    }
+    nodes.cx=cx;nodes.cy=cy;
+  }
+  function spawn(){
+    const out=Math.random()<0.5, n=nodes[(Math.random()*N)|0];
+    packets.push({n,out,p:0,sp:0.006+Math.random()*0.005});
+  }
+  function draw(){
+    t+=1; ctx.clearRect(0,0,W,H);
+    const {cx,cy}=nodes, dpr=devicePixelRatio;
+    ctx.lineWidth=1.2*dpr;
+    for(const n of nodes){
+      ctx.strokeStyle='rgba(245,232,199,.18)';
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(n.x,n.y);ctx.stroke();
+    }
+    for(const n of nodes){
+      const s=(3+Math.sin(t*0.03+n.ph))*dpr;
+      ctx.fillStyle='rgba(245,232,199,.85)';
+      ctx.beginPath();ctx.arc(n.x,n.y,s,0,6.28);ctx.fill();
+      ctx.strokeStyle='rgba(245,232,199,.35)';
+      ctx.beginPath();ctx.arc(n.x,n.y,s+7*dpr,0,6.28);ctx.stroke();
+    }
+    if(!reduce && t%14===0 && packets.length<22) spawn();
+    for(const p of packets){
+      p.p+=p.sp;
+      const a=p.out?p.p:1-p.p;
+      const x=cx+(p.n.x-cx)*a, y=cy+(p.n.y-cy)*a;
+      ctx.fillStyle=p.out?'rgba(245,232,199,.95)':'rgba(227,178,60,.95)';
+      ctx.beginPath();ctx.arc(x,y,2.6*dpr,0,6.28);ctx.fill();
+    }
+    packets=packets.filter(p=>p.p<1);
+    const pulse=1+0.06*Math.sin(t*0.05);
+    ctx.fillStyle='rgba(245,232,199,.14)';ctx.beginPath();ctx.arc(cx,cy,28*dpr*pulse,0,6.28);ctx.fill();
+    ctx.fillStyle='rgba(245,232,199,1)';ctx.beginPath();ctx.arc(cx,cy,8*dpr,0,6.28);ctx.fill();
+    if(!reduce) raf=requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  window.addEventListener('resize',()=>{resize();if(reduce)draw();},{passive:true});
+  if(typeof Reveal!=='undefined'){ Reveal.on('ready',()=>{resize();if(reduce)draw();}); }
+})();
+
+// ---------- charts (drawn lazily when their slide appears) ----------
+const drawn={};
+const INK='#47423e', BLUE='#1e3a8a', GREEN='#3d6b3f', RED='#c62828', YELLOW='#b8860b';
+const axis=(title)=>({ticks:{color:INK,font:{family:"'JetBrains Mono'",size:10}},grid:{color:'rgba(30,58,138,.12)'},title:{display:true,text:title,color:BLUE,font:{family:"'Montserrat'",size:10,weight:'600'}}});
+const baseOpts={
+  responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+  plugins:{legend:{labels:{color:INK,font:{family:"'Montserrat'",size:11,weight:'600'},boxWidth:14,usePointStyle:true,pointStyle:'line'}},
+           tooltip:{backgroundColor:BLUE,titleColor:'#f5e8c7',bodyColor:'#f5e8c7',borderColor:BLUE,borderWidth:0,titleFont:{family:"'JetBrains Mono'"},bodyFont:{family:"'JetBrains Mono'"}}}
+};
+const pct=v=>Math.round(v*100)+'%';
+function drawAcc(){
+  if(drawn.acc||typeof Chart==='undefined') return; drawn.acc=true;
+  const rounds=[1,2,3,4,5,6,7,8,9,10];
+  // demo/ numbers: python fedavg_numpy.py (identical to the flwr run)
+  const G  =[0.399,0.581,0.634,0.639,0.646,0.650,0.701,0.767,0.816,0.859];
+  const A  =[0.080,0.120,0.120,0.120,0.120,0.120,0.160,0.360,0.400,0.520];
+  const B  =[0.227,0.707,0.893,0.960,0.960,0.960,0.973,0.987,0.987,0.987];
+  const C  =[0.793,0.847,0.847,0.847,0.853,0.860,0.873,0.893,0.927,0.940];
+  const IID=[0.991,0.993,0.996,0.996,0.996,0.994,0.994,0.994,0.994,0.994];
+  const ds=(l,c,d,dash,w)=>({label:l,data:d,borderColor:c,backgroundColor:'transparent',borderDash:dash||[],tension:.3,fill:false,borderWidth:w||2,pointRadius:0,pointHoverRadius:5});
+  new Chart(document.getElementById('accChart'),{type:'line',data:{labels:rounds,datasets:[
+    ds('Global model',BLUE,G,[],3),
+    ds('Hospital C · 600',GREEN,C,[6,4]),
+    ds('Hospital B · 300',YELLOW,B,[6,4]),
+    ds('Hospital A · 100',RED,A,[6,4]),
+    ds('Global · IID case mix','#7a7f8e',IID,[2,4],1.5),
+  ]},options:Object.assign({},baseOpts,{scales:{x:axis('round'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:INK,font:{family:"'JetBrains Mono'",size:10},callback:pct}})}})});
+}
+function drawDP(){
+  if(drawn.dp||typeof Chart==='undefined') return; drawn.dp=true;
+  // demo/ numbers: python fedavg_numpy.py --iid --noise σ  (clip 0.5, 10 rounds); chance = 0.333
+  const sig=[0,0.25,0.5,0.75,1,1.5,2,3,4];
+  const acc=[0.994,0.981,0.879,0.768,0.652,0.504,0.432,0.390,0.370];
+  new Chart(document.getElementById('dpChart'),{type:'line',data:{labels:sig,datasets:[
+    {label:'accuracy',data:acc,borderColor:BLUE,backgroundColor:'rgba(30,58,138,.10)',fill:true,tension:.35,borderWidth:2.4,pointRadius:4,pointBackgroundColor:BLUE,pointBorderColor:'#fffaf0',pointBorderWidth:2,pointHoverRadius:6},
+    {label:'chance',data:sig.map(()=>0.333),borderColor:RED,borderDash:[4,4],borderWidth:1.5,pointRadius:0,fill:false}
+  ]},options:Object.assign({},baseOpts,{scales:{x:axis('noise multiplier σ (more privacy →)'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:INK,font:{family:"'JetBrains Mono'",size:10},callback:pct}})}})});
+}
+function drawAll(s){
+  if(!s) return;
+  if(s.querySelector('#accChart')) drawAcc();
+  if(s.querySelector('#dpChart')) drawDP();
+}
+Reveal.on('ready',e=>drawAll(e.currentSlide));
+Reveal.on('slidechanged',e=>drawAll(e.currentSlide));
+</script>
+</body>
+</html>
