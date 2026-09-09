@@ -10,7 +10,9 @@ open index.html
 
 Works offline, everything is in `vendor/`.
 
-Keys: `←` `→` slides · `Esc` overview · `S` speaker notes · `F` fullscreen.
+Keys: `←` `→` slides · `Esc` overview · `S` speaker notes · `F` fullscreen · `T` start/pause the talk clock (`Shift+T` resets, it also starts by itself when you leave the title slide) · `A` toggles the entrance animations.
+
+Presenter script and core concepts: [`TRANSCRIPT.md`](TRANSCRIPT.md).
 
 ## Build the single-file deck
 
@@ -18,7 +20,7 @@ Keys: `←` `→` slides · `Esc` overview · `S` speaker notes · `F` fullscree
 python3 build_single.py
 ```
 
-Writes `dist/index.html` (about 1.2 MB) with everything inlined. Serve that one file; `deploy/nginx.conf` has a server block for it. Rebuild after every edit to `index.html`.
+Writes `dist/index.html` (about 1.3 MB) with everything inlined. Serve that one file; `deploy/nginx.conf` has a server block for it. Rebuild after every edit to `index.html`.
 
 ## Run the demos
 

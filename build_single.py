@@ -16,7 +16,7 @@ css = re.sub(r"url\((fonts/[^)]+)\)", font_uri, css)
 html = html.replace(link, "<style>\n" + css + "\n</style>", 1)
 
 # scripts -> inline
-for name in ("reveal.min.js", "notes.min.js", "chart.umd.js"):
+for name in ("reveal.min.js", "notes.min.js", "chart.umd.js", "highlight.min.js"):
     js = (root / "vendor" / name).read_text(encoding="utf-8")
     assert "</script" not in js, name
     tag = f'<script src="vendor/{name}"></script>'

@@ -10,6 +10,7 @@
 <script src="vendor/reveal.min.js"></script>
 <script src="vendor/notes.min.js"></script>
 <script src="vendor/chart.umd.js"></script>
+<script src="vendor/highlight.min.js"></script>
 
 <style>
 /* reveal.js 4.5.0 core CSS, inlined so the deck is one file */
@@ -131,17 +132,28 @@ table.data .num,table.data th.num{text-align:right;font-family:var(--font-mono);
 .v-bad{color:var(--red);font-weight:700;font-family:var(--font-mono);}
 .reveal .blue .v-good{color:#9bd39a;} .reveal .blue .v-bad{color:#ff9a8a;}
 
-pre.code{font-family:var(--font-mono);font-variant-ligatures:none;background:var(--panel-bg);color:var(--panel-fg);padding:1em 1.2em;margin:.4rem 0;font-size:clamp(.74rem,1.85vw,.98rem);white-space:pre;overflow-x:auto;line-height:1.55;}
-pre.code .k{color:var(--yellow);} pre.code .cm{opacity:.65;}
-.reveal .blue pre.code .k{color:var(--red);}
-
+/* code boxes: VS Code Dark+ */
+.editor{position:relative;background:#1e1e1e;color:#d4d4d4;border-radius:6px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,.28);margin:.4rem 0;font-size:clamp(.74rem,1.85vw,.98rem);}
+.editor::before{content:attr(data-file);display:flex;align-items:center;height:2.1em;padding:0 1em 0 5.8em;background:#252526;border-bottom:1px solid #3c3c3c;color:#c5c5c5;font:500 .72em/1 var(--font-mono);letter-spacing:.02em;}
+.editor::after{content:"";position:absolute;left:.85em;top:.4em;width:3em;height:.75em;background:radial-gradient(circle at .35em 50%,#ff5f56 .3em,transparent .34em),radial-gradient(circle at 1.45em 50%,#ffbd2e .3em,transparent .34em),radial-gradient(circle at 2.55em 50%,#27c93f .3em,transparent .34em);}
+pre.code{font-family:var(--font-mono);font-variant-ligatures:none;background:transparent;color:#d4d4d4;padding:1em 1.2em;margin:0;font-size:1em;white-space:pre;overflow-x:auto;line-height:1.6;tab-size:4;counter-reset:l;}
+pre.code .line{counter-increment:l;}
+pre.code .line::before{content:counter(l);display:inline-block;width:1.6em;margin-right:1.4em;text-align:right;color:#6e7681;}
+pre.code .k{color:#dcdcaa;} pre.code .cm{color:#6a9955;font-style:italic;} pre.code .prompt{color:#808080;}
+pre.code .hljs-comment{color:#6a9955;font-style:italic;}
+pre.code .hljs-keyword{color:#c586c0;}
+pre.code .hljs-built_in,pre.code .hljs-title,pre.code .hljs-title.function_{color:#dcdcaa;}
+pre.code .hljs-string,pre.code .hljs-meta .hljs-string{color:#ce9178;}
+pre.code .hljs-number,pre.code .hljs-literal{color:#b5cea8;}
+pre.code .hljs-variable,pre.code .hljs-attr,pre.code .hljs-params{color:#9cdcfe;}
+pre.code .hljs-punctuation{color:#d4d4d4;}
+.bars{font-family:var(--font-mono);font-variant-ligatures:none;font-size:1em;line-height:1.7;white-space:pre;padding:1em 1.2em;color:#d4d4d4;overflow-x:auto;}
+.bars .bar{color:#569cd6;}
 .chart-box{position:relative;width:100%;height:clamp(230px,38vh,380px);background:var(--white);padding:clamp(.8rem,2vw,1.1rem);display:flex;flex-direction:column;overflow:hidden;color:var(--ink);}
 .chart-box h4{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:0 0 .4rem;flex:0 0 auto;}
 .chart-box .canvas-wrap{position:relative;flex:1 1 auto;min-height:0;width:100%;}
 .chart-box .canvas-wrap canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;}
 
-.bars{font-family:var(--font-mono);font-variant-ligatures:none;font-size:clamp(.72rem,1.8vw,.95rem);line-height:1.7;white-space:pre;}
-.bars .bar{color:var(--blue);}
 
 /* hero */
 #hero .pad{position:relative;overflow:hidden;}
@@ -187,6 +199,7 @@ html.phone .cols,html.phone .cols.wide-left,html.phone .cols.wide-right{grid-tem
 html.phone .cols>*{min-width:0;}          /* grid items default to min-width:auto, which lets tables/pre push the slide wider than the phone */
 html.phone .cols>.frame{order:2;}         /* text first, illustration after, when stacked */
 html.phone pre.code{white-space:pre-wrap;word-break:break-word;}
+html.phone .editor{font-size:.8rem;}
 html.phone .bars{overflow-x:auto;}
 html.phone .cards,html.phone .cards.four,html.phone .cards.three{grid-template-columns:1fr;}
 html.phone .chart-box{box-sizing:border-box;height:clamp(230px,48vh,320px);}
@@ -218,11 +231,29 @@ html.phone .live{grid-template-columns:1fr;}
 html.phone .live .stage{height:clamp(240px,42vh,330px);}
 html.phone .live .chart-box{height:clamp(170px,30vh,220px);}
 html.phone .live .noise{margin-left:0;}
+/* entrance: elements fade up one by one, in reading order (delay set per element by script) */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.reveal section.fun .fu{animation:fadeUp .6s cubic-bezier(.33,1,.68,1) both;animation-delay:var(--d,0ms);}
+html.noanim .reveal section.fun .fu{animation:none!important;}
+
+/* talk clock: elapsed time + this slide's budget, top right. T start/pause · shift+T reset · A toggles animations */
+#clock{position:absolute;right:clamp(1rem,4vw,3rem);top:clamp(.9rem,3vw,1.8rem);z-index:40;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--green);opacity:.85;display:flex;gap:.6em;align-items:baseline;pointer-events:none;}
+#clock b{font-weight:700;font-size:1.15em;}
+#clock .bud{color:var(--fg);opacity:.7;}
+#clock.idle b{opacity:.45;}
+#clock.paused b{opacity:.55;text-decoration:line-through;}
+#clock.late b{color:var(--red);}
+#clock.late .bud{color:var(--red);opacity:1;}
+#clock.on-blue{color:#9bd39a;} #clock.on-blue .bud{color:#f5e8c7;}
+html.hasclock .reveal .timing{display:none;}
+html.phone #clock{display:none;}
+html.phone .reveal .timing{display:none;}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
 <body>
 <div class="reveal">
+<div id="clock" class="idle"><b>00:00</b><span class="bud"></span></div>
 <div class="slides">
 
 <!-- 1 · Federated Learning and the Future of Private, Open AI -->
@@ -400,16 +431,16 @@ html.phone .live .noise{margin-left:0;}
     <div class="cols wide-right">
       <div>
         <div class="key">Hospital C has six times the say of Hospital A<br>Non-IID (each hospital sees different patients): 0.86 after ten rounds · IID (same mix everywhere): 0.99 after one<br>The plateau at rounds 4–6 is client drift: three local models pulling in different directions</div>
-<div class="bars">FedAvg weights (round 1):
+<div class="editor" data-file=""><div class="bars">FedAvg weights (round 1):
   hospital A:  n= 100  w=0.100  <span class="bar">███</span>
   hospital B:  n= 300  w=0.300  <span class="bar">█████████</span>
-  hospital C:  n= 600  w=0.600  <span class="bar">██████████████████</span></div>
+  hospital C:  n= 600  w=0.600  <span class="bar">██████████████████</span></div></div>
         <p class="small" style="margin-top:.8rem">Hospital A, the cardiac centre with 100 notes, is at <span class="v-bad">52%</span> after ten rounds while the average reads <span class="v-good">86%</span>. Weighting by volume is a policy decision wearing the costume of a default.</p>
       </div>
       <div class="chart-box"><h4>Accuracy per round · solid = different patients per hospital · dotted = same mix everywhere</h4><div class="canvas-wrap"><canvas id="accChart" role="img" aria-label="Accuracy over ten rounds for the global model and three hospitals, non-IID versus IID data"></canvas></div></div>
     </div>
   </div>
-  <aside class="notes">Demo 1 and 2 in the README. Numbers from python fedavg_numpy.py, identical to the flwr run. Hover the lines for values. Same three hospitals as slide 8.</aside>
+  <aside class="notes">Demo 1 and 2 in the README. Numbers from python fedavg_numpy.py, identical to the flwr run. Hover the lines for values. Same three hospitals as slide 5.</aside>
 </section>
 
 <!-- 9 · An Example: Three Hospitals in 400 Lines -->
@@ -423,19 +454,19 @@ html.phone .live .noise{margin-left:0;}
         <p>Plain NumPy on Flower. Three synthetic hospitals with different case mixes and sizes, one 256-dimensional bag-of-words classifier, three departments. Every number on the example slides is reproducible on a laptop, offline.</p>
       </div>
       <div>
-<pre class="code"><span class="cm"># client_app.py — Step 3: send back the trained
-# parameters, NOT the data.</span>
+<div class="editor" data-file="client_app.py" data-lines><pre class="code language-python"># client_app.py — Step 3: send back the trained
+# parameters, NOT the data.
 return Message(RecordDict({
-    <span class="k">"arrays"</span>:  ArrayRecord(params),      <span class="cm"># 771 floats</span>
-    <span class="k">"metrics"</span>: MetricRecord({
-        "num-examples": len(y_train),  <span class="cm"># FedAvg weight</span>
+    "arrays":  ArrayRecord(params),      # 771 floats
+    "metrics": MetricRecord({
+        "num-examples": len(y_train),  # FedAvg weight
     }),
-}), reply_to=msg)</pre>
+}), reply_to=msg)</pre></div>
         <p class="small">The privacy promise of federated learning is, quite literally, a claim about the last ten lines of this file. If you cannot read this file, you cannot check the promise.</p>
       </div>
     </div>
   </div>
-  <aside class="notes">This is the answer to slide 3. Not trust, not policy: read the file that builds the reply. Point at num-examples: a small fact about the hospital that does leave the building.</aside>
+  <aside class="notes">This is the answer to slide 2. Not trust, not policy: read the file that builds the reply. Point at num-examples: a small fact about the hospital that does leave the building.</aside>
 </section>
 
 <!-- 10 · Read the Promise Carefully -->
@@ -475,7 +506,7 @@ return Message(RecordDict({
     <h2>Run the Update Backwards</h2>
     <div class="cols">
       <div>
-<pre class="code">$ python attack_demo.py
+<div class="editor" data-file=""><pre class="code"><span class="prompt">$</span> <span class="hljs-built_in">python</span> attack_demo.py
 
 The note that never leaves the hospital:
   <span class="k">"fracture cardiac fall ambulance poisoning
@@ -489,7 +520,7 @@ The server runs it backwards:
   cosine similarity    : <span class="k">1.000000</span>
   recovered words:
   <span class="k">cardiac trauma bleeding fracture wound
-  poisoning fall ambulance</span></pre>
+  poisoning fall ambulance</span></pre></div>
       </div>
       <div>
         <div class="key">The update is computed from the data — same data, same update<br>What is computed can be run backwards<br>Linear model: exact arithmetic · deep nets: guess-and-check (DLG)</div>
@@ -538,7 +569,7 @@ The server runs it backwards:
       <div>
         <div class="key">σ = 0 → 99%<br>σ = 1.0 (Flower's "strong privacy") → 65%<br>σ = 4 → 37%, where chance is 33%</div>
         <p class="small">σ is the noise knob: clip every hospital's update to 0.5 and add random noise σ × 0.5 before averaging. More noise, more privacy, less accuracy. Same run, same data. Someone sets this knob — and reports it, or doesn't.</p>
-<pre class="code">python fedavg_numpy.py --iid --noise <span class="k">1.0</span></pre>
+<div class="editor" data-file=""><pre class="code language-bash">python fedavg_numpy.py --iid --noise 1.0</pre></div>
       </div>
       <div class="chart-box"><h4>Global accuracy after 10 rounds vs DP noise multiplier · clip 0.5 · IID</h4><div class="canvas-wrap"><canvas id="dpChart" role="img" aria-label="Measured curve: accuracy falls from 99% to 37% as the noise multiplier rises from 0 to 4"></canvas></div></div>
     </div>
@@ -602,8 +633,8 @@ The server runs it backwards:
             <tr><td>1 of 5 poisoned, real case mix</td><td class="num"><span class="v-bad">0.326</span></td><td class="num"><span class="v-bad">0.326</span></td><td class="num"><span class="v-bad">0.326</span></td></tr>
           </tbody>
         </table></div>
-<pre class="code" style="margin-top:.8rem">flwr run . local-simulation --stream --run-config \
-  <span class="k">"poisoned-hospitals=1 attack-boost=20 strategy='krum'"</span></pre>
+<div class="editor" data-file="" style="margin-top:.8rem"><pre class="code language-bash">flwr run . local-simulation --stream --run-config \
+  "poisoned-hospitals=1 attack-boost=20 strategy='krum'"</pre></div>
       </div>
       <div>
         <div class="key">Not one line of client code changed — only the aggregation rule<br>On real case mixes the defence stops working<br>Every defence here <b>inspects individual updates</b> — exactly what secure aggregation forbids</div>
@@ -663,9 +694,9 @@ The server runs it backwards:
   <div class="pad">
     <p class="eyebrow">Inspect · Modify · Govern · Fork</p>
     <h1>Questions<br>&amp; Discussion</h1>
-    <p class="mono small muted" style="margin-top:1.5rem">← → slides · Esc overview · S speaker notes · F fullscreen</p>
+    <p class="mono small muted" style="margin-top:1.5rem">← → slides · Esc overview · S speaker notes · F fullscreen · T clock</p>
   </div>
-  <aside class="notes">Read the eyebrow. Stop. Six and a half minutes for questions inside the forty.</aside>
+  <aside class="notes">Read the eyebrow. Stop. Fifteen minutes for questions inside the forty; if nobody starts, ask the room which of the three keyboard answers they picked now.</aside>
 </section>
 
 </div>
@@ -776,6 +807,10 @@ Reveal.initialize(Object.assign({
   if(typeof Reveal!=='undefined'){ Reveal.on('ready',()=>{resize();if(reduce)draw();}); }
 })();
 
+// ---------- syntax highlighting ----------
+if(typeof hljs!=='undefined') document.querySelectorAll('pre.code[class*="language-"]').forEach(el=>hljs.highlightElement(el));
+document.querySelectorAll('.editor[data-lines] pre.code').forEach(el=>{ el.innerHTML=el.innerHTML.split('\n').map(l=>'<span class="line">'+l+'</span>').join('\n'); });
+
 // ---------- charts (drawn lazily when their slide appears) ----------
 const drawn={};
 const INK='#47423e', BLUE='#1e3a8a', GREEN='#3d6b3f', RED='#c62828', YELLOW='#b8860b';
@@ -821,6 +856,69 @@ function drawAll(s){
 }
 Reveal.on('ready',e=>drawAll(e.currentSlide));
 Reveal.on('slidechanged',e=>drawAll(e.currentSlide));
+
+// ---------- "fun" entrance animations: replay on every slide change ----------
+(function(){
+  const SEL='h1,h2,.eyebrow,.lead,.key,.card,.steps>li,.list>li,.frame,.chart-box,.editor,.table-wrap,p,.live .stage,.live .side>*,#hero .qr';
+  const STEP=160;
+  function play(sec){
+    document.querySelectorAll('.reveal section.fun').forEach(s=>{ s.classList.remove('fun'); s.querySelectorAll('.fu').forEach(e=>{e.classList.remove('fu');e.style.removeProperty('--d');}); });
+    if(!sec) return;
+    const all=Array.from(sec.querySelectorAll(SEL)).filter(e=>!e.closest('aside'));
+    const set=new Set(all);
+    // outermost matches only: a <p> inside a card rides along with the card
+    const items=all.filter(e=>{ let a=e.parentElement; while(a&&a!==sec){ if(set.has(a)) return false; a=a.parentElement; } return true; });
+    items.forEach((e,i)=>{ e.classList.add('fu'); e.style.setProperty('--d',(i*STEP)+'ms'); });
+    void sec.offsetWidth;            // restart the CSS animations
+    sec.classList.add('fun');
+  }
+  Reveal.on('ready',e=>play(e.currentSlide));
+  Reveal.on('slidechanged',e=>play(e.currentSlide));
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='a'&&e.key!=='A') return;
+    if(/input|select|textarea/i.test(e.target.tagName)) return;
+    document.documentElement.classList.toggle('noanim');
+  });
+})();
+
+// ---------- talk clock ----------
+(function(){
+  const el=document.getElementById('clock'); if(!el) return;
+  document.documentElement.classList.add('hasclock');
+  const num=el.querySelector('b'), bud=el.querySelector('.bud');
+  let st; try{ st=JSON.parse(sessionStorage.getItem('talkClock')||'null'); }catch(e){}
+  st=st||{running:false,startAt:0,accum:0};
+  const save=()=>{ try{ sessionStorage.setItem('talkClock',JSON.stringify(st)); }catch(e){} };
+  const elapsed=()=>st.accum+(st.running?Date.now()-st.startAt:0);
+  function budget(){ // "@7.5 · 2.5 min" -> {start:7.5, end:10}
+    const s=Reveal.getCurrentSlide(), t=s&&s.querySelector('.timing'); if(!t) return null;
+    const m=t.textContent.match(/@([\d.]+)\s*·\s*([\d.]+)\s*min/); if(m) return {text:t.textContent.trim(),end:(+m[1])+(+m[2])};
+    const q=t.textContent.match(/@([\d.]+).*?to\s*(\d+)/); if(q) return {text:t.textContent.trim(),end:+q[2]};
+    return {text:t.textContent.trim(),end:Infinity};
+  }
+  function tick(){
+    const ms=elapsed(), m=Math.floor(ms/60000), sec=Math.floor(ms/1000)%60;
+    num.textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+    const b=budget(); bud.textContent=b?b.text:'';
+    el.classList.toggle('idle',!st.running&&st.accum===0);
+    el.classList.toggle('paused',!st.running&&st.accum>0);
+    el.classList.toggle('late',!!b&&ms/60000>b.end);
+  }
+  function start(){ if(st.running) return; st.running=true; st.startAt=Date.now(); save(); tick(); }
+  function pause(){ if(!st.running) return; st.accum=elapsed(); st.running=false; save(); tick(); }
+  function reset(){ st={running:false,startAt:0,accum:0}; save(); tick(); }
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='t'&&e.key!=='T') return;
+    if(/input|select|textarea/i.test(e.target.tagName)) return;
+    if(e.shiftKey) reset(); else (st.running?pause():start());
+  });
+  // leaving the title slide starts the clock, so you never forget to press T
+  const tint=s=>el.classList.toggle('on-blue',!!(s&&s.classList.contains('blue')));
+  Reveal.on('slidechanged',e=>{ if(!st.running&&st.accum===0&&e.indexh>0) start(); tint(e.currentSlide); tick(); });
+  Reveal.on('ready',e=>tint(e.currentSlide));
+  Reveal.on('ready',tick);
+  setInterval(tick,500);
+})();
 
 // ---------- live FedAvg core: a JS port of demo/hospitals_fl/task.py + fedavg_numpy.py ----------
 const FED=(function(){
@@ -981,9 +1079,9 @@ const FED=(function(){
   }
   // ----- geometry -----
   function resize(){
-    const r=cv.getBoundingClientRect(); if(r.width<10) return;
+    const box=cv.parentElement; if(!box||box.clientWidth<10) return;
     const dpr=window.devicePixelRatio||1;
-    W=r.width; H=r.height; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    W=box.clientWidth; H=box.clientHeight; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   function geo(){
