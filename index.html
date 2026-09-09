@@ -146,10 +146,14 @@ pre.code .k{color:var(--yellow);} pre.code .cm{opacity:.65;}
 /* hero */
 #hero .pad{position:relative;overflow:hidden;}
 #fed{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-#hero .hero-content{position:relative;z-index:2;max-width:60%;}
+#hero .hero-content{position:relative;z-index:2;max-width:60%;padding-bottom:clamp(3rem,10vh,6.5rem);}
 @media(max-width:760px){#hero .hero-content{max-width:100%;}}
 #hero h1{font-size:clamp(2.6rem,7.6vw,5.4rem);}
 .hero-sub{font-size:clamp(.95rem,2.4vw,1.35rem);max-width:40rem;margin:.6rem 0 0;}
+#hero .qr{position:absolute;left:clamp(1.2rem,5.5vw,4.2rem);bottom:clamp(1rem,3.2vw,2.2rem);z-index:2;display:flex;align-items:flex-end;gap:.7rem;}
+#hero .qr img{width:clamp(64px,9.5vw,124px);height:auto;display:block;border-radius:6px;background:#fff;padding:3px;box-sizing:border-box;}
+#hero .qr span{font-family:var(--font-body);font-weight:600;font-size:clamp(.55rem,1.2vw,.7rem);letter-spacing:.18em;text-transform:uppercase;color:var(--fg);opacity:.7;line-height:1.5;max-width:8rem;}
+html.phone #hero .qr{display:none;}
 
 .big .pad{justify-content:center;}
 .big h1{font-size:clamp(3rem,10vw,7rem);}
@@ -203,6 +207,10 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
       <p class="eyebrow">Parsa Bordbar · Software Freedom Day</p>
       <h1>Federated Learning and the Future of Private, Open AI</h1>
       <p class="hero-sub muted">What it solves, what it does not, and how you would check.</p>
+    </div>
+    <div class="qr">
+      <img src="data:image/png;base64,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" alt="QR code">
+      <span>Scan for the slides</span>
     </div>
   </div>
   <aside class="notes">Thirty seconds. Name, title, straight into the phone.</aside>

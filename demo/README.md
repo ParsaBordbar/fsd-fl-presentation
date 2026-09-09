@@ -48,6 +48,23 @@ options.backend.init-args.num-cpus = 4
 
 Then run `flwr run . local-simulation --stream`.
 
+A second federation with five supernodes saves toggling the number before demo 4:
+
+```toml
+[superlink.local-sim-5]
+address = ":local:"
+options.num-supernodes = 5
+options.backend.client-resources.num-cpus = 1
+options.backend.init-args.num-cpus = 4
+```
+
+Use `flwr run . local-sim-5 --stream ...` for demo 4.
+
+**Activate the venv first** (`source .venv/bin/activate`). Calling
+`.venv/bin/flwr` directly fails with
+`Unable to launch flower-superlink ... No such file or directory`, because
+`flwr` looks for `flower-superlink` on `PATH`.
+
 **Flower < 1.36** — put this at the end of `pyproject.toml` instead, and run
 `flwr run .`:
 
