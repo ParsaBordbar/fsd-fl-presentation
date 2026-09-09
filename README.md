@@ -22,6 +22,8 @@ Writes `dist/index.html` (about 1.2 MB) with everything inlined. Serve that one 
 
 ## Run the demos
 
+Slide 7 ("Live — Three Hospitals, One Average") runs the same federation as `demo/fedavg_numpy.py` inside the browser: press **Run** on the slide, no Python needed. Toggle real case mix / IID and the DP σ there. The terminal demos below remain for the attack and poisoning slides.
+
 One-time setup:
 
 ```bash

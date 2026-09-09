@@ -192,6 +192,32 @@ html.phone .cards,html.phone .cards.four,html.phone .cards.three{grid-template-c
 html.phone .chart-box{box-sizing:border-box;height:clamp(230px,48vh,320px);}
 html.phone .timing{display:none;}
 html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
+/* live federation demo */
+.live{display:grid;grid-template-columns:1.45fr 1fr;gap:clamp(.8rem,2vw,1.3rem);align-items:stretch;margin-top:.2rem;}
+.live .stage{position:relative;background:var(--white);height:clamp(300px,54vh,430px);overflow:hidden;}
+.live .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.live .side{display:flex;flex-direction:column;gap:.6rem;min-width:0;}
+.live .readout{background:var(--blue);color:var(--cream);padding:.65rem 1rem .6rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:end;}
+.live .readout .n{font-family:var(--font-display);font-size:clamp(1.9rem,4.6vw,3rem);line-height:1;font-variant-numeric:tabular-nums;}
+.live .readout .n small{display:block;font-family:var(--font-body);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-bottom:.3em;}
+.live .readout .n.r{text-align:right;}
+.live .readout .n .k{color:var(--yellow);}
+.live .chart-box{height:auto;flex:1 1 auto;min-height:140px;}
+.live .ctl{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;}
+.live button,.live .seg span{font-family:var(--font-body);font-weight:700;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.55em .85em;background:var(--blue);color:var(--cream);border:0;cursor:pointer;line-height:1.2;}
+.live button:disabled{opacity:.45;cursor:default;}
+.live button.go{background:var(--green);}
+.live button.stop{background:var(--red);}
+.live .seg{display:inline-flex;border:2px solid var(--blue);}
+.live .seg span{background:transparent;color:var(--blue);padding:.4em .7em;}
+.live .seg span.on{background:var(--blue);color:var(--cream);}
+.live .noise{font-family:var(--font-mono);font-size:.7rem;color:var(--blue);display:inline-flex;align-items:center;gap:.3rem;margin-left:auto;}
+.live .noise select{font-family:var(--font-mono);font-size:.7rem;color:var(--cream);background:var(--blue);border:0;padding:.35em .4em;}
+.live-cap{margin:.55rem 0 0;font-size:clamp(.66rem,1.5vw,.8rem);}
+html.phone .live{grid-template-columns:1fr;}
+html.phone .live .stage{height:clamp(240px,42vh,330px);}
+html.phone .live .chart-box{height:clamp(170px,30vh,220px);}
+html.phone .live .noise{margin-left:0;}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
@@ -199,7 +225,7 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
 <div class="reveal">
 <div class="slides">
 
-<!-- 1 ─────────────────────────────────────────────────────────────── -->
+<!-- 1 · Federated Learning and the Future of Private, Open AI -->
 <section id="hero" class="blue" data-background-color="#1e3a8a">
   <canvas id="fed"></canvas>
   <div class="pad">
@@ -216,112 +242,43 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
   <aside class="notes">Thirty seconds. Name, title, straight into the phone.</aside>
 </section>
 
-<!-- 2 ─────────────────────────────────────────────────────────────── -->
+<!-- 2 · Take Out Your Phone -->
 <section class="blue" data-background-color="#1e3a8a">
   <span class="timing">@0.5 · 1.5 min</span>
   <div class="pad">
-    <h2>2 — Take Out Your Phone</h2>
+    <h2>Take Out Your Phone</h2>
     <p class="lead"><b>Your keyboard has been learning from you.</b> Passwords. Medical searches. Family messages. Bank details. Years of it.</p>
     <div class="cards">
       <div class="card"><div class="num">01</div><h4>Where Did That Learning Go?</h4><p>It stayed on your phone. Local learning, nothing uploaded.</p></div>
       <div class="card"><div class="num">02</div><h4>It Went to the Server?</h4><p>It went to the vendor's server. Your private words, their data center.</p></div>
       <div class="card"><div class="num">03</div><h4>You Do Not Know?</h4><p>You genuinely do not know where your keyboard's learning went.</p></div>
-      <div class="card"><div class="num">?</div><h4>How Would You Check?</h4><p>Whichever you picked — raise your hand. Now: how would you verify it?</p></div>
+      <div class="card"><div class="num">?</div><h4>How Would You Check?</h4><p>Whichever you picked — raise your hand. Now: how would you check? Not trust, not policy — verification.</p></div>
     </div>
   </div>
   <aside class="notes">Actually wait for hands on each of the three. Most rooms split. The fourth card is the whole talk.</aside>
 </section>
 
-<!-- 3 ─────────────────────────────────────────────────────────────── -->
+<!-- 3 · Where That Breaks -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@2 · 1 min</span>
+  <span class="timing">@2 · 1.5 min</span>
   <div class="pad">
-    <h2>How Would You Check?</h2>
-    <div class="cols wide-left">
-      <div>
-        <div class="key">Not "Do you trust them?"<br>Not "What does the policy say?"</div>
-        <p class="lead">Whichever answer you picked: how would you verify it? Using the skills you already have — not trust, not policy — how would you check which answer is actually true?</p>
-      </div>
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 300 220" role="img" aria-label="A phone with a question mark over it">
-          <rect x="105" y="20" width="90" height="180" rx="12" class="box"/>
-          <rect x="118" y="40" width="64" height="120" class="box solid"/>
-          <text x="150" y="112" text-anchor="middle" class="big" style="fill:#f5e8c7;font-size:54px">?</text>
-          <circle cx="150" cy="180" r="6" class="dot"/>
-        </svg>
-        <figcaption>Not trust. Not policy. Verification.</figcaption>
-      </figure>
-    </div>
-  </div>
-  <aside class="notes">Hold the silence. Nobody in the room can answer yet. Promise they will be able to by the end.</aside>
-</section>
-
-<!-- 4 ─────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@3 · 1 min</span>
-  <div class="pad">
-    <div class="cols wide-right">
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 320 260" role="img" aria-label="Phones, cars, hospitals and sensors all sending data to one server">
-          <g class="ln"><line x1="86" y1="40" x2="196" y2="122"/><line x1="86" y1="90" x2="196" y2="128"/><line x1="86" y1="140" x2="196" y2="134"/><line x1="86" y1="190" x2="196" y2="140"/><line x1="86" y1="235" x2="196" y2="146"/></g>
-          <g><rect x="20" y="24" width="60" height="32" class="box"/><text x="50" y="44" text-anchor="middle">phones</text></g>
-          <g><rect x="20" y="74" width="60" height="32" class="box"/><text x="50" y="94" text-anchor="middle">cars</text></g>
-          <g><rect x="20" y="124" width="60" height="32" class="box"/><text x="50" y="144" text-anchor="middle">keyboards</text></g>
-          <g><rect x="20" y="174" width="60" height="32" class="box"/><text x="50" y="194" text-anchor="middle">hospitals</text></g>
-          <g><rect x="20" y="219" width="60" height="32" class="box"/><text x="50" y="239" text-anchor="middle">sensors</text></g>
-          <rect x="200" y="80" width="96" height="110" class="box solid"/>
-          <text x="248" y="128" text-anchor="middle" style="fill:#f5e8c7">ONE</text>
-          <text x="248" y="146" text-anchor="middle" style="fill:#f5e8c7">SERVER</text>
-          <polygon points="196,134 186,128 186,140" class="dot"/>
-        </svg>
-        <figcaption>One pile · one target · one owner</figcaption>
-      </figure>
-      <div>
-        <h2>4 — How ML Normally Works</h2>
-        <div class="key">Model + data → train → useful system<br>Data begins on phones, cars, keyboards, and in hospitals — across thousands of devices and institutions</div>
-        <p>Data sources: phones · cars · keyboards · hospitals · sensors · cameras · wearables<br>Classical answer: collect everything on one server and train.<br><b>One pile. One target. One owner.</b></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5 ─────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@4 · 1.5 min</span>
-  <div class="pad">
-    <h2>5 — Where That Breaks</h2>
-    <p class="lead">Centralized collection hits hard walls: legal, ethical, and practical. One pile of data means one target and one owner.</p>
+    <h2>Where That Breaks</h2>
+    <div class="key">The usual recipe: gather everyone's data in one place, train the model there</div>
+    <p class="lead">That one pile hits hard walls: legal, ethical, and practical. One pile of data means one target and one owner.</p>
     <div class="cards four">
       <div class="card plain"><h4>Regulation</h4><p>data cannot cross institutions or jurisdictions under GDPR and health law</p></div>
       <div class="card plain"><h4>User Trust</h4><p>your keyboard sees secrets you do not expect on a vendor server</p></div>
       <div class="card plain"><h4>Volume</h4><p>moving raw camera or sensor data from millions of devices is impractical</p></div>
-      <div class="card plain"><h4>Blocked Projects</h4><p>cross-hospital cancer detection, fraud detection, EV range prediction all stall</p></div>
+      <div class="card plain"><h4>Blocked Projects</h4><p>cross-hospital diagnosis models, fraud detection, EV range prediction all stall</p></div>
     </div>
   </div>
 </section>
 
-<!-- 6 ─────────────────────────────────────────────────────────────── -->
+<!-- 4 · Reverse the Pipeline -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@5.5 · 1 min</span>
+  <span class="timing">@3.5 · 1.5 min</span>
   <div class="pad">
-    <div class="cols wide-right">
-      <div class="frame" style="display:flex;align-items:center;justify-content:center;min-height:14rem">
-        <span style="font-family:var(--font-display);font-size:clamp(7rem,20vw,14rem);line-height:1;color:var(--blue)">?</span>
-      </div>
-      <div>
-        <h2>The Question</h2>
-        <div class="key">Can many people train one shared model without collecting their data in one place?<br>If they can — what exactly is protected?<br>Who can verify the answers?</div>
-        <p>Answering only the first question is an advertisement. The hard questions are the second and third: what the architecture actually protects, under what conditions, and whether anyone outside the vendor can inspect and confirm those claims.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 7 ─────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@6.5 · 1.5 min</span>
-  <div class="pad">
-    <h2>7 — Reverse the Pipeline</h2>
+    <h2>Reverse the Pipeline</h2>
     <div class="cols">
       <figure class="frame" style="margin:0">
         <svg class="dia" viewBox="0 0 340 200" role="img" aria-label="Left: data flows into a central server. Right: the model flows out to devices and only updates flow back">
@@ -341,7 +298,7 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
         <figcaption>The dot is the data. On the right it never moves.</figcaption>
       </figure>
       <div>
-        <div class="key">Centralized ML: move data to computation<br>Federated learning: move computation to data</div>
+        <div class="key">Centralized ML: move data to computation<br>Federated learning: move computation to data<br>What exactly is protected — and who can verify it?</div>
         <p>Receive the global model → improve it locally on your own data → send back only a focused update, not the raw data.</p>
         <p class="small muted">Source: Google Federated Learning announcement, April 2017.</p>
       </div>
@@ -349,9 +306,9 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
   </div>
 </section>
 
-<!-- 8 ─────────────────────────────────────────────────────────────── -->
+<!-- 5 · The Running Example -->
 <section class="blue" data-background-color="#1e3a8a">
-  <span class="timing">@8 · 1 min</span>
+  <span class="timing">@5 · 1 min</span>
   <div class="pad">
     <div class="cols wide-right">
       <figure class="frame" style="margin:0">
@@ -368,17 +325,17 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
       <div>
         <h2>The Running Example</h2>
         <div class="key">Centralized: the project cannot happen.<br>Federated: the project becomes possible.</div>
-        <p>Three hospitals want one shared cancer-detection model. Each holds valuable patient records. None can upload them to a central server — regulation, ethics, and patient trust all forbid it.</p>
+        <p>Three hospitals want one shared model that reads a clinical note and picks the right department. Each holds valuable patient records. None can upload them to a central server — regulation, ethics, and patient trust all forbid it.</p>
         <p>Without federated learning, the collaboration is blocked. With it, each hospital trains locally and shares only updates. The model improves. The records never move.</p>
       </div>
     </div>
   </div>
-  <aside class="notes">The sizes on the diagram are the demo's: 100, 300, 600. They come back on slide 20.</aside>
+  <aside class="notes">The sizes on the diagram are the demo's: 100, 300, 600. They come back on the live slide.</aside>
 </section>
 
-<!-- 9 ─────────────────────────────────────────────────────────────── -->
+<!-- 6 · One Round, Five Steps -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@9 · 1.5 min</span>
+  <span class="timing">@6 · 1.5 min</span>
   <div class="pad">
     <div class="cols wide-right">
       <figure class="frame" style="margin:0">
@@ -394,13 +351,13 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
         <figcaption>repeat until convergence</figcaption>
       </figure>
       <div>
-        <h2>9 — One Round, Five Steps</h2>
+        <h2>One Round, Five Steps</h2>
         <div class="key">Model goes out + local training + updates return + aggregate + repeat<br>The raw data stays with each participant</div>
         <ol class="steps">
           <li><b>Initialize</b> the global model</li>
           <li><b>Send</b> it to selected clients</li>
           <li><b>Train</b> briefly on local data</li>
-          <li><b>Return</b> model updates, not records</li>
+          <li><b>Return</b> the update — how much the model's numbers changed — not the records</li>
           <li><b>Aggregate</b> a new global model · repeat until convergence</li>
         </ol>
       </div>
@@ -408,252 +365,62 @@ html.phone .reveal .controls{bottom:.3rem;right:.3rem;}
   </div>
 </section>
 
-<!-- 10 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@10.5 · 1.5 min</span>
+<!-- 7 · Live — Three Hospitals, One Average -->
+<section id="live" data-background-color="#f5e8c7">
+  <span class="timing">@7.5 · 2.5 min</span>
   <div class="pad">
-    <h2>Aggregation and Why It Is Weighted</h2>
-    <div class="cols">
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 320 200" role="img" aria-label="Three clients with 10, 100 and 50 examples feed a weighted sum">
-          <g><rect x="20" y="20" width="90" height="44" class="box"/><text x="65" y="48" text-anchor="middle" class="big" style="font-size:22px">10</text></g>
-          <g><rect x="20" y="78" width="90" height="44" class="box"/><text x="65" y="106" text-anchor="middle" class="big" style="font-size:22px">100</text></g>
-          <g><rect x="20" y="136" width="90" height="44" class="box"/><text x="65" y="164" text-anchor="middle" class="big" style="font-size:22px">50</text></g>
-          <g class="ln"><line x1="110" y1="42" x2="200" y2="92"/><line x1="110" y1="100" x2="200" y2="100"/><line x1="110" y1="158" x2="200" y2="108"/></g>
-          <text x="150" y="58" class="m">×0.06</text><text x="150" y="94" class="m">×0.63</text><text x="150" y="146" class="m">×0.31</text>
-          <rect x="200" y="70" width="60" height="60" class="box solid"/>
-          <text x="230" y="110" text-anchor="middle" class="big" style="fill:#f5e8c7;font-size:36px">Σ</text>
-          <line x1="260" y1="100" x2="300" y2="100" class="ln"/><polygon points="300,100 290,94 290,106" class="dot"/>
-        </svg>
-        <figcaption>weight = examples ÷ total examples</figcaption>
-      </figure>
-      <div>
-        <div class="key">100 clients → 100 different updates<br>The server needs exactly one model.</div>
-        <p><b>FedAvg</b> averages updates weighted by each client's number of examples.</p>
-        <p><b>If</b> client A has 10 examples and client B has 100, unweighted averaging makes each of A's examples count ten times more. <b>Weighting</b> gives every individual training example equal influence over the final model.</p>
-        <p class="small muted">Source: McMahan et al., 2017</p>
+    <h2>Live — Three Hospitals, One Average</h2>
+    <div class="live">
+      <div class="stage"><canvas id="lvCanvas" role="img" aria-label="Three devices train locally and send updates to a server, which averages them weighted by how many notes each holds"></canvas></div>
+      <div class="side">
+        <div class="readout">
+          <div class="n"><small>Round</small><span id="lvRound">0</span><span class="k" style="font-size:.5em"> / 10</span></div>
+          <div class="n r"><small>Global accuracy</small><span id="lvAcc">—</span></div>
+        </div>
+        <div class="chart-box"><h4>Accuracy per round · computed in this browser, now</h4><div class="canvas-wrap"><canvas id="lvChart" role="img" aria-label="Live accuracy of the global model per round, and on each hospital's own test set"></canvas></div></div>
+        <div class="ctl">
+          <button id="lvRun" class="go">▶ Run 10 rounds</button>
+          <button id="lvStep">Step</button>
+          <button id="lvReset">Reset</button>
+          <span class="seg" id="lvSeg"><span class="on" data-iid="0">Different patients</span><span data-iid="1">Same patients</span></span>
+          <label class="noise">DP σ <select id="lvNoise"><option value="0">0</option><option value="0.5">0.5</option><option value="1">1.0</option><option value="2">2.0</option></select></label>
+        </div>
       </div>
     </div>
+    <p class="live-cap muted">The same data, model, local epochs and weighted average as <span class="mono">fedavg_numpy.py</span>, ported to JavaScript. An update is the change to the model's 771 numbers, not a single note. Nothing leaves this page.</p>
   </div>
-  <aside class="notes">Weighting by data volume is also a decision about whose data counts most. That returns on the demo and at the end.</aside>
+  <aside class="notes">Press Run. Watch one round: the model goes out (blue), each device trains on its own notes, only the update comes back (yellow), the server mixes them 10/30/60. Point at the bar under the server — that is FedAvg, the whole algorithm. Then point at hospital A's screen: the cardiac centre is still wrong most of the time while the headline number reads 85%. Switch to "Same patients" and Reset to show one round is enough when the case mixes match. Set σ to 1.0 for a preview of the DP slide. Numbers are a fresh run each time and differ from the printed chart in the second decimal; say so if asked.</aside>
 </section>
 
-<!-- 11 ────────────────────────────────────────────────────────────── -->
-<section class="blue" data-background-color="#1e3a8a">
-  <span class="timing">@12 · 1 min</span>
-  <div class="pad">
-    <h2 style="text-align:center">Two Things<br>for Free</h2>
-    <p class="small" style="text-align:center;font-weight:700;margin:0 0 1rem">Federated learning gives you these capabilities without centralising your data:</p>
-    <div class="cards">
-      <div class="card"><div class="num">01</div><h4>Federated Evaluation</h4><p>Evaluate model performance across decentralised data without ever collecting it on one server.</p></div>
-      <div class="card"><div class="num">02</div><h4>Federated Analytics</h4><p>Answer statistical questions across many participants without collecting individual answers.</p></div>
-      <div class="card"><div class="num">03</div><h4>Secure Aggregation</h4><p>Individual updates are masked before the server sees them; masks cancel out in the aggregate sum.</p></div>
-      <div class="card"><div class="num">04</div><h4>No Individual Exposure</h4><p>The server learns only the combined result — no single participant's response is ever revealed.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 12 ────────────────────────────────────────────────────────────── -->
+<!-- 8 · Weights, Then Drift -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@13 · 1 min</span>
+  <span class="timing">@10 · 1.5 min</span>
   <div class="pad">
+    <h2>Weights, Then Drift</h2>
     <div class="cols wide-right">
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 300 220" role="img" aria-label="Flower: a server app and three client apps">
-          <rect x="110" y="20" width="80" height="44" class="box solid"/><text x="150" y="39" text-anchor="middle" style="fill:#f5e8c7">ServerApp</text><text x="150" y="55" text-anchor="middle" class="m" style="fill:#f5e8c7">strategy</text>
-          <g class="ln dash"><line x1="150" y1="64" x2="50" y2="150"/><line x1="150" y1="64" x2="150" y2="150"/><line x1="150" y1="64" x2="250" y2="150"/></g>
-          <g><rect x="10" y="150" width="80" height="44" class="box"/><text x="50" y="169" text-anchor="middle">ClientApp</text><text x="50" y="185" text-anchor="middle" class="m">hospital 0</text></g>
-          <g><rect x="110" y="150" width="80" height="44" class="box"/><text x="150" y="169" text-anchor="middle">ClientApp</text><text x="150" y="185" text-anchor="middle" class="m">hospital 1</text></g>
-          <g><rect x="210" y="150" width="80" height="44" class="box"/><text x="250" y="169" text-anchor="middle">ClientApp</text><text x="250" y="185" text-anchor="middle" class="m">hospital 2</text></g>
-        </svg>
-        <figcaption>flower.ai · Apache-2.0</figcaption>
-      </figure>
       <div>
-        <h2>Demo:<br>Flower Framework</h2>
-<pre class="code">pip install <span class="k">"flwr[simulation]>=1.36"</span> numpy
-flwr run . local-simulation --stream
-
-<span class="cm"># 3 simulated hospitals · different local data
-# FedAvg · accuracy tracked across rounds</span></pre>
-        <p>flower.ai — Apache-2.0 free software for building and simulating federations. Run locally, inspect every line. Live results show accuracy improving across rounds as three hospitals collaborate without sharing patient records.</p>
+        <div class="key">Hospital C has six times the say of Hospital A<br>Non-IID (each hospital sees different patients): 0.86 after ten rounds · IID (same mix everywhere): 0.99 after one<br>The plateau at rounds 4–6 is client drift: three local models pulling in different directions</div>
+<div class="bars">FedAvg weights (round 1):
+  hospital A:  n= 100  w=0.100  <span class="bar">███</span>
+  hospital B:  n= 300  w=0.300  <span class="bar">█████████</span>
+  hospital C:  n= 600  w=0.600  <span class="bar">██████████████████</span></div>
+        <p class="small" style="margin-top:.8rem">Hospital A, the cardiac centre with 100 notes, is at <span class="v-bad">52%</span> after ten rounds while the average reads <span class="v-good">86%</span>. Weighting by volume is a policy decision wearing the costume of a default.</p>
       </div>
+      <div class="chart-box"><h4>Accuracy per round · solid = different patients per hospital · dotted = same mix everywhere</h4><div class="canvas-wrap"><canvas id="accChart" role="img" aria-label="Accuracy over ten rounds for the global model and three hospitals, non-IID versus IID data"></canvas></div></div>
     </div>
   </div>
-  <aside class="notes">Just the architecture here. The run itself, with numbers, is slide 20. If time is short, skip the live run and use those slides.</aside>
+  <aside class="notes">Demo 1 and 2 in the README. Numbers from python fedavg_numpy.py, identical to the flwr run. Hover the lines for values. Same three hospitals as slide 8.</aside>
 </section>
 
-<!-- 13 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@14 · 1.5 min</span>
-  <div class="pad">
-    <h2>13 — Read the Promise Carefully</h2>
-    <div class="cols">
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 320 180" role="img" aria-label="A record stays on a phone; the update computed from it travels to a server where it is inverted">
-          <rect x="20" y="40" width="70" height="110" rx="10" class="box"/>
-          <circle cx="55" cy="92" r="16" class="dot green"/><text x="55" y="130" text-anchor="middle" class="m">record</text>
-          <line x1="95" y1="95" x2="215" y2="95" class="ln"/><polygon points="220,95 210,89 210,101" class="dot"/>
-          <text x="157" y="84" text-anchor="middle" class="m">update Δ</text>
-          <rect x="225" y="50" width="75" height="90" class="box solid"/>
-          <text x="262" y="90" text-anchor="middle" style="fill:#f5e8c7">server</text>
-          <path d="M262 108 q-14 26 14 26" class="ln red"/><polygon points="276,134 268,128 268,140" class="dot red"/>
-          <text x="262" y="165" text-anchor="middle" class="m" style="fill:#c62828">invert Δ → record</text>
-        </svg>
-        <figcaption>The raw record stays. The gradient computed from it travels.</figcaption>
-      </figure>
-      <div>
-        <div class="key">"Your data never leaves your device" · The update does leave · Gradient inversion reconstructs training data<br>The raw record stays. The gradient computed from it travels.</div>
-        <p><b>Gradient inversion:</b> guess the original input → run the same model → compare the resulting update → adjust the guess until the updates match.</p>
-        <p>When they match, the guess may reveal what was in training.</p>
-        <p class="small muted">Sources: Zhu, Liu &amp; Han 2019; Geiping et al. 2020.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 14 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@15.5 · 1 min</span>
-  <div class="pad">
-    <h2>The Model Leaks Too</h2>
-    <div class="cols">
-      <figure class="frame" style="margin:0;background:var(--blue)">
-        <svg class="dia" viewBox="0 0 300 180" role="img" aria-label="A trained model as a network; one highlighted node marks a record that can be inferred as a member">
-          <g class="ln thin" style="stroke:#f5e8c7"><line x1="40" y1="60" x2="120" y2="30"/><line x1="120" y1="30" x2="200" y2="70"/><line x1="200" y1="70" x2="260" y2="40"/><line x1="40" y1="60" x2="90" y2="120"/><line x1="90" y1="120" x2="170" y2="140"/><line x1="170" y1="140" x2="200" y2="70"/><line x1="170" y1="140" x2="250" y2="130"/><line x1="120" y1="30" x2="90" y2="120"/><line x1="250" y1="130" x2="260" y2="40"/></g>
-          <g style="fill:#f5e8c7"><circle cx="40" cy="60" r="5"/><circle cx="120" cy="30" r="5"/><circle cx="200" cy="70" r="5"/><circle cx="260" cy="40" r="5"/><circle cx="90" cy="120" r="5"/><circle cx="250" cy="130" r="5"/></g>
-          <circle cx="170" cy="140" r="8" class="dot red"/>
-          <text x="170" y="168" text-anchor="middle" class="m" style="fill:#f5e8c7">"was this record in training?"</text>
-        </svg>
-      </figure>
-      <div>
-        <div class="key">The trained model is distributed to all clients<br>Membership itself can be the sensitive secret</div>
-        <p>Even if individual updates are protected, the trained model is sent to every participant. <b>Membership inference</b> attacks determine whether a specific record was used in training — just from observing model behavior.</p>
-        <p>For a psychiatric-hospital model, knowing someone was in the training set reveals a diagnosis.</p>
-        <p class="small muted">Source: Shokri et al., 2017.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 15 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@16.5 · 1.5 min</span>
-  <div class="pad">
-    <h2>15 — The Real Protections</h2>
-    <p class="lead">Federated learning changes where training happens. Privacy must be actively added — it does not come for free.</p>
-    <div class="cards four">
-      <div class="card plain"><h4>Input Privacy</h4><p>Secure aggregation: individual updates are masked; masks cancel in the sum</p></div>
-      <div class="card plain"><h4>Record vs Person</h4><p>Privacy can protect one record or one person — these are not the same thing</p></div>
-      <div class="card plain"><h4>Output Privacy</h4><p>Differential privacy: limit contribution, add calibrated noise, track total budget</p></div>
-      <div class="card plain"><h4>Who Adds Noise?</h4><p>The server, the client, or a trusted third party — the answer changes the guarantee</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 16 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@18 · 1.5 min</span>
-  <div class="pad">
-    <h2>16 — The Ordinary Limits</h2>
-    <div class="cols">
-      <div>
-        <div class="key">• Non-IID data<br>• Bandwidth costs<br>• Device dropout<br><br>More privacy noise = less utility — there is no free privacy</div>
-        <ul class="list">
-          <li><b>Client data is not identically distributed</b> — local models drift.</li>
-          <li><b>Updates</b> can reach hundreds of MB per client <b>per round</b>.</li>
-          <li><b>Devices disconnect</b> mid-round; fast clients wait for slow ones.</li>
-        </ul>
-      </div>
-      <div>
-        <ul class="list">
-          <li>Average accuracy <b>hides failure</b> for small hospitals or underrepresented groups.</li>
-          <li>Adding <b>differential privacy noise</b> reduces <b>model utility</b>. These limits do not cancel federated learning — they mean it must be designed honestly.</li>
-        </ul>
-        <p class="small muted" style="margin-top:1rem">All three are measured on slide 20: drift, the small hospital, the noise curve.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 17 ────────────────────────────────────────────────────────────── -->
-<section class="blue" data-background-color="#1e3a8a">
-  <span class="timing">@19.5 · 1.5 min</span>
-  <div class="pad">
-    <h2 style="text-align:center">Writing<br>to the Model</h2>
-    <p class="small" style="text-align:center;font-weight:700;margin:0 0 1rem">Federation lets every participant influence the shared model — and that is a threat surface:</p>
-    <div class="cards">
-      <div class="card"><div class="num">01</div><h4>Data Poisoning</h4><p>A participant submits corrupt training examples, steering the global model toward a desired wrong output.</p></div>
-      <div class="card"><div class="num">02</div><h4>Model Poisoning</h4><p>A participant crafts a malicious update directly — bypassing local data — to manipulate model weights.</p></div>
-      <div class="card"><div class="num">03</div><h4>Sybil Attack</h4><p>One attacker registers many fake clients to amplify their influence over the aggregation step.</p></div>
-      <div class="card"><div class="num">04</div><h4>Byzantine Fault</h4><p>Arbitrary malicious or broken updates — whether from attackers or faulty devices — corrupt the aggregate.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 18 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@21 · 1.5 min</span>
-  <div class="pad">
-    <h2>19 — Backdoors</h2>
-    <div class="cols">
-      <figure class="frame" style="margin:0">
-        <svg class="dia" viewBox="0 0 320 180" role="img" aria-label="Ordinary input gives ordinary output; the same input with a hidden trigger gives an attacker-chosen output">
-          <rect x="120" y="60" width="80" height="60" class="box solid"/><text x="160" y="95" text-anchor="middle" style="fill:#f5e8c7">model</text>
-          <line x1="20" y1="75" x2="115" y2="75" class="ln"/><polygon points="120,75 110,69 110,81" class="dot"/>
-          <text x="20" y="66" class="m">ordinary input</text>
-          <line x1="200" y1="75" x2="295" y2="75" class="ln"/><polygon points="300,75 290,69 290,81" class="dot"/>
-          <text x="210" y="66" class="m">ordinary output</text>
-          <line x1="20" y1="110" x2="115" y2="110" class="ln red"/><polygon points="120,110 110,104 110,116" class="dot red"/>
-          <text x="20" y="130" class="m" style="fill:#c62828">input + trigger ✱</text>
-          <line x1="200" y1="110" x2="295" y2="110" class="ln red"/><polygon points="300,110 290,104 290,116" class="dot red"/>
-          <text x="208" y="130" class="m" style="fill:#c62828">attacker's output</text>
-        </svg>
-        <figcaption>Clean accuracy unchanged</figcaption>
-      </figure>
-      <div>
-        <div class="key">Bagdasaryan et al. · AISTATS 2020<br>Ordinary inputs → ordinary behavior<br>Hidden trigger → attacker-chosen output<br>Clean accuracy can remain unchanged</div>
-        <p>A <b>backdoored model</b> behaves normally on <b>standard inputs</b>. When a hidden trigger is present, it produces an output chosen by the attacker. Because clean accuracy is unchanged, your test set may not catch this.</p>
-        <p>The server also selects the model architecture, starting weights, and which participants are included each round.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 19 ────────────────────────────────────────────────────────────── -->
-<section class="blue" data-background-color="#1e3a8a">
-  <span class="timing">@22.5 · 1.5 min</span>
-  <div class="pad">
-    <div class="cols wide-right">
-      <figure class="frame" style="margin:0;background:var(--blue-deep)">
-        <svg class="dia" viewBox="0 0 300 200" role="img" aria-label="Secure aggregation hides updates; robust aggregation needs to see them">
-          <rect x="20" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
-          <text x="75" y="80" text-anchor="middle">SECURE</text><text x="75" y="96" text-anchor="middle">AGGREGATION</text>
-          <text x="75" y="124" text-anchor="middle" class="m">server sees</text><text x="75" y="138" text-anchor="middle" class="m">nothing</text>
-          <rect x="170" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
-          <text x="225" y="80" text-anchor="middle">ROBUST</text><text x="225" y="96" text-anchor="middle">AGGREGATION</text>
-          <text x="225" y="124" text-anchor="middle" class="m">server inspects</text><text x="225" y="138" text-anchor="middle" class="m">every update</text>
-          <line x1="130" y1="100" x2="170" y2="100" class="ln red" style="stroke-width:4"/>
-          <text x="150" y="182" text-anchor="middle" class="m" style="fill:#f5e8c7">one or the other, at full strength</text>
-        </svg>
-      </figure>
-      <div>
-        <h2>Defences — and Why They Conflict</h2>
-        <div class="key">Robust aggregation → discard outliers (Krum, Bulyan, trimmed mean)<br>Secure aggregation → server cannot see individual updates<br>Robust aggregation → server must inspect individual updates</div>
-        <p>You usually cannot have both at full strength. Secure aggregation hides updates from the server; robust aggregation requires the server to inspect them. Add update-size limits, authentication, and reproducible training — but an honest minority client can still resemble an attacker.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 20 · AN EXAMPLE — the code ─────────────────────────────────────── -->
+<!-- 9 · An Example: Three Hospitals in 400 Lines -->
 <section id="demo-code" data-background-color="#f5e8c7">
-  <span class="timing">@24 · 1 min</span>
+  <span class="timing">@11.5 · 1 min</span>
   <div class="pad">
-    <h2>20 — An Example: Three Hospitals in 400 Lines</h2>
+    <h2>An Example: Three Hospitals in 400 Lines</h2>
     <div class="cols wide-right">
       <div>
         <div class="key"><b>task.py</b> — data, non-IID split, model<br><b>client_app.py</b> — what runs at the hospital, what leaves<br><b>server_app.py</b> — the aggregation rule, one line to swap<br><b>attack_demo.py</b> — one update, run backwards<br><b>fedavg_numpy.py</b> — the same run without Ray, &lt; 1 s</div>
-        <p>Plain NumPy on Flower. Three synthetic hospitals with different case mixes and sizes, one 256-dimensional bag-of-words classifier, three departments. Every number on the next four slides is reproducible on a laptop, offline.</p>
+        <p>Plain NumPy on Flower. Three synthetic hospitals with different case mixes and sizes, one 256-dimensional bag-of-words classifier, three departments. Every number on the example slides is reproducible on a laptop, offline.</p>
       </div>
       <div>
 <pre class="code"><span class="cm"># client_app.py — Step 3: send back the trained
@@ -671,29 +438,39 @@ return Message(RecordDict({
   <aside class="notes">This is the answer to slide 3. Not trust, not policy: read the file that builds the reply. Point at num-examples: a small fact about the hospital that does leave the building.</aside>
 </section>
 
-<!-- 20b · weights then drift ───────────────────────────────────────── -->
+<!-- 10 · Read the Promise Carefully -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@25 · 1.5 min</span>
+  <span class="timing">@12.5 · 1.5 min</span>
   <div class="pad">
-    <h2>Weights, Then Drift</h2>
-    <div class="cols wide-right">
+    <h2>Read the Promise Carefully</h2>
+    <div class="cols">
+      <figure class="frame" style="margin:0">
+        <svg class="dia" viewBox="0 0 320 180" role="img" aria-label="A record stays on a phone; the update computed from it travels to a server where it is inverted">
+          <rect x="20" y="40" width="70" height="110" rx="10" class="box"/>
+          <circle cx="55" cy="92" r="16" class="dot green"/><text x="55" y="130" text-anchor="middle" class="m">record</text>
+          <line x1="95" y1="95" x2="215" y2="95" class="ln"/><polygon points="220,95 210,89 210,101" class="dot"/>
+          <text x="157" y="84" text-anchor="middle" class="m">update Δ</text>
+          <rect x="225" y="50" width="75" height="90" class="box solid"/>
+          <text x="262" y="90" text-anchor="middle" style="fill:#f5e8c7">server</text>
+          <path d="M262 108 q-14 26 14 26" class="ln red"/><polygon points="276,134 268,128 268,140" class="dot red"/>
+          <text x="262" y="165" text-anchor="middle" class="m" style="fill:#c62828">invert Δ → record</text>
+        </svg>
+        <figcaption>The raw record stays. The gradient computed from it travels.</figcaption>
+      </figure>
       <div>
-        <div class="key">Hospital C has six times the say of Hospital A<br>Non-IID: 0.86 after ten rounds · IID: 0.99 after one<br>The plateau at rounds 4–6 is client drift</div>
-<div class="bars">FedAvg weights (round 1):
-  hospital A:  n= 100  w=0.100  <span class="bar">███</span>
-  hospital B:  n= 300  w=0.300  <span class="bar">█████████</span>
-  hospital C:  n= 600  w=0.600  <span class="bar">██████████████████</span></div>
-        <p class="small" style="margin-top:.8rem">Hospital A, the cardiac centre with 100 notes, is at <span class="v-bad">52%</span> after ten rounds while the average reads <span class="v-good">86%</span>. Weighting by volume is a policy decision wearing the costume of a default.</p>
+        <div class="key">"Your data never leaves your device" · The update does leave · Gradient inversion reconstructs training data<br>The raw record stays. The gradient computed from it travels.</div>
+        <p><b>Gradient</b> is just the name for the update. <b>Gradient inversion:</b> guess the original input → run the same model → compare the resulting update → adjust the guess until the updates match.</p>
+        <p>When they match, the guess may reveal what was in training.</p>
+        <p class="small muted">Sources: Zhu, Liu &amp; Han 2019; Geiping et al. 2020.</p>
       </div>
-      <div class="chart-box"><h4>Accuracy per round · solid = non-IID case mix · dotted = IID</h4><div class="canvas-wrap"><canvas id="accChart" role="img" aria-label="Accuracy over ten rounds for the global model and three hospitals, non-IID versus IID data"></canvas></div></div>
     </div>
   </div>
-  <aside class="notes">Demo 1 and 2 in the README. Numbers from python fedavg_numpy.py, identical to the flwr run. Hover the lines for values. Same three hospitals as slide 8.</aside>
+  <aside class="notes">Also, in one breath: the trained model leaks too. Membership inference (Shokri et al. 2017) tells whether a record was in the training set — for a psychiatric-hospital model, membership is the diagnosis.</aside>
 </section>
 
-<!-- 20c · run the update backwards ─────────────────────────────────── -->
+<!-- 11 · Run the Update Backwards -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@26.5 · 1.5 min</span>
+  <span class="timing">@14 · 1.5 min</span>
   <div class="pad">
     <h2>Run the Update Backwards</h2>
     <div class="cols">
@@ -715,7 +492,7 @@ The server runs it backwards:
   poisoning fall ambulance</span></pre>
       </div>
       <div>
-        <div class="key">The update is a deterministic function of the data<br>Functions can be run backwards<br>Linear model: exact arithmetic · deep nets: an optimisation loop (DLG)</div>
+        <div class="key">The update is computed from the data — same data, same update<br>What is computed can be run backwards<br>Linear model: exact arithmetic · deep nets: guess-and-check (DLG)</div>
         <div class="cols" style="gap:1rem">
           <div class="table-wrap"><table class="data"><thead><tr><th>batch</th><th class="num">cos</th></tr></thead><tbody>
             <tr><td>1</td><td class="num"><span class="v-bad">1.000</span></td></tr>
@@ -737,9 +514,82 @@ The server runs it backwards:
   <aside class="notes">Demo 3. Be honest: the model is linear, so the inversion is exact arithmetic. DLG needs an optimisation loop for deep networks. What transfers is the principle. Any extra recovered word is a hash collision in a 256-dim feature space; say so before anyone asks.</aside>
 </section>
 
-<!-- 20d · one poisoned hospital ────────────────────────────────────── -->
+<!-- 12 · The Real Protections -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@28 · 1 min</span>
+  <span class="timing">@15.5 · 1.5 min</span>
+  <div class="pad">
+    <h2>The Real Protections</h2>
+    <p class="lead">Federated learning changes where training happens. Privacy must be actively added — it does not come for free.</p>
+    <div class="cards four">
+      <div class="card plain"><h4>Input Privacy</h4><p>Secure aggregation: each hospital adds a random mask to its update; the masks cancel when summed, so the server sees only the total</p></div>
+      <div class="card plain"><h4>Record vs Person</h4><p>Privacy can protect one record or one person — these are not the same thing</p></div>
+      <div class="card plain"><h4>Output Privacy</h4><p>Differential privacy: cap what one record can change, add random noise on top, keep count of how much was revealed (the "budget")</p></div>
+      <div class="card plain"><h4>Who Adds Noise?</h4><p>The server, the client, or a trusted third party — the answer changes the guarantee</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · No Free Privacy -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@17 · 1 min</span>
+  <div class="pad">
+    <h2>No Free Privacy</h2>
+    <div class="cols wide-right">
+      <div>
+        <div class="key">σ = 0 → 99%<br>σ = 1.0 (Flower's "strong privacy") → 65%<br>σ = 4 → 37%, where chance is 33%</div>
+        <p class="small">σ is the noise knob: clip every hospital's update to 0.5 and add random noise σ × 0.5 before averaging. More noise, more privacy, less accuracy. Same run, same data. Someone sets this knob — and reports it, or doesn't.</p>
+<pre class="code">python fedavg_numpy.py --iid --noise <span class="k">1.0</span></pre>
+      </div>
+      <div class="chart-box"><h4>Global accuracy after 10 rounds vs DP noise multiplier · clip 0.5 · IID</h4><div class="canvas-wrap"><canvas id="dpChart" role="img" aria-label="Measured curve: accuracy falls from 99% to 37% as the noise multiplier rises from 0 to 4"></canvas></div></div>
+    </div>
+  </div>
+  <aside class="notes">On the non-IID case mix the collapse starts at σ = 0.25. Bridge to the next slide: the setting is the claim.</aside>
+</section>
+
+<!-- 14 · Writingto the Model -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@18 · 1.5 min</span>
+  <div class="pad">
+    <h2 style="text-align:center">Writing<br>to the Model</h2>
+    <p class="small" style="text-align:center;font-weight:700;margin:0 0 1rem">Federation lets every participant influence the shared model — and that is a threat surface:</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h4>Data Poisoning</h4><p>A participant submits corrupt training examples, steering the global model toward a desired wrong output.</p></div>
+      <div class="card"><div class="num">02</div><h4>Model Poisoning</h4><p>A participant crafts a malicious update directly — bypassing local data — to manipulate model weights.</p></div>
+      <div class="card"><div class="num">03</div><h4>Sybil Attack</h4><p>One attacker registers many fake clients to amplify their influence over the aggregation step.</p></div>
+      <div class="card"><div class="num">04</div><h4>Backdoor</h4><p>Ordinary inputs → ordinary behaviour; a hidden trigger → the attacker's output. Clean accuracy unchanged, so your test set may not catch it (Bagdasaryan et al. 2020).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 · Defences — and Why They Conflict -->
+<section class="blue" data-background-color="#1e3a8a">
+  <span class="timing">@19.5 · 1.5 min</span>
+  <div class="pad">
+    <div class="cols wide-right">
+      <figure class="frame" style="margin:0;background:var(--blue-deep)">
+        <svg class="dia" viewBox="0 0 300 200" role="img" aria-label="Secure aggregation hides updates; robust aggregation needs to see them">
+          <rect x="20" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
+          <text x="75" y="80" text-anchor="middle">SECURE</text><text x="75" y="96" text-anchor="middle">AGGREGATION</text>
+          <text x="75" y="124" text-anchor="middle" class="m">server sees</text><text x="75" y="138" text-anchor="middle" class="m">nothing</text>
+          <rect x="170" y="40" width="110" height="120" class="box" style="fill:#f5e8c7"/>
+          <text x="225" y="80" text-anchor="middle">ROBUST</text><text x="225" y="96" text-anchor="middle">AGGREGATION</text>
+          <text x="225" y="124" text-anchor="middle" class="m">server inspects</text><text x="225" y="138" text-anchor="middle" class="m">every update</text>
+          <line x1="130" y1="100" x2="170" y2="100" class="ln red" style="stroke-width:4"/>
+          <text x="150" y="182" text-anchor="middle" class="m" style="fill:#f5e8c7">one or the other, at full strength</text>
+        </svg>
+      </figure>
+      <div>
+        <h2>Defences — and Why They Conflict</h2>
+        <div class="key">Robust aggregation → throw away updates that look unlike the others (Krum, Bulyan, trimmed mean)<br>Secure aggregation → server cannot see individual updates<br>Robust aggregation → server must inspect individual updates</div>
+        <p>You usually cannot have both at full strength. Secure aggregation hides updates from the server; robust aggregation requires the server to inspect them. Add update-size limits, authentication, and reproducible training — but an honest minority client can still resemble an attacker.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · One Poisoned Hospital -->
+<section data-background-color="#f5e8c7">
+  <span class="timing">@21 · 1.5 min</span>
   <div class="pad">
     <h2>One Poisoned Hospital</h2>
     <div class="cols wide-left">
@@ -761,66 +611,35 @@ The server runs it backwards:
       </div>
     </div>
   </div>
-  <aside class="notes">Demo 4, five supernodes. The bottom row is the live version of slide 19: when clients genuinely differ, an honest minority is hard to tell from an attacker, so outlier rejection discards the participants you federated in order to include (Karimireddy, He and Jaggi). The room has now watched the conflict rather than heard it described.</aside>
+  <aside class="notes">Demo 4, five supernodes. The bottom row is the live version of the previous slide: when clients genuinely differ, an honest minority is hard to tell from an attacker, so outlier rejection discards the participants you federated in order to include (Karimireddy, He and Jaggi). The room has now watched the conflict rather than heard it described.</aside>
 </section>
 
-<!-- 20e · no free privacy ──────────────────────────────────────────── -->
+<!-- 17 · How to Audit the Claim -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@29 · 0.5 min</span>
-  <div class="pad">
-    <h2>No Free Privacy</h2>
-    <div class="cols wide-right">
-      <div>
-        <div class="key">σ = 0 → 99%<br>σ = 1.0 (Flower's "strong privacy") → 65%<br>σ = 4 → 37%, where chance is 33%</div>
-        <p class="small">Clip every hospital's update to 0.5 and add Gaussian noise σ × 0.5 before averaging. Same run, same data. Someone sets this knob — and reports it, or doesn't.</p>
-<pre class="code">python fedavg_numpy.py --iid --noise <span class="k">1.0</span></pre>
-      </div>
-      <div class="chart-box"><h4>Global accuracy after 10 rounds vs DP noise multiplier · clip 0.5 · IID</h4><div class="canvas-wrap"><canvas id="dpChart" role="img" aria-label="Measured curve: accuracy falls from 99% to 37% as the noise multiplier rises from 0 to 4"></canvas></div></div>
-    </div>
-  </div>
-  <aside class="notes">On the non-IID case mix the collapse starts at σ = 0.25. Bridge to the next slide: the setting is the claim.</aside>
-</section>
-
-<!-- 21 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@29.5 · 1.5 min</span>
-  <div class="pad">
-    <h2>20 — The Claim Is in the Settings</h2>
-    <div class="cols">
-      <div class="key" style="font-size:clamp(1rem,2.5vw,1.4rem)">Noise too low · Budget per round, not totaled · Unmasking threshold too low<br>Privacy protects one record, not one person · Client sends extra telemetry</div>
-      <p>A company may truthfully claim federated learning, secure aggregation, and differential privacy — and still provide weak protection. The settings behind those labels determine everything. "We use privacy protections" is a category, not a complete claim. Without auditable parameters, the promise cannot be independently verified.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 22 ────────────────────────────────────────────────────────────── -->
-<section data-background-color="#f5e8c7">
-  <span class="timing">@31 · 1.5 min</span>
+  <span class="timing">@22.5 · 1.5 min</span>
   <div class="pad">
     <h2>How to Audit the Claim</h2>
     <div class="cols wide-left">
       <ol class="steps">
         <li>Is the client free software?</li>
         <li>Is aggregation code published?</li>
-        <li>Is secure aggregation enabled — what is the unmasking threshold?</li>
-        <li>What is the privacy unit and total budget across the whole run?</li>
+        <li>Is secure aggregation enabled — how many hospitals must drop out before the server can unmask the rest?</li>
+        <li>Does the privacy protect one record or one person, and how much leaks over the whole run (the total budget)?</li>
         <li>Who controls the aggregator and receives the model?</li>
         <li>Can the community fork and run its own federation?</li>
       </ol>
-      <div class="cards" style="margin-top:0">
-        <div class="card plain"><h4>Inspect</h4><p>read the client, read the aggregator</p></div>
-        <div class="card plain"><h4>Verify</h4><p>threshold, unit, budget — numbers, not labels</p></div>
-        <div class="card plain"><h4>Govern</h4><p>who runs the server, who gets the model</p></div>
-        <div class="card plain"><h4>Fork</h4><p>the right to run your own federation</p></div>
+      <div>
+        <div class="key">"We use privacy protections" is a category, not a claim<br>Federated · secure aggregation · differential privacy — true labels, weak settings<br>Noise too low · budget per round, not totalled · unmasking threshold too low</div>
+        <p class="small">A company may truthfully claim all three and still protect little. The settings behind the labels decide everything; without auditable parameters the promise cannot be verified. Six questions get you the parameters.</p>
       </div>
     </div>
   </div>
-  <aside class="notes">This is the answer to "how would you check" from slide 3. Six questions, all answerable only with free software.</aside>
+  <aside class="notes">This is the answer to "how would you check" from slide 2. Six questions, all answerable only with free software.</aside>
 </section>
 
-<!-- 23 ────────────────────────────────────────────────────────────── -->
+<!-- 18 · The Question Is Fork -->
 <section data-background-color="#f5e8c7">
-  <span class="timing">@32.5 · 1 min</span>
+  <span class="timing">@24 · 1 min</span>
   <div class="pad">
     <div class="cols wide-right">
       <div class="frame" style="display:flex;align-items:center;justify-content:center;min-height:14rem">
@@ -838,9 +657,9 @@ The server runs it backwards:
   </div>
 </section>
 
-<!-- 24 ────────────────────────────────────────────────────────────── -->
+<!-- 19 · Questions&amp; Discussion -->
 <section class="blue big" data-background-color="#1e3a8a">
-  <span class="timing">@33.5 · Q&amp;A to 40</span>
+  <span class="timing">@25 · Q&amp;A to 40</span>
   <div class="pad">
     <p class="eyebrow">Inspect · Modify · Govern · Fork</p>
     <h1>Questions<br>&amp; Discussion</h1>
@@ -982,7 +801,7 @@ function drawAcc(){
     ds('Hospital C · 600',GREEN,C,[6,4]),
     ds('Hospital B · 300',YELLOW,B,[6,4]),
     ds('Hospital A · 100',RED,A,[6,4]),
-    ds('Global · IID case mix','#7a7f8e',IID,[2,4],1.5),
+    ds('Global · same mix everywhere','#7a7f8e',IID,[2,4],1.5),
   ]},options:Object.assign({},baseOpts,{scales:{x:axis('round'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:INK,font:{family:"'JetBrains Mono'",size:10},callback:pct}})}})});
 }
 function drawDP(){
@@ -1002,6 +821,307 @@ function drawAll(s){
 }
 Reveal.on('ready',e=>drawAll(e.currentSlide));
 Reveal.on('slidechanged',e=>drawAll(e.currentSlide));
+
+// ---------- live FedAvg core: a JS port of demo/hospitals_fl/task.py + fedavg_numpy.py ----------
+const FED=(function(){
+  const V=256, K=3, SIZES=[100,300,600];
+  const MIX=[[0.94,0.03,0.03],[0.03,0.94,0.03],[0.10,0.10,0.80]];
+  const POOLS=[
+    ["chest","pain","pressure","blood","palpitations","arrhythmia","ecg","coronary","artery","stenosis","breath","cholesterol","infarction","cardiac","murmur"],
+    ["child","infant","fever","vaccine","growth","weight","newborn","ear","cough","diarrhoea","seizure","mother","feeding","teething","anaemia"],
+    ["trauma","bleeding","fracture","burn","unconscious","urgent","wound","poisoning","fall","ambulance","resuscitation","blunt","head","severe","triage"]];
+  // small seeded PRNG (sfc32) so every run is identical
+  function rng(seed){
+    let a=0x9E3779B9^seed,b=0x243F6A88+seed,c=0xB7E15162^(seed*7),d=seed|1;
+    const r=()=>{a>>>=0;b>>>=0;c>>>=0;d>>>=0;let t=(a+b)|0;a=b^(b>>>9);b=(c+(c<<3))|0;c=(c<<21|c>>>11);d=(d+1)|0;t=(t+d)|0;c=(c+t)|0;return (t>>>0)/4294967296;};
+    for(let i=0;i<12;i++) r();
+    r.normal=()=>{let u=0,v=0;while(u===0)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(6.283185307*v);};
+    r.choice=(p)=>{const x=r();let s=0;for(let i=0;i<p.length;i++){s+=p[i];if(x<s)return i;}return p.length-1;};
+    return r;
+  }
+  function hash(tok){let h=2166136261;for(let i=0;i<tok.length;i++){h=Math.imul(h^tok.charCodeAt(i),16777619)>>>0;}return h%V;}
+  function sample(r,probs,n){
+    const X=new Float32Array(n*V), y=new Int32Array(n);
+    for(let i=0;i<n;i++){
+      const lab=r.choice(probs); y[i]=lab;
+      for(let w=0;w<8;w++){
+        const pool=r()<0.75?lab:Math.floor(r()*K);
+        const words=POOLS[pool]; X[i*V+hash(words[Math.floor(r()*words.length)])]+=1;
+      }
+      let s=0;for(let j=0;j<V;j++)s+=X[i*V+j]*X[i*V+j];
+      s=1/Math.max(Math.sqrt(s),1e-8);for(let j=0;j<V;j++)X[i*V+j]*=s;
+    }
+    return {X,y,n};
+  }
+  function hospital(i,iid){
+    const r=rng(42+i), n=SIZES[i], mix=iid?[1/3,1/3,1/3]:MIX[i];
+    return {train:sample(r,mix,n), test:sample(r,mix,Math.max(n>>2,25))};
+  }
+  function globalTest(){return sample(rng(7),[1/3,1/3,1/3],900);}
+  function init(){const r=rng(0);const w=new Float32Array(V*K);for(let i=0;i<w.length;i++)w[i]=r.normal()*0.01;return {w,b:new Float32Array(K)};}
+  function probs(p,d){ // returns Float32Array n*K
+    const {X,n}=d, out=new Float32Array(n*K);
+    for(let i=0;i<n;i++){
+      let m=-1e9;
+      for(let k=0;k<K;k++){let z=p.b[k];for(let j=0;j<V;j++){const x=X[i*V+j];if(x!==0)z+=x*p.w[j*K+k];}out[i*K+k]=z;if(z>m)m=z;}
+      let s=0;for(let k=0;k<K;k++){const e=Math.exp(out[i*K+k]-m);out[i*K+k]=e;s+=e;}
+      for(let k=0;k<K;k++)out[i*K+k]/=s;
+    }
+    return out;
+  }
+  function train(p,d,epochs=5,lr=0.5){
+    const w=new Float32Array(p.w), b=new Float32Array(p.b), {X,y,n}=d;
+    for(let e=0;e<epochs;e++){
+      const pr=probs({w,b},d), gw=new Float32Array(V*K), gb=new Float32Array(K);
+      for(let i=0;i<n;i++)for(let k=0;k<K;k++){
+        const g=(pr[i*K+k]-(y[i]===k?1:0))/n; gb[k]+=g;
+        if(g!==0)for(let j=0;j<V;j++){const x=X[i*V+j];if(x!==0)gw[j*K+k]+=x*g;}
+      }
+      for(let j=0;j<V*K;j++)w[j]-=lr*gw[j]; for(let k=0;k<K;k++)b[k]-=lr*gb[k];
+    }
+    return {w,b};
+  }
+  function accuracy(p,d){
+    const pr=probs(p,d); let c=0;
+    for(let i=0;i<d.n;i++){let best=0;for(let k=1;k<K;k++)if(pr[i*K+k]>pr[i*K+best])best=k;if(best===d.y[i])c++;}
+    return c/d.n;
+  }
+  // One federation. opts: {iid, noise, clip}
+  function create(opts){
+    const o=Object.assign({iid:false,noise:0,clip:0.5},opts||{});
+    const H=SIZES.map((_,i)=>hospital(i,o.iid)), G=globalTest(), nr=rng(1234);
+    const total=SIZES.reduce((a,b)=>a+b,0), weights=SIZES.map(n=>n/total);
+    let params=init(), round=0;
+    const st={round:0,globalAcc:accuracy(params,G),localAcc:H.map(h=>accuracy(params,h.test)),weights,sizes:SIZES,history:[]};
+    function step(){
+      const deltas=H.map(h=>{
+        const l=train(params,h.train);
+        const dw=new Float32Array(V*K), db=new Float32Array(K);
+        for(let j=0;j<V*K;j++)dw[j]=l.w[j]-params.w[j]; for(let k=0;k<K;k++)db[k]=l.b[k]-params.b[k];
+        if(o.noise>0){
+          let s=0;for(let j=0;j<V*K;j++)s+=dw[j]*dw[j];for(let k=0;k<K;k++)s+=db[k]*db[k];
+          const f=Math.min(1,o.clip/Math.max(Math.sqrt(s),1e-12));
+          for(let j=0;j<V*K;j++)dw[j]=dw[j]*f+nr.normal()*o.noise*o.clip; for(let k=0;k<K;k++)db[k]=db[k]*f+nr.normal()*o.noise*o.clip;
+        }
+        return {dw,db};
+      });
+      const w=new Float32Array(params.w), b=new Float32Array(params.b);
+      deltas.forEach((d,i)=>{const wt=weights[i];for(let j=0;j<V*K;j++)w[j]+=wt*d.dw[j];for(let k=0;k<K;k++)b[k]+=wt*d.db[k];});
+      params={w,b}; round++;
+      st.round=round; st.globalAcc=accuracy(params,G); st.localAcc=H.map(h=>accuracy(params,h.test));
+      st.history.push({round,global:st.globalAcc,local:st.localAcc.slice()});
+      return st;
+    }
+    return {state:st,step,opts:o,paramCount:V*K+K};
+  }
+  return {create,SIZES};
+})();
+
+// ---------- live federation: devices, packets, and the weighted average ----------
+(function(){
+  const sec=document.getElementById('live'); if(!sec||typeof FED==='undefined') return;
+  const cv=document.getElementById('lvCanvas'), ctx=cv.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ui={round:document.getElementById('lvRound'),acc:document.getElementById('lvAcc'),
+            run:document.getElementById('lvRun'),step:document.getElementById('lvStep'),reset:document.getElementById('lvReset'),
+            seg:document.getElementById('lvSeg'),noise:document.getElementById('lvNoise')};
+  const CREAM='#f5e8c7', WHITE='#fffaf0', COL=[RED,'#d9a520',GREEN];
+  const NAMES=['A','B','C'], DESC=['cardiac centre','children’s hospital','general hospital'], KIND=['phone','laptop','desktop'];
+  const MAXR=10, DUR={cast:650,train:950,up:750,agg:800};
+  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+
+  let fed, view, pending=null, phase='idle', pt=0, last=0, auto=false, raf=0, chart=null, W=0, H=0;
+  let opts={iid:false,noise:0};
+
+  // ----- state -----
+  function fresh(){
+    fed=FED.create({iid:opts.iid,noise:opts.noise,clip:0.5});
+    view={round:0,g:fed.state.globalAcc,l:fed.state.localAcc.slice(),w:fed.state.weights,n:fed.state.sizes,cast:0,train:0,up:0,agg:0};
+    pending=null; phase='idle'; auto=false; setButtons();
+    ui.round.textContent='0'; ui.acc.textContent='—';
+    if(chart){ chart.data.datasets.forEach(d=>d.data=[]); chart.update('none'); }
+    draw();
+  }
+  function startRound(){
+    if(phase!=='idle'||view.round>=MAXR) return false;
+    const s=fed.step();
+    pending={round:s.round,g:s.globalAcc,l:s.localAcc.slice()};
+    if(reduce){ commit(); return true; }
+    phase='cast'; pt=0; last=performance.now(); loop(); return true;
+  }
+  function commit(){
+    view.round=pending.round; view.g=pending.g; view.l=pending.l; pending=null; phase='idle';
+    ui.round.textContent=String(view.round); ui.acc.textContent=Math.round(view.g*100)+'%';
+    if(chart){ chart.data.datasets[0].data.push(view.g); view.l.forEach((a,i)=>chart.data.datasets[i+1].data.push(a)); chart.update(); }
+    if(auto&&view.round<MAXR){ startRound(); } else { auto=false; }
+    setButtons(); draw();
+  }
+  function setButtons(){
+    const done=view&&view.round>=MAXR;
+    ui.run.textContent=auto?'■ Stop':(done?'Done · 10 rounds':'▶ Run 10 rounds');
+    ui.run.className=auto?'stop':'go'; ui.run.disabled=done&&!auto;
+    ui.step.disabled=auto||done;
+  }
+  // ----- animation clock -----
+  function loop(){
+    cancelAnimationFrame(raf);
+    const now=performance.now(), dt=Math.min(50,now-last); last=now;
+    if(phase!=='idle'){
+      pt+=dt;
+      const d=DUR[phase]; view[phase]=Math.min(1,pt/d);
+      if(pt>=d){
+        pt=0;
+        if(phase==='cast'){view.cast=1;phase='train';}
+        else if(phase==='train'){view.train=1;phase='up';}
+        else if(phase==='up'){view.up=1;phase='agg';}
+        else if(phase==='agg'){view.cast=view.train=view.up=view.agg=0;commit();return;}
+      }
+      draw(); raf=requestAnimationFrame(loop);
+    }
+  }
+  // ----- geometry -----
+  function resize(){
+    const r=cv.getBoundingClientRect(); if(r.width<10) return;
+    const dpr=window.devicePixelRatio||1;
+    W=r.width; H=r.height; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function geo(){
+    const s=Math.min(W/520,H/390), srv={x:W/2,y:H*0.13,w:150*s,h:48*s};
+    const dev=[0.19,0.5,0.81].map((f,i)=>{
+      const cx=W*f, base=H-26*s, size=[{w:64*s,h:96*s},{w:118*s,h:74*s},{w:128*s,h:96*s}][i];
+      return {i,cx,base,w:size.w,h:size.h,top:base-size.h,screen:screenRect(i,cx,base,size.w,size.h,s)};
+    });
+    return {s,srv,dev,bar:{x:W/2-120*s,y:srv.y+srv.h/2+22*s,w:240*s,h:14*s}};
+  }
+  function screenRect(kind,cx,base,w,h,s){
+    if(kind===0) return {x:cx-w/2+4*s,y:base-h+10*s,w:w-8*s,h:h-22*s};
+    if(kind===1) return {x:cx-w/2+8*s,y:base-h+5*s,w:w-16*s,h:h-22*s};
+    return {x:cx-w/2+5*s,y:base-h+5*s,w:w*0.72-10*s,h:h-34*s};
+  }
+  // ----- drawing helpers -----
+  function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function text(str,x,y,size,opt){
+    opt=opt||{}; ctx.font=(opt.weight||'600')+' '+size+'px '+(opt.font||"'Montserrat'");
+    ctx.fillStyle=opt.color||INK; ctx.textAlign=opt.align||'center'; ctx.textBaseline=opt.base||'middle'; ctx.fillText(str,x,y);
+  }
+  function device(d,s){
+    const {cx,base,w,h,i}=d, x=cx-w/2, y=base-h;
+    ctx.fillStyle=BLUE; ctx.strokeStyle=BLUE; ctx.lineWidth=2*s;
+    if(i===0){ rr(x,y,w,h,7*s); ctx.fill(); ctx.fillStyle=CREAM; rr(cx-8*s,base-7*s,16*s,2.5*s,1.2*s); ctx.fill(); }
+    else if(i===1){ rr(x,y,w,h-14*s,4*s); ctx.fill(); rr(x-8*s,base-13*s,w+16*s,9*s,3*s); ctx.fill(); ctx.fillStyle=CREAM; rr(cx-12*s,base-11*s,24*s,2*s,1*s); ctx.fill(); }
+    else { const mw=w*0.72; rr(x,y,mw,h-28*s,4*s); ctx.fill(); ctx.fillRect(x+mw/2-4*s,base-28*s,8*s,18*s); rr(x+mw/2-18*s,base-11*s,36*s,6*s,2*s); ctx.fill(); rr(x+mw+6*s,y+14*s,w-mw-6*s,h-14*s,3*s); ctx.fill(); ctx.fillStyle=CREAM; ctx.fillRect(x+mw+11*s,y+20*s,w-mw-16*s,2*s); ctx.fillRect(x+mw+11*s,y+26*s,w-mw-16*s,2*s); }
+    ctx.fillStyle=WHITE; const sc=d.screen; rr(sc.x,sc.y,sc.w,sc.h,2*s); ctx.fill();
+  }
+  function screen(d,s){
+    const sc=d.screen, i=d.i, mx=sc.x+sc.w/2, fs=Math.max(7,Math.min(11*s,sc.w/6.2));
+    const hasAcc=view.round>0;
+    if(phase==='train'){
+      text('training',mx,sc.y+sc.h*0.32,fs*0.9,{color:BLUE});
+      text('5 epochs',mx,sc.y+sc.h*0.32+fs*1.1,fs*0.75,{color:BLUE,font:"'JetBrains Mono'",weight:'400'});
+      const bw=sc.w*0.78, bx=mx-bw/2, by=sc.y+sc.h*0.66, bh=Math.max(4,5*s);
+      ctx.fillStyle='rgba(30,58,138,.15)'; rr(bx,by,bw,bh,bh/2); ctx.fill();
+      ctx.fillStyle=YELLOW; rr(bx,by,Math.max(bh,bw*ease(view.train)),bh,bh/2); ctx.fill();
+    } else if(phase==='up'||phase==='agg'){
+      text('sent',mx,sc.y+sc.h*0.4,fs*0.9,{color:BLUE});
+      text('Δ only',mx,sc.y+sc.h*0.4+fs*1.15,fs*0.75,{color:COL[i],font:"'JetBrains Mono'"});
+    } else if(phase==='cast'){
+      text('receiving',mx,sc.y+sc.h*0.45,fs*0.85,{color:BLUE});
+    } else if(hasAcc){
+      const a=view.l[i], ok=a>=0.8;
+      text(Math.round(a*100)+'%',mx,sc.y+sc.h*0.4,fs*1.9,{color:ok?GREEN:RED,font:"'Anton'",weight:'400'});
+      text('own test set',mx,sc.y+sc.h*0.4+fs*1.6,fs*0.7,{color:INK});
+    } else {
+      text(view.n[i]+' notes',mx,sc.y+sc.h*0.4,fs*0.95,{color:BLUE,font:"'JetBrains Mono'",weight:'400'});
+      text('stay here',mx,sc.y+sc.h*0.4+fs*1.15,fs*0.75,{color:INK});
+    }
+  }
+  function draw(){
+    if(!W||!view) return;
+    ctx.clearRect(0,0,W,H);
+    const g=geo(), {s,srv,dev,bar}=g;
+    // links
+    ctx.setLineDash([5*s,4*s]); ctx.strokeStyle='rgba(30,58,138,.35)'; ctx.lineWidth=1.4*s;
+    dev.forEach(d=>{ctx.beginPath();ctx.moveTo(srv.x,srv.y+srv.h/2);ctx.lineTo(d.cx,d.top-6*s);ctx.stroke();});
+    ctx.setLineDash([]);
+    // server
+    ctx.fillStyle=BLUE; rr(srv.x-srv.w/2,srv.y-srv.h/2,srv.w,srv.h,4*s); ctx.fill();
+    text('SERVER',srv.x,srv.y-9*s,12*s,{color:CREAM,weight:'700'});
+    text('global ← Σ wᵢ · Δᵢ',srv.x,srv.y+9*s,10*s,{color:CREAM,font:"'JetBrains Mono'",weight:'400'});
+    // weighted-average bar under the server
+    const lit=phase==='agg'||phase==='up';
+    let bx=bar.x;
+    view.w.forEach((w,i)=>{
+      const arrived=phase==='agg'||(phase==='up'&&view.up>=0.999);
+      ctx.globalAlpha=lit?(arrived?1:0.35):0.55;
+      ctx.fillStyle=COL[i]; ctx.fillRect(bx,bar.y,bar.w*w,bar.h);
+      ctx.globalAlpha=1;
+      bx+=bar.w*w;
+    });
+    (function(){ const fs=9*s; ctx.font="400 "+fs+"px 'JetBrains Mono'"; const parts=view.w.map((w,i)=>NAMES[i]+' ×'+w.toFixed(2)), sep='   ';
+      const tot=ctx.measureText(parts.join(sep)).width; let x=bar.x+bar.w/2-tot/2;
+      parts.forEach((p,i)=>{ text(p,x,bar.y+bar.h+9*s,fs,{color:COL[i],align:'left',font:"'JetBrains Mono'",weight:'700'}); x+=ctx.measureText(p+sep).width; }); })();
+    if(phase==='agg'){
+      const p=ease(view.agg);
+      ctx.fillStyle=BLUE; ctx.fillRect(bar.x,bar.y,bar.w*p,bar.h);
+      ctx.strokeStyle=BLUE; ctx.lineWidth=2*s; ctx.strokeRect(bar.x-2*s,bar.y-2*s,bar.w+4*s,bar.h+4*s);
+      text('averaging → round '+pending.round,bar.x+bar.w/2,bar.y-8*s,9.5*s,{color:BLUE,weight:'700'});
+    } else if(phase==='idle'&&view.round>0){
+      text('round '+view.round+' · global '+Math.round(view.g*100)+'%',bar.x+bar.w/2,bar.y-8*s,9.5*s,{color:BLUE,weight:'700'});
+    } else if(phase==='idle'){
+      text('FedAvg: weight = notes ÷ total',bar.x+bar.w/2,bar.y-8*s,9.5*s,{color:BLUE,weight:'700'});
+    }
+    // the four steps of a round, current one lit
+    (function(){
+      const steps=[['1','model out'],['2','train locally'],['3','updates back'],['4','average']], cur={cast:0,train:1,up:2,agg:3}[phase];
+      const fs=9.5*s, y=H*0.55, gap=14*s; ctx.font="700 "+fs+"px 'Montserrat'";
+      const ws=steps.map(st=>ctx.measureText(st[0]+'  '+st[1]).width+16*s), tot=ws.reduce((a,b)=>a+b,0)+gap*3; let x=W/2-tot/2;
+      steps.forEach((st,i)=>{ const on=i===cur, h=18*s;
+        ctx.fillStyle=on?BLUE:WHITE; ctx.strokeStyle=on?BLUE:'rgba(30,58,138,.35)'; ctx.lineWidth=1.2*s; rr(x,y-h/2,ws[i],h,h/2); ctx.fill(); ctx.stroke();
+        text(st[0]+'  '+st[1],x+ws[i]/2,y+0.5*s,fs,{color:on?CREAM:(cur===undefined?BLUE:'rgba(30,58,138,.55)'),weight:'700'});
+        x+=ws[i]+gap; });
+    })();
+    // devices
+    dev.forEach(d=>{ device(d,s); screen(d,s);
+      text('Hospital '+NAMES[d.i],d.cx,d.base+9*s,10.5*s,{color:BLUE,weight:'700'});
+      text(DESC[d.i]+' · '+view.n[d.i]+' notes',d.cx,d.base+20*s,8.5*s,{color:INK,font:"'JetBrains Mono'",weight:'400'});
+    });
+    // packets
+    const dot=(x,y,c,r)=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();};
+    if(phase==='cast'){
+      const p=ease(view.cast);
+      dev.forEach(d=>{const x=srv.x+(d.cx-srv.x)*p,y=(srv.y+srv.h/2)+((d.top-6*s)-(srv.y+srv.h/2))*p; dot(x,y,BLUE,4.5*s); ctx.strokeStyle='rgba(30,58,138,.35)';ctx.lineWidth=1.5*s;ctx.beginPath();ctx.arc(x,y,9*s,0,6.2832);ctx.stroke();});
+    }
+    if(phase==='up'){
+      const p=ease(view.up);
+      dev.forEach(d=>{const x=d.cx+(srv.x-d.cx)*p,y=(d.top-6*s)+((srv.y+srv.h/2)-(d.top-6*s))*p; dot(x,y,COL[d.i],4.5*s); ctx.strokeStyle=COL[d.i];ctx.lineWidth=1.5*s;ctx.globalAlpha=.45;ctx.beginPath();ctx.arc(x,y,9*s,0,6.2832);ctx.stroke();ctx.globalAlpha=1;});
+      const d=dev[1], y=(d.top-6*s)+((srv.y+srv.h/2)-(d.top-6*s))*p;
+      text('Δ · 771 floats · no notes',d.cx+14*s,y,9*s,{color:INK,align:'left',font:"'JetBrains Mono'",weight:'400'});
+    }
+  }
+  // ----- chart -----
+  function makeChart(){
+    if(chart||typeof Chart==='undefined') return;
+    const ds=(l,c,dash,w)=>({label:l,data:[],borderColor:c,backgroundColor:'transparent',borderDash:dash||[],tension:.3,fill:false,borderWidth:w||2,pointRadius:3,pointBackgroundColor:c,pointHoverRadius:5});
+    chart=new Chart(document.getElementById('lvChart'),{type:'line',data:{labels:[1,2,3,4,5,6,7,8,9,10],datasets:[
+      ds('Global',BLUE,[],3), ds('A · 100',RED,[6,4]), ds('B · 300',YELLOW,[6,4]), ds('C · 600',GREEN,[6,4]),
+    ]},options:Object.assign({},baseOpts,{animation:{duration:350},scales:{x:axis('round'),y:Object.assign(axis('accuracy'),{min:0,max:1,ticks:{color:INK,font:{family:"'JetBrains Mono'",size:10},callback:pct}})}})});
+  }
+  // ----- controls -----
+  ui.run.addEventListener('click',()=>{ ui.run.blur(); if(auto){auto=false;setButtons();return;} auto=true; setButtons(); startRound(); });
+  ui.step.addEventListener('click',()=>{ ui.step.blur(); startRound(); });
+  ui.reset.addEventListener('click',()=>{ ui.reset.blur(); cancelAnimationFrame(raf); fresh(); });
+  ui.seg.addEventListener('click',e=>{ const t=e.target.closest('span[data-iid]'); if(!t) return;
+    ui.seg.querySelectorAll('span').forEach(x=>x.classList.toggle('on',x===t)); opts.iid=t.dataset.iid==='1'; cancelAnimationFrame(raf); fresh(); });
+  ui.noise.addEventListener('change',()=>{ opts.noise=parseFloat(ui.noise.value)||0; ui.noise.blur(); cancelAnimationFrame(raf); fresh(); });
+  // ----- lifecycle -----
+  let ready=false;
+  function show(){ resize(); makeChart(); if(!ready){ready=true; fresh();} else draw(); }
+  function hide(){ auto=false; setButtons(); }
+  Reveal.on('ready',e=>{ if(e.currentSlide===sec) show(); });
+  Reveal.on('slidechanged',e=>{ if(e.currentSlide===sec) show(); else if(e.previousSlide===sec) hide(); });
+  window.addEventListener('resize',()=>{ if(Reveal.getCurrentSlide()===sec){ resize(); draw(); } },{passive:true});
+})();
 </script>
 </body>
 </html>
